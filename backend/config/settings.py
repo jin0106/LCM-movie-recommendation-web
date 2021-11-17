@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     
     #3rd partyapp
     'accounts',
-    'community',
+    'communities',
     'movies',
 
     'rest_framework',

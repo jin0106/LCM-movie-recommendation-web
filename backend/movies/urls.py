@@ -3,5 +3,6 @@ from . import views
 
 app_name = "movies"
 urlpatterns = [
-
+    path('', views.index),
+    path('<int:movie_pk>/', views.movie_detail,)
 ]
