@@ -11,7 +11,7 @@ def create(request):
 def detail(request, review_pk):
     pass
 
-def create_commment(request, review_pk):
+def create_comment(request, review_pk):
     pass
 
 def like(request, review_pk):
