@@ -1,5 +1,5 @@
 from django.db import models
-from ..movies.models import Movie
+from movies.models import Movie
 from django.conf import settings
 
 class Review(models.Model):
