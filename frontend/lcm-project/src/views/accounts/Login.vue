@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="Login">
     <h2>로그인</h2>
     <hr>
     <div v-if="errMsg">{{ errMsg }}</div>
@@ -7,7 +7,6 @@
       <label for="username">아이디 :</label>
       <input type="text" id="username" v-model="credentials.username">
     </div>
-    <!-- div>label[for="password"]{비밀번호: }+input:password#password -->
     <div>
       <label for="password">비밀번호 :</label>
       <input 
@@ -41,7 +40,7 @@ export default {
     login: function () {
       axios({
         method: 'post',
-        url: `http://127.0.0.1:8000/accounts/api/token/`,
+        url: `http://9049-125-134-86-234.ngrok.io/accounts/api/token/`,
         data: this.credentials
       })
       .then(res => {

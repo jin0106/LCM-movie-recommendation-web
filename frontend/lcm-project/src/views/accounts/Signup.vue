@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="Signup">
     <h2>회원가입</h2>
     <div>
       <label for="username">ID : </label>
@@ -53,7 +53,7 @@ export default {
       console.log(SERVER_URL)
       axios({
         method: 'post',
-        url: `http://127.0.0.1:8000/accounts/signup/`,
+        url: `http://9049-125-134-86-234.ngrok.io/accounts/signup/`,
         data: this.credentials
       })
       .then(res => {
