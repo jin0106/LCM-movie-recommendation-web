@@ -48,7 +48,7 @@ export default {
         console.log(res)
         localStorage.setItem('JWT', res.data.access)
         this.$emit('login')
-        this.$router.push({ name: 'TodoList' })
+        this.$router.push({ name: 'temp' })
       })
       .catch(err => {
         console.dir(err.response.data)

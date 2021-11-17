@@ -1,16 +1,41 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link :to="{ name : 'Signup' }">Signup</router-link> 
-      <router-link :to="{ name : 'Login' }">Signup</router-link> 
+      <h1 v-if="isLogin">로그인 완료</h1>
+      <h2 v-else>로그인 안됨</h2>
+
+      <router-link :to="{ name : 'Signup' }">Signup</router-link>   |
+      <router-link :to="{ name : 'Login' }">Login</router-link>   |
+      <router-link :to="{ name : 'temp' }">temp</router-link>   
+
 
     </div>
-    <router-view />
+    <router-view 
+    @login="setLogin"
+    />
   </div>
 </template>
 <script>
 
 export default {
+  name: 'App',
+  data: function () {
+    return {
+      isLogin: false,
+    }
+  },
+  methods: {
+      setLogin: function () {
+      this.isLogin = true
+    },
+  },
+  created: function () {
+    if (localStorage.getItem('JWT')) {
+      this.isLogin = true
+    } else {
+      this.$router.push({ name: 'Login' }).catch(() => {})
+    }
+  }
 
 }
 </script>
