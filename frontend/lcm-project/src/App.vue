@@ -6,7 +6,8 @@
 
       <router-link :to="{ name : 'Signup' }">Signup</router-link>   |
       <router-link :to="{ name : 'Login' }">Login</router-link>   |
-      <router-link :to="{ name : 'temp' }">temp</router-link>   
+      <router-link :to="{ name : 'temp' }">temp</router-link>   |
+      <router-link :to="{ name : 'ReviewList' }">ReviewList</router-link>
 
 
     </div>

@@ -44,7 +44,6 @@ export default {
         data: this.credentials
       })
       .then(res => {
-        console.log(res)
         localStorage.setItem('JWT', res.data.access)
         this.$emit('login')
         this.$router.push({ name: 'temp' })
