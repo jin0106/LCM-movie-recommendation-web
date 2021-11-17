@@ -1,13 +1,21 @@
 <template>
   <div id="app">
     <div id="nav">
-      <h1 v-if="isLogin">로그인 완료</h1>
-      <h2 v-else>로그인 안됨</h2>
+      <h1 v-if="isLogin">로그인 완료
+        <div>
+          <router-link :to="{ name : 'ReviewList' }">ReviewList</router-link>    |
+          <router-link to='#' @click.native="Logout">Logout</router-link>
+        </div>
 
-      <router-link :to="{ name : 'Signup' }">Signup</router-link>   |
-      <router-link :to="{ name : 'Login' }">Login</router-link>   |
-      <router-link :to="{ name : 'temp' }">temp</router-link>   |
-      <router-link :to="{ name : 'ReviewList' }">ReviewList</router-link>
+      </h1>
+      <h2 v-else>로그인 안됨
+        <div>
+          <router-link :to="{ name : 'Signup' }">Signup</router-link>   |
+          <router-link :to="{ name : 'Login' }">Login</router-link>   |
+        </div>
+      </h2>
+
+      <router-link :to="{ name : 'temp' }">temp</router-link>   
 
 
     </div>
@@ -29,6 +37,11 @@ export default {
       setLogin: function () {
       this.isLogin = true
     },
+      Logout: function () {
+        console.log(1111)
+        localStorage.removeItem('JWT')
+        this.isLogin = false
+    }
   },
   created: function () {
     if (localStorage.getItem('JWT')) {

@@ -28,13 +28,22 @@
         id="passwordcomfirm"
         >
     </div>
+
+    <div>
+      <label for="nickname">NICK NAME : </label>
+      <input
+        v-model="credentials.nickname"
+        type="text"
+        id="nickname"
+        >
+    </div>
     <button @click="signup">회원가입</button>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-const SERVER_URL = process.env.VUE_APP_SERVER_URL
+//const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 
 export default {
@@ -45,12 +54,12 @@ export default {
         username: '',
         password: '',
         passwordconfirm: '',
+        nickname: '',
       }
     }
   },
   methods: {
     signup: function(){
-      console.log(SERVER_URL)
       axios({
         method: 'post',
         url: `http://9049-125-134-86-234.ngrok.io/accounts/signup/`,
