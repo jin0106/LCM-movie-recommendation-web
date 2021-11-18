@@ -39,7 +39,6 @@ export default {
       this.isLogin = true
     },
       Logout: function () {
-        console.log(1111)
         localStorage.removeItem('JWT')
         this.isLogin = false
     }

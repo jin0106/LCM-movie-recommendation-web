@@ -18,10 +18,20 @@ export default {
     }
   },
   methods: {
+    setHeader: function () {
+      const token = localStorage.getItem('JWT')
+      const header = {
+        Authorization: `Bearer ${token}`
+      }
+      return header
+    },
     getLikeGenre: function(){
+      console.log(this.setHeader())
       axios({
         method: 'get',
         url: `http://127.0.0.1:8000/accounts/likegenre/`,
+        headers: this.setHeader()
+
       })
       .then(res => {
         console.log(res)

@@ -1,8 +1,12 @@
+from django.contrib.auth import get_user_model
 from django.http import response
-from django.shortcuts import render
-from rest_framework import status
+from django.shortcuts import get_list_or_404, render
+from rest_framework import serializers, status
 from rest_framework.response import Response
+
+from movies.models import Genre
 from .serializers import UserSerializer
+from movies.serializers import GenreListSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 # Create your views here.
@@ -21,7 +25,12 @@ def signup(request):
 
 @api_view(['GET'])
 def likegenre(request):
-    
-    pass
+    if request.method == 'GET':
+        #user = request.user.id
+        #genres = get_list_or_404(get_user_model(), name=user.genre)
+        #serializer = GenreListSerializer(genres, many=True)
+        #print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        # print(genres)
+        return Response( status.HTTP_200_OK)
     
         
