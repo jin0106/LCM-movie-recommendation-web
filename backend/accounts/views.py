@@ -34,11 +34,8 @@ def getuserinfo(request):
 def updateuserinfo(request):
     serializer = UserSerializer(request.user, data=request.data)
     if serializer.is_valid(raise_exception=True):
-
         serializer.save()
         return Response(status=status.HTTP_200_OK)
-
-
 
          
 @api_view(['GET'])
