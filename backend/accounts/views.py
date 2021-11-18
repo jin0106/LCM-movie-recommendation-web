@@ -11,11 +11,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 # Create your views here.
 
-@api_view(['POST'])
+@api_view(['GET','POST'])
 @permission_classes([AllowAny])
 def signup(request):
     if request.data.get('password') != request.data.get('passwordconfirm'):
         return Response({ 'error': '비밀번호 확인해주세요.' }, status.HTTP_400_BAD_REQUEST)
+    
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         user = serializer.save()
@@ -23,14 +24,28 @@ def signup(request):
         user.save()
         return Response(serializer.data, status.HTTP_201_CREATED)
 
+
+@api_view(['GET'])
+def getuserinfo(request):
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['PUT', 'DELETE'])   
+def updateuserinfo(request):
+    serializer = UserSerializer(request.user, data=request.data)
+    if serializer.is_valid(raise_exception=True):
+
+        serializer.save()
+        return Response(status=status.HTTP_200_OK)
+
+
+
+         
 @api_view(['GET'])
 def likegenre(request):
     if request.method == 'GET':
-        #user = request.user.id
-        #genres = get_list_or_404(get_user_model(), name=user.genre)
-        #serializer = GenreListSerializer(genres, many=True)
-        #print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        # print(genres)
-        return Response( status.HTTP_200_OK)
+        genres = request.user.genre.all()
+        serializer = GenreListSerializer(genres, many=True)
+        return Response(serializer.data, status.HTTP_200_OK)
     
         
