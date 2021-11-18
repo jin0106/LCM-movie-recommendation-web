@@ -40,7 +40,7 @@ export default {
     login: function () {
       axios({
         method: 'post',
-        url: `http://9049-125-134-86-234.ngrok.io/accounts/api/token/`,
+        url: `http://127.0.0.1:8000/accounts/api/token/`,
         data: this.credentials
       })
       .then(res => {
