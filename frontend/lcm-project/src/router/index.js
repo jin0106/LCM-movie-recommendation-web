@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import temp from '@/views/accounts/temp'
+import Profile from '@/views/accounts/Profile'
+
 import ReviewList from '@/views/community/ReviewList'
 Vue.use(VueRouter)
 
@@ -26,6 +28,11 @@ const routes = [
     path: '/community',
     name: 'ReviewList',
     component: ReviewList,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   },
 ]
 

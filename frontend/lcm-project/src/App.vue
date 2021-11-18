@@ -4,7 +4,8 @@
       <h1 v-if="isLogin">로그인 완료
         <div>
           <router-link :to="{ name : 'ReviewList' }">ReviewList</router-link>    |
-          <router-link to='#' @click.native="Logout">Logout</router-link>
+          <router-link to='#' @click.native="Logout">Logout</router-link>     |
+          <router-link :to="{ name : 'Profile' }">Profile</router-link>
         </div>
 
       </h1>

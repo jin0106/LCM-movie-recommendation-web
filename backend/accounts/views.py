@@ -10,10 +10,15 @@ from .serializers import UserSerializer
 def signup(request):
     if request.data.get('password') != request.data.get('passwordconfirm'):
         return Response({ 'error': '비밀번호 확인해주세요.' }, status.HTTP_400_BAD_REQUEST)
-
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         user = serializer.save()
         user.set_password(request.data.get('password'))
         user.save()
         return Response(serializer.data, status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def likegenre(request):
+    pass
+    
+        
