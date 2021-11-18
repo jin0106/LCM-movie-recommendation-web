@@ -6,13 +6,15 @@ from rest_framework import serializers, status
 from rest_framework.decorators import api_view
 
 # GET일 때 전체 리뷰 불러오기, POST일때 리뷰 생성
+
+
 @api_view(['GET', 'POST'])
 def review_list_create(request):
-    if request.method=='GET':
-        reviews= get_list_or_404(Review)
+    if request.method == 'GET':
+        reviews = get_list_or_404(Review)
         serializer = ReviewListSerializer(reviews, many=True)
         return Response(serializer.data)
-    else:
+    if request.method == 'POST':
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -20,11 +22,11 @@ def review_list_create(request):
 
 
 # GET일때 하나의 리뷰 디테일 정보 불러오기, PUT일때 업데이트, DELETE일때 삭제
-@api_view(['GET','PUT','DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def review_update_delete(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
-    
-    if request.method=='GET':
+
+    if request.method == 'GET':
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
 
@@ -44,20 +46,19 @@ def review_update_delete(request, review_pk):
 
 def comment_list_create(request, review_pk):
     if request.method == 'GET':
-        review = get_object_or_404(Review, pk = review_pk)
+        review = get_object_or_404(Review, pk=review_pk)
         # commentform 설정?해서 만들고 serializer?
-        
+
 
 def comment_delete_update(request, review_pk, comment_pk):
-    comment= get_object_or_404(Comment, pk=comment_pk)
+    comment = get_object_or_404(Comment, pk=comment_pk)
     if request.user == comment.user:
         comment.delete()
-        
+
+
 def like(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if review.like_users.filter(pk=request.user.pk).exists():
         review.like_users.remove(request.user)
     else:
         review.like_users.add(request.user)
-
-

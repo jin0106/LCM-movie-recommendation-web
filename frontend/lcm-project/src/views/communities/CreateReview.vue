@@ -1,12 +1,12 @@
 <template>
-  <div id="temp">
-    <h1>well done</h1>
+  <div id="CreateReview">
+    <h1>Create Review</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: "temp",
+  name: "CreateReview",
 };
 </script>
 
