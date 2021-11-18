@@ -41,11 +41,18 @@ export default {
         content: "",
         created_at: "",
         updated_at: "",
-        is_private: "",
+        user: "",
       },
     };
   },
   methods: {
+    setHeader: function () {
+      const token = localStorage.getItem("JWT");
+      const header = {
+        Authorization: `Bearer ${token}`,
+      };
+      return header;
+    },
     goList: function () {
       this.$router.push({ name: "ReviewList" });
     },
@@ -54,12 +61,15 @@ export default {
         method: "POST",
         url: "http://127.0.0.1:8000/communities/",
         data: this.info,
+        headers: this.setHeader(),
       })
         .then((res) => {
           console.log(res);
           this.$route.push({ name: "ReviewList" });
         })
-        .catch((err) => [console.log(err)]);
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   computed: {

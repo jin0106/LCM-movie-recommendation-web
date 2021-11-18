@@ -4,11 +4,7 @@ import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import temp from '@/views/accounts/temp'
 import Profile from '@/views/accounts/Profile'
-import ReviewDetail from '@/views/communities/ReviewDetail'
-import ReviewList from '@/views/communities/ReviewList'
-
-import CreateReview from '@/views/communities/CreateReview'
-
+import Community from '@/views/communities/Community'
 
 Vue.use(VueRouter)
 
@@ -29,25 +25,15 @@ const routes = [
     component: temp,
   },
   {
-    path: '/communities',
-    name: 'ReviewList',
-    component: ReviewList,
-  },
-  {
     path: '/profile',
     name: 'Profile',
     component: Profile,
   },
   {
-    path:'/communities/:reviewId',
-    name:'ReviewDetail',
-    component: ReviewDetail,
+    path:'/community',
+    name:'Community',
+    component: Community,
   },
-  {
-    path:'/communities/create/:',
-    name:'CreateReview',
-    component: CreateReview,
-  }
 ]
 
 const router = new VueRouter({

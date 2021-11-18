@@ -17,9 +17,7 @@ def review_list_create(request):
         return Response(serializer.data)
     if request.method == 'POST':
         serializer = ReviewSerializer(data=request.data)
-
         if serializer.is_valid(raise_exception=True):
-
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -36,7 +34,7 @@ def review_update_delete(request, review_pk):
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = ReviewSerializer(review, data=request.data)
+        serializer = ReviewSerializer(instance=review, data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)

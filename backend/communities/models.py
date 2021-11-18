@@ -16,6 +16,9 @@ class Review(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_private = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.title
+
 
 class Comment(models.Model):
     content = models.CharField(max_length=100)
