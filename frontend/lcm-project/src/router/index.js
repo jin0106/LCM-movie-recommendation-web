@@ -6,6 +6,10 @@ import temp from '@/views/accounts/temp'
 import Profile from '@/views/accounts/Profile'
 import ReviewDetail from '@/views/communities/ReviewDetail'
 import ReviewList from '@/views/communities/ReviewList'
+
+import CreateReview from '@/views/communities/CreateReview'
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,6 +42,11 @@ const routes = [
     path:'/communities/:reviewId',
     name:'ReviewDetail',
     component: ReviewDetail,
+  },
+  {
+    path:'/communities/create/:',
+    name:'CreateReview',
+    component: CreateReview,
   }
 ]
 

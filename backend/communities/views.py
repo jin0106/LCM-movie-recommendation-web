@@ -1,6 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from .models import Review, Comment
-from .serializers import ReviewSerializer, ReviewListSerializer
+from .serializers import CommentSerializer, ReviewSerializer, ReviewListSerializer
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.decorators import api_view
@@ -16,12 +17,16 @@ def review_list_create(request):
         return Response(serializer.data)
     if request.method == 'POST':
         serializer = ReviewSerializer(data=request.data)
+
         if serializer.is_valid(raise_exception=True):
+
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # GET일때 하나의 리뷰 디테일 정보 불러오기, PUT일때 업데이트, DELETE일때 삭제
+
+
 @api_view(['GET', 'PUT', 'DELETE'])
 def review_update_delete(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
@@ -44,10 +49,21 @@ def review_update_delete(request, review_pk):
         return Response(data, status=status.HTTP_204_NO_CONTENT)
 
 
+@api_view(['GET', 'POST'])
 def comment_list_create(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
-        review = get_object_or_404(Review, pk=review_pk)
-        # commentform 설정?해서 만들고 serializer?
+        comments = Comment.objects.filter(review_id=review_pk)
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+
+    if request.method == 'POST':
+        comment = Comment(content=request.data.get(
+            'content'), review=review, user=User)
+        comment.save()
+        serializer = CommentSerializer(comment)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 def comment_delete_update(request, review_pk, comment_pk):

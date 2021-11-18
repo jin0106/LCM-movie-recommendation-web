@@ -1,8 +1,14 @@
 <template>
   <div id="ReviewList">
     <div v-for="(review, idx) in reviewList" :key="idx">
+
+      <p @click="detail(review)">{{ review.title }}</p>
+    </div>
+    <button @click="createReview">글 쓰기</button>
+
       <p @click="detail(idx)">{{ review.title }}왜 안나옴</p>
     </div>
+
     <!-- <h2 v-else>게시글이 없습니다.</h2> -->
   </div>
 </template>
@@ -15,6 +21,18 @@ export default {
   name: "ReviewList",
   // 받아온 게시글 데이터의 유무를 위해서 변수 정의
   methods: {
+    detail: function (review) {
+      this.$router.push({
+        name: "ReviewDetail",
+        params: {
+          reviewId: review.id,
+        },
+      });
+    },
+    createReview: function () {
+      this.$router.push({ name: "CreateReview" });
+    },
+
     detail: function (idx) {
       this.$router.push({
         name: "ReviewDetail",
@@ -34,6 +52,8 @@ export default {
         this.$store.dispatch("getReviewList", res.data);
       })
       .catch((err) => {
+        console.log(err);
+
         alert(err);
       });
   },
