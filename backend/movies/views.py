@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 import requests
 import json
-
+import random
 
 # 전체 영화 목록 조회
 @api_view(['GET'])
@@ -39,15 +39,15 @@ def user_recommend(request):
                 b += j
         genres.append(b)
 
+
     input_serializer = []
     for i in range(len(genres)):
         a = Movie.objects.filter(genres=int(genres[i]))
         input_serializer.extend(a)
-
+    input_serializer[:10]
     serializer = MovieListSerializer(input_serializer, many=True)
 
     return Response(serializer.data, status.HTTP_200_OK)
-
 
 @api_view(['GET'])
 def weather_recommend(request):
@@ -55,19 +55,22 @@ def weather_recommend(request):
     # 현재 위치 정보 받아오기 진행중
     LOCATION_API_KEY = 'AIzaSyB7Sx40393IyWF0OYSJ7OMUqY2dHCdxzsw'
     url = f'https://www.googleapis.com/geolocation/v1/geolocate?key={LOCATION_API_KEY}'
+    
 
     result = json.dumps(requests.post(url).json())
     location = json.loads(result)
-
+    
+    
     lat = location["location"]["lat"]
     lng = location["location"]["lng"]
 
+    
     WEATHER_API_KEY = 'b1a32c0fd2033a695051df3761f95526'
     url = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lng}&appid={WEATHER_API_KEY}'
     # request the API data and convert the JSON to Python data types
     city_weather = requests.get(url).json()
     # 필요한 정보들만 가져오기
-
+    
     weather = {
         'main': city_weather['weather'][0]['main'],
         'temperature': city_weather['main']['temp'],
@@ -80,7 +83,15 @@ def weather_recommend(request):
            'snow': 10751, 'mist': 14, 'broken clouds': 27, 'scattered clouds': 10749}
     genre = lst[weather['description']]
     # 장르와 같은 영화 정보들 가지고오기
-    movies = Movie.objects.filter(genres=genre)[:10]
-    serializers = MovieListSerializer(movies, many=True)
 
+ 
+    movies = Movie.objects.filter(genres=genre)
+    number = random.sample(range(0, len(movies)), 10)
+    
+    a = []
+    for i in number:
+        a.append(Movie.objects.filter(genres=genre)[i])
+
+    serializers = MovieListSerializer(a, many=True)
+    
     return Response(serializers.data, status.HTTP_200_OK)
