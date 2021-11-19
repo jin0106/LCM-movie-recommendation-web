@@ -12,7 +12,12 @@ export default new Vuex.Store({
   mutations: {
     GET_REVIEWS: function(state, data){
       state.reviews = data
-
+    },
+    CREATE_REVIEWS(state,res){
+      state.reviews.push(res)
+    },
+    DELETE_REVIEW: function(state,data){
+      state.reviews.pop(data)
     },
     GET_USERNAME: function(state, data){
       state.getUserName = data
@@ -30,6 +35,34 @@ export default new Vuex.Store({
         .then((res) => {
           // console.log(res.data);
           commit('GET_REVIEWS', res.data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteReview:function({commit}, data){
+      axios({
+        method: "delete",
+        url: `http://127.0.0.1:8000/communities/${data}`,
+      })
+        .then((res) => {
+          commit('DELETE_REVIEW', res);
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(data)
+        });
+    },
+    CreateReview({commit}, item){
+      axios({
+        method: "POST",
+        url: "http://127.0.0.1:8000/communities/",
+        data: this.item.reviewItem,
+        headers: item.token,
+      })
+        .then(() => {
+          commit('CREATE_REVIEW')
+          this.$router.push({name:'Community'})
         })
         .catch((err) => {
           console.log(err);

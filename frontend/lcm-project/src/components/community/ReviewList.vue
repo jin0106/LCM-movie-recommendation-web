@@ -1,20 +1,16 @@
 <template>
   <div id="ReviewList">
-    <p v-for="(review, idx) in reviews" :key="idx">{{ review.title }}</p>
-    <ReviewDetail :review="review" />
-    <!-- <h2 v-else>게시글이 없습니다.</h2> -->
+    <div v-for="(review, idx) in reviews" :key="idx">
+      <p @click="detail(review)">{{ review.title }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import ReviewDetail from "@/components/community/ReviewDetail";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ReviewList",
-  components: {
-    ReviewDetail,
-  },
   // 받아온 게시글 데이터의 유무를 위해서 변수 정의
   methods: {
     setHeader: function () {
@@ -24,12 +20,20 @@ export default {
       };
       return header;
     },
+    detail: function (review) {
+      this.$router.push({
+        name: "ReviewDetail",
+        params: {
+          reviewId: review.id,
+        },
+      });
+    },
   },
   created: function () {
     this.$store.dispatch("getReviews", this.setHeader());
   },
   computed: {
-    ...mapState(["reviews"]),
+    ...mapGetters(["reviews"]),
   },
 };
 </script>

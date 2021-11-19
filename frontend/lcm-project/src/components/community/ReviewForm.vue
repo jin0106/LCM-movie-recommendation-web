@@ -29,19 +29,15 @@
 
 <script>
 import { mapGetters } from "vuex";
-import axios from "axios";
 export default {
-  name: "CreateReview",
+  name: "ReviewForm",
   data: function () {
     return {
       info: {
-        movie: "",
-        like_users: "",
-        title: "",
-        content: "",
-        created_at: "",
-        updated_at: "",
-        user: "",
+        movie: null,
+        like_users: null,
+        title: null,
+        content: null,
       },
     };
   },
@@ -56,20 +52,12 @@ export default {
     goList: function () {
       this.$router.push({ name: "ReviewList" });
     },
-    Create: function () {
-      axios({
-        method: "POST",
-        url: "http://127.0.0.1:8000/communities/",
-        data: this.info,
-        headers: this.setHeader(),
-      })
-        .then((res) => {
-          console.log(res);
-          this.$route.push({ name: "ReviewList" });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    Create() {
+      const reviewItem = {
+        reviewItem: this.info,
+        token: this.setHeader(),
+      };
+      this.$store.dispatch("CreateReview", reviewItem);
     },
   },
   computed: {
