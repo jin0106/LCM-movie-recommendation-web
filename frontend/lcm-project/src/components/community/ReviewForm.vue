@@ -38,6 +38,7 @@ export default {
         like_users: null,
         title: null,
         content: null,
+        is_private: false,
       },
     };
   },
@@ -54,7 +55,7 @@ export default {
     },
     Create() {
       const reviewItem = {
-        reviewItem: this.info,
+        info: this.info,
         token: this.setHeader(),
       };
       this.$store.dispatch("CreateReview", reviewItem);

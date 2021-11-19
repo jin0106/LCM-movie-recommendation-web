@@ -6,6 +6,7 @@ import temp from '@/views/accounts/temp'
 import Profile from '@/views/accounts/Profile'
 import Community from '@/views/community/Community'
 import ReviewDetail from '@/components/community/ReviewDetail'
+import ReviewForm from '@/components/community/ReviewForm'
 
 Vue.use(VueRouter)
 
@@ -43,7 +44,7 @@ const routes = [
   {
     path:'community/create',
     name: 'ReviewForm',
-    component: Reviewform,
+    component: ReviewForm,
   }
   
 ]

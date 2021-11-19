@@ -7,7 +7,7 @@
       <ReviewList />
     </div>
     <div v-else>작성된 글이 없습니다.</div>
-    <button>글 작성</button>
+    <button @click="moveCreate">글 작성</button>
   </div>
 </template>
 
@@ -21,6 +21,11 @@ export default {
   },
   computed: {
     ...mapGetters(["reviews"]),
+  },
+  methods: {
+    moveCreate() {
+      this.$router.push({ name: "ReviewForm" });
+    },
   },
   created: function () {
     this.$store.dispatch("getReviews");

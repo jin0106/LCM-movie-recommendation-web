@@ -57,10 +57,11 @@ export default new Vuex.Store({
       axios({
         method: "POST",
         url: "http://127.0.0.1:8000/communities/",
-        data: this.item.reviewItem,
+        data: item.info,
         headers: item.token,
       })
         .then(() => {
+        
           commit('CREATE_REVIEW')
           this.$router.push({name:'Community'})
         })
