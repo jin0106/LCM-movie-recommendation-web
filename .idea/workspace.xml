@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="12f7739f-6368-4bfa-b81c-7cb6b0228333" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/backend/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/accounts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/components/HelloWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/views/accounts/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/views/accounts/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/views/accounts/Profile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/views/accounts/Profile.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/views/accounts/Signup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/views/accounts/Signup.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/views/accounts/temp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/views/accounts/temp.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/views/communities/CreateReview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/views/communities/CreateReview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/views/communities/ReviewDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/views/communities/ReviewDetail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/lcm-project/src/views/communities/ReviewList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lcm-project/src/views/communities/ReviewList.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="2177Iye24GGqwIikV7hZ3aMXNb3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="12f7739f-6368-4bfa-b81c-7cb6b0228333" name="Changes" comment="" />
+      <created>1637280199451</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1637280199451</updated>
+    </task>
+    <servers />
+  </component>
+</project>

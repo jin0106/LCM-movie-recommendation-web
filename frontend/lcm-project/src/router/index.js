@@ -5,9 +5,13 @@ import Login from '@/views/accounts/Login'
 import temp from '@/views/accounts/temp'
 import Profile from '@/views/accounts/Profile'
 import Community from '@/views/community/Community'
+import Movies from '@/views/movies/Movies'
+
 import ReviewDetail from '@/components/community/ReviewDetail'
 import ReviewForm from '@/components/community/ReviewForm'
-
+import MovieDetail from '@/components/movies/MovieDetail'
+import MovieList from '@/components/movies/MovieList'
+import UserRecommend from '@/components/movies/UserRecommend'
 Vue.use(VueRouter)
 
 const routes = [
@@ -42,10 +46,31 @@ const routes = [
     component: ReviewDetail,
   },
   {
-    path:'community/create',
+    path:'/community/create',
     name: 'ReviewForm',
     component: ReviewForm,
+  },
+  {
+    path:'/Movies',
+    name: "Movies",
+    component: Movies,
   }
+  ,
+  {
+    path:'/movies/MovieDetail',
+    name: 'MovieDetail',
+    component: MovieDetail,
+  },
+  {
+    path:'/movies/MovieList',
+    name: 'MovieList',
+    component: MovieList,
+  },
+  {
+    path:'/movies/UserRecommend',
+    name: 'UserRecommend',
+    component: UserRecommend,
+  },
   
 ]
 

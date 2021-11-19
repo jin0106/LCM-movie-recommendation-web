@@ -59,15 +59,16 @@
       <input type="checkbox" v-model="credentials.genre" value="10752">War
       <input type="checkbox" v-model="credentials.genre" value="10770">TV Movie
     </div>
-    <div>
-      <button @click="signup">회원가입</button>
-    </div>
+
+
+    <button @click="signup">회원가입</button>
+
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-//const SERVER_URL = process.env.VUE_APP_SERVER_URL
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 
 export default {
@@ -80,15 +81,17 @@ export default {
         passwordconfirm: '',
         nickname: '',
         genre: [],
+        profileimg: '',
       }
     }
   },
   methods: {
     signup: function(){
+      console.log(this.$store.state.ngrokurl)
       axios({
         method: 'post',
-        url: `http://127.0.0.1:8000/accounts/signup/`,
-        data: this.credentials
+        url: `${SERVER_URL}accounts/signup/`,
+        data: this.credentials,
       })
       .then(res => {
         console.log(res)
@@ -97,7 +100,7 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    }
+    },
   }
 }
 </script>

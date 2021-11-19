@@ -2,12 +2,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 Vue.use(Vuex)
-
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 export default new Vuex.Store({
   state: {
     reviews: [],
     getUserName:'',
-
   },
   mutations: {
     GET_REVIEWS: function(state, data){
@@ -54,6 +53,7 @@ export default new Vuex.Store({
         });
     },
     CreateReview({commit}, item){
+      console.log(item)
       axios({
         method: "POST",
         url: "http://127.0.0.1:8000/communities/",
@@ -69,9 +69,21 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-
     getUserName : function({commit}, data){
       commit('GET_USERNAME',data)
+    },
+
+
+    getMovieList: function({commit}, data){
+      axios({
+        method: "GET",
+        url : `${SERVER_URL}movies/`,
+        headers: data
+      })
+      .then((res) => {
+        console.log(commit)
+        console.log(res)
+      })
     }
   },
   getters: {
@@ -80,6 +92,7 @@ export default new Vuex.Store({
     },
     reviews(state){
       return state.reviews
-    }
+    },
+ 
     }
   })

@@ -45,6 +45,7 @@
 
 <script>
 import axios from 'axios'
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name : "Profile",
@@ -69,7 +70,7 @@ export default {
     getLikeGenre: function(){
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/accounts/likegenre/`,
+        url: `${SERVER_URL}accounts/likegenre/`,
         headers: this.setHeader()
       })
       .then(res => {
@@ -83,7 +84,7 @@ export default {
     getUser: function(){
       axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/accounts/getuserinfo/`,
+        url: `${SERVER_URL}accounts/getuserinfo/`,
         headers: this.setHeader(),
       })
       .then(res => {
@@ -99,7 +100,7 @@ export default {
       console.log(this.credentials)
       axios({
         method: 'put',
-        url: `http://127.0.0.1:8000/accounts/updateuserinfo/`,
+        url: `${SERVER_URL}accounts/updateuserinfo/`,
         headers: this.setHeader(),
         data: this.credentials
       })

@@ -6,7 +6,9 @@
         <div>
           <router-link :to="{ name: 'Community' }">Community</router-link> |
           <router-link to="#" @click.native="Logout">Logout</router-link> |
-          <router-link :to="{ name: 'Profile' }">Profile</router-link>
+          <router-link :to="{ name: 'Profile' }">Profile</router-link>  |
+          <router-link :to="{ name: 'Movies' }">Movies</router-link>
+
         </div>
       </h1>
       <h2 v-else>
@@ -14,6 +16,7 @@
         <div>
           <router-link :to="{ name: 'Signup' }">Signup</router-link> |
           <router-link :to="{ name: 'Login' }">Login</router-link> |
+
         </div>
       </h2>
 
