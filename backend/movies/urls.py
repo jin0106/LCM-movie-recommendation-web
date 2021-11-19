@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.movie_list),
     path('<int:movie_pk>/', views.movie_detail),
     path('user_recommend/', views.user_recommend),
+    path('weather_recommend/', views.weather_recommend),
 ]

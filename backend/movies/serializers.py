@@ -9,10 +9,16 @@ class GenreListSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# class MovieListSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Movie
-#         fields = '__all__'
+class MovieListSerializer(serializers.ModelSerializer):
+    class GenreListSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Genre
+            fields = '__all__'
+    genres = GenreListSerializer(many=True)
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
 
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -20,7 +26,7 @@ class MovieSerializer(serializers.ModelSerializer):
         class Meta:
             model = Genre
             fields = '__all__'
-    genres = GenreListSerializer(required=False)
+    genres = GenreListSerializer(many=True)
 
     class Meta:
         model = Movie
