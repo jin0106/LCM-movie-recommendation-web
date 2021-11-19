@@ -1,9 +1,9 @@
 <template>
-  <div id="MovieList">
+  <div id="MovieWeather">
     <div class="contents">
-      <p class="title">How about this movies?</p>
-      <div class="posters" v-if="totalMovieList.length">
-        <div class="div-img" v-for="(movie, idx) in totalMovieList" :key="idx">
+      <p class="title">Based on the Weahter in your city</p>
+      <div class="posters" v-if="WeatherMovies.length">
+        <div class="div-img" v-for="(movie, idx) in WeatherMovies" :key="idx">
           <img class="poster" :src="movie.poster_path" alt="thumnail" />
         </div>
       </div>
@@ -21,7 +21,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "MovieList",
+  name: "MovieWeather",
   data: function () {
     return {
       movieList: [],
@@ -29,11 +29,11 @@ export default {
   },
   methods: {
     getMovieList: function () {
-      this.$store.dispatch("getMovieList", this.$store.state.token);
+      this.$store.dispatch("WeatherMovies", this.$store.state.token);
     },
   },
   computed: {
-    ...mapGetters(["totalMovieList"]),
+    ...mapGetters(["WeatherMovies"]),
   },
 
   created: function () {

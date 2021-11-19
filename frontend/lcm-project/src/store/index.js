@@ -17,6 +17,7 @@ export default new Vuex.Store({
     totalMovieList: [],
     userlikegenres:[],
     token:'',
+    weatherMovies:[],
   },
   mutations: {
     GET_REVIEWS: function(state, data){
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     },
     GET_TOKEN(state, data){
       state.token = data
+    },
+    GET_WEATHERMOVIES(state,data){
+      state.weatherMovies = data
     }
   },
   actions: {
@@ -125,6 +129,19 @@ export default new Vuex.Store({
       };
       this.commit('GET_TOKEN', header)
     },
+    WeatherMovies({commit},token){
+      axios({
+        method:'get',
+        url: `${SERVER_URL}movies/weather_recommend/`,
+        headers: token,
+      })
+      .then((res) =>{
+        commit('GET_WEATHERMOVIES', res.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
   },
   getters: {
     getUserName : function(state){
@@ -134,7 +151,10 @@ export default new Vuex.Store({
       return state.reviews
     },
     totalMovieList: function(state){
-      return _.sampleSize(state.totalMovieList,11)
+      return _.sampleSize(state.totalMovieList,10)
     },
+    WeatherMovies(state){
+      return state.weatherMovies
+    }
     }
   })
