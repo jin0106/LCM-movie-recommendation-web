@@ -1,0 +1,42 @@
+* {
+  color: black;
+  margin: 0;
+}
+
+#MoviList {
+  width: 100%;
+  padding: 100px;
+}
+
+.title {
+  font-size: 1.25rem;
+  text-align: left;
+  margin: 0;
+  font-weight: 700;
+}
+
+.divimg {
+  width: auto;
+  height: auto;
+}
+
+.poster {
+  width: 100%;
+  height: 100%;
+  padding-left: 2px;
+}
+
+.div-img:first-child>.poster {
+  padding: 0;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+}
+
+.posters {
+  display: flex;
+  justify-content: center;
+  /* flex-wrap: nowrap; */
+}

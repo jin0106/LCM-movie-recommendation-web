@@ -1,13 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import createPersistedState from 'vuex-persistedstate';
+import _ from 'lodash'
 Vue.use(Vuex)
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
+
+
 export default new Vuex.Store({
+  plugins: [
+    createPersistedState()
+  ],
   state: {
     reviews: [],
     getUserName:'',
     totalMovieList: [],
+    userlikegenres:[],
+    token:'',
   },
   mutations: {
     GET_REVIEWS: function(state, data){
@@ -25,6 +34,12 @@ export default new Vuex.Store({
     GET_MOVIELIST: function(state, data){
       state.totalMovieList = data
     },
+    GET_LIKEGENRE: function(state, data){
+      state.userlikegenres = data
+    },
+    GET_TOKEN(state, data){
+      state.token = data
+    }
   },
   actions: {
     // 리뷰 목록 가져오기
@@ -63,7 +78,6 @@ export default new Vuex.Store({
         headers: item.token,
       })
         .then(() => {
-        
           commit('CREATE_REVIEW')
           this.$router.push({name:'Community'})
         })
@@ -87,7 +101,30 @@ export default new Vuex.Store({
         console.log('getmovieaction')
         console.log(err)
       })
-    }
+    },
+    getLikeGenre: function ({commit},token) {
+      console.log('!!!!!!!!')
+      axios({
+        method: "get",
+        url: `${SERVER_URL}accounts/likegenre/`,
+        headers: token,
+      })
+        .then((res) => {
+          const likeGenre = res.data;
+          commit('GET_LIKEGENRE', likeGenre)
+          console.log(this.likeGenre);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    setHeader: function () {
+      const token = localStorage.getItem("JWT");
+      const header = {
+        Authorization: `Bearer ${token}`,
+      };
+      this.commit('GET_TOKEN', header)
+    },
   },
   getters: {
     getUserName : function(state){
@@ -97,8 +134,7 @@ export default new Vuex.Store({
       return state.reviews
     },
     totalMovieList: function(state){
-      return state.totalMovieList
+      return _.sampleSize(state.totalMovieList,11)
     },
- 
     }
   })

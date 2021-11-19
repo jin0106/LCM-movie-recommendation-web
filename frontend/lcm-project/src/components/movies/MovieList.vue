@@ -1,21 +1,17 @@
 <template>
   <div id="MovieList">
-    <h2>MovieList</h2>
-    <div v-if="totalMovieList.length">
-      <b-container fluid class="p-4 bg-dark">
-          <b-row>
-            <b-col>
-              <div v-for="(movie, idx) in totalMovieList" :key="idx">
-                <b-img class="max-small" thumbnail fluid :src="movie.poster_path" alt="thumnail"></b-img>
-              </div>
-            </b-col>
-          </b-row>
-      </b-container>
-    </div>
+    <div class="contents">
+      <p class="title">How about this movies?</p>
+      <div class="posters" v-if="totalMovieList.length">
+        <div class="div-img" v-for="(movie, idx) in totalMovieList" :key="idx">
+          <img class="poster" :src="movie.poster_path" alt="thumnail" />
+        </div>
+      </div>
 
-    <div v-else>
-      <div>
-        <b-spinner style="width: 3rem; height: 3rem;" label=""></b-spinner>
+      <div v-else>
+        <div>
+          <b-spinner style="width: 3rem; height: 3rem" label=""></b-spinner>
+        </div>
       </div>
     </div>
   </div>
@@ -24,49 +20,33 @@
 <script>
 import { mapGetters } from "vuex";
 
-
 export default {
-  name : "MovieList",
+  name: "MovieList",
   data: function () {
     return {
       movieList: [],
-        
-    }
+    };
   },
   methods: {
-    setHeader: function () {
-      const token = localStorage.getItem("JWT");
-      const header = {
-        Authorization: `Bearer ${token}`,
-      };
-      return header;
+    getMovieList: function () {
+      this.$store.dispatch("getMovieList", this.$store.state.token);
     },
-
-    getMovieList: function() {
-      this.$store.dispatch('getMovieList', this.setHeader())
+    check: function () {
+      this.movieList = this.$store.state.totalMovieList;
     },
-    check: function() {
-      this.movieList = this.$store.state.totalMovieList
-    }
-
-
   },
   computed: {
-    ...mapGetters(["totalMovieList"])
-  
+    ...mapGetters(["totalMovieList"]),
   },
 
-  created: function(){
-    this.getMovieList()
-    this.check()
-  }
-}
+  created: function () {
+    this.getMovieList();
+    this.check();
+  },
+};
 </script>
 
 <style>
-.max-small {
-    width: auto; height: auto;
-    max-width: 30;
-    max-height: 100px;
-}
+/* 전체 글자 색깔 마진 없애주기 */
+@import "css/movielist.css";
 </style>
