@@ -139,6 +139,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
+    "http://192.168.45.83:8080",
 ]
 
 REST_FRAMEWORK = {
@@ -148,8 +149,9 @@ REST_FRAMEWORK = {
 
 }
 
-import datetime
 
-JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=300),
 }

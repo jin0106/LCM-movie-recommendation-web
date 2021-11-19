@@ -1,19 +1,19 @@
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.contrib.auth import get_user_model
-from rest_framework import serializers
+from rest_framework import serializers, status
 from rest_framework.decorators import api_view, permission_classes
 from .models import Movie, Genre
 from .serializers import GenreListSerializer, MovieSerializer, MovieListSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 import requests
+import json
 
 
 # 전체 영화 목록 조회
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def movie_list(request):
-
     movies = get_list_or_404(Movie)
     serializers = MovieListSerializer(movies, many=True)
     return Response(serializers.data)
@@ -27,47 +27,53 @@ def movie_detail(request, movie_pk):
     return Response(serializers.data)
 
 
+
+
 @api_view(['GET'])
-@permission_classes([AllowAny])
 def user_recommend(request):
-    # 현재 위치 정보 받아오기 진행중
-    # url = 'https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDRNxAxFvZlpwHLb43bBc80UPnjh8J43I8'
-    # data = {
-    #     'considerIp': True,
-    # }
-
-    # result = requests.post(url, data)
-
-    # print(result.text)
-
     user = request.user.genre.all()
     genres = []
     for i in user:
-        i = str(i)[14:16]
-        genres.append(int(i))
-    movies = []
+        a = json.loads(json.dumps(str(i)))
+        b = ''
+        for j in str(a):
+            if j.isdigit():
+                b += j
+        genres.append(b)
+
+
+    input_serializer = []
     for i in range(len(genres)):
-        a = get_list_or_404(Movie, genres=genres[i])[:3]
-        movies.extend(a)
-    print(movies)
-    # serializer = GenreListSerializer(a, many=True)
-    # return Response(serializer.data)
+        a = Movie.objects.filter(genres=int(genres[i]))
+        input_serializer.extend(a)
+    
+    serializer = MovieListSerializer(input_serializer, many=True)
 
-# 장르에 대한 정보만 시리얼라이저 해서 넘겨주기
-    # user = request.user
-    # genre = get_list_or_404(Genre, user_genre=user.id)
-    # serializer = GenreListSerializer(genre, many=True)
-    # return Response(serializer.data)
+    return Response(serializer.data, status.HTTP_200_OK)
 
-
+@api_view(['GET'])
 def weather_recommend(request):
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid=b1a32c0fd2033a695051df3761f95526'
-    city = 'Daegu'
+    # serializer.data,
+    # 현재 위치 정보 받아오기 진행중
+    LOCATION_API_KEY = 'AIzaSyB7Sx40393IyWF0OYSJ7OMUqY2dHCdxzsw'
+    url = f'https://www.googleapis.com/geolocation/v1/geolocate?key={LOCATION_API_KEY}'
+    
+
+    result = json.dumps(requests.post(url).json())
+    location = json.loads(result)
+    
+    
+    lat = location["location"]["lat"]
+    lng = location["location"]["lng"]
+
+    
+    WEATHER_API_KEY = 'b1a32c0fd2033a695051df3761f95526'
+    url = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lng}&appid={WEATHER_API_KEY}'
     # request the API data and convert the JSON to Python data types
-    city_weather = requests.get(url.format(city)).json()
+    city_weather = requests.get(url).json()
     # 필요한 정보들만 가져오기
+    
     weather = {
-        'city': city,
         'main': city_weather['weather'][0]['main'],
         'temperature': city_weather['main']['temp'],
         'description': city_weather['weather'][0]['description'],
@@ -80,6 +86,6 @@ def weather_recommend(request):
     genre = lst[weather['description']]
     # 장르와 같은 영화 정보들 가지고오기
     movies = Movie.objects.filter(genres=genre)[:10]
-
     serializers = MovieListSerializer(movies, many=True)
-    return Response(serializers.data)
+    
+    return Response(serializers.data, status.HTTP_200_OK)

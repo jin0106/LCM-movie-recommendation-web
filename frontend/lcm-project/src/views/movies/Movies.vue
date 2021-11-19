@@ -1,18 +1,21 @@
 <template>
   <div id="Movies">
     <header>
-      <MovieList/>
+      <MoviesRecommend/>
+      
     </header>
   </div>
 </template>
 
 <script>
-import MovieList from "@/components/movies/MovieList.vue"
+//import MovieList from "@/components/movies/MovieList.vue"
+import MoviesRecommend from "@/components/movies/MoviesRecommend.vue"
 
 export default {
   name: "Movies",
   components: {
-    MovieList,
+    //MovieList,
+    MoviesRecommend,
   }
 }
 </script>
