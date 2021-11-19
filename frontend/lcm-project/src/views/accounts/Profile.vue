@@ -75,6 +75,7 @@ export default {
       })
       .then(res => {
         this.likeGenre = res.data
+        console.log(this.likeGenre)
       })
       .catch(err => {
         console.log(err)

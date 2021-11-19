@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     reviews: [],
     getUserName:'',
+    totalMovieList: [],
   },
   mutations: {
     GET_REVIEWS: function(state, data){
@@ -20,8 +21,10 @@ export default new Vuex.Store({
     },
     GET_USERNAME: function(state, data){
       state.getUserName = data
-
-    }
+    },
+    GET_MOVIELIST: function(state, data){
+      state.totalMovieList = data
+    },
   },
   actions: {
     // 리뷰 목록 가져오기
@@ -53,7 +56,6 @@ export default new Vuex.Store({
         });
     },
     CreateReview({commit}, item){
-      console.log(item)
       axios({
         method: "POST",
         url: "http://127.0.0.1:8000/communities/",
@@ -72,17 +74,18 @@ export default new Vuex.Store({
     getUserName : function({commit}, data){
       commit('GET_USERNAME',data)
     },
-
-
     getMovieList: function({commit}, data){
       axios({
         method: "GET",
         url : `${SERVER_URL}movies/`,
         headers: data
       })
-      .then((res) => {
-        console.log(commit)
-        console.log(res)
+      .then(res => {
+        commit('GET_MOVIELIST', res.data)
+      })
+      .catch(err => {
+        console.log('getmovieaction')
+        console.log(err)
       })
     }
   },
@@ -90,8 +93,11 @@ export default new Vuex.Store({
     getUserName : function(state){
       return state.getUserName
     },
-    reviews(state){
+    reviews: function(state){
       return state.reviews
+    },
+    totalMovieList: function(state){
+      return state.totalMovieList
     },
  
     }
