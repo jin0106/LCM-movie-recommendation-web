@@ -7,7 +7,7 @@ class Review(models.Model):
     movie = models.ForeignKey(
         Movie, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='review', null=True)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='review', blank=True)
     like_users = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name='like_reviews', blank=True)
     title = models.CharField(max_length=100)

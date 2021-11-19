@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.decorators import api_view
 
+
 # GET일 때 전체 리뷰 불러오기, POST일때 리뷰 생성
 
 
@@ -15,10 +16,10 @@ def review_list_create(request):
         reviews = get_list_or_404(Review)
         serializer = ReviewListSerializer(reviews, many=True)
         return Response(serializer.data)
-    if request.method == 'POST':
+    elif request.method == 'POST':
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -51,17 +52,15 @@ def review_update_delete(request, review_pk):
 def comment_list_create(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
-        comments = Comment.objects.filter(review_id=review_pk)
+        comments = Comment.objects.filter(pk=review_pk)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
     if request.method == 'POST':
-        comment = Comment(content=request.data.get(
-            'content'), review=review, user=User)
-        comment.save()
-        serializer = CommentSerializer(comment)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(review=review, user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 def comment_delete_update(request, review_pk, comment_pk):

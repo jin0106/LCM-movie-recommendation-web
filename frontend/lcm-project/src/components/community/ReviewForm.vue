@@ -34,7 +34,7 @@ export default {
   data: function () {
     return {
       info: {
-        movie: null,
+        // movie: null,
         like_users: null,
         title: null,
         content: null,
@@ -59,6 +59,11 @@ export default {
         token: this.setHeader(),
       };
       this.$store.dispatch("CreateReview", reviewItem);
+      this.movie = null;
+      this.like_users = null;
+      this.title = null;
+      this.content = null;
+      this.is_private = false;
     },
   },
   computed: {
