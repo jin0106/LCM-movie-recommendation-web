@@ -87,7 +87,6 @@ def weather_recommend(request):
  
     movies = Movie.objects.filter(genres=genre)
     number = random.sample(range(0, len(movies)), 10)
-    
     a = []
     for i in number:
         a.append(Movie.objects.filter(genres=genre)[i])

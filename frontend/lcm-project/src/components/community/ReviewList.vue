@@ -1,8 +1,13 @@
 <template>
   <div id="ReviewList">
-    <div v-for="(review, idx) in reviews" :key="idx">
-      <p @click="detail(review)">{{ review.title }}</p>
+    <div v-if="check.length">
+      <div v-for="(review, idx) in reviews" :key="idx">
+        <p  @click="detail(review)">{{ review.title }}</p>
+      </div>
     </div>
+  
+
+    
   </div>
 </template>
 
@@ -12,6 +17,12 @@ import { mapGetters } from "vuex";
 export default {
   name: "ReviewList",
   // 받아온 게시글 데이터의 유무를 위해서 변수 정의
+  data: function(){
+    return{
+      movietitle: this.$store.state.movieInfo.title,
+      check: this.$store.state.reviews
+    }
+  },
   methods: {
     setHeader: function () {
       const token = localStorage.getItem("JWT");
@@ -21,6 +32,7 @@ export default {
       return header;
     },
     detail: function (review) {
+      console.log(this.check)
       this.$router.push({
         name: "ReviewDetail",
         params: {
@@ -29,9 +41,7 @@ export default {
       });
     },
   },
-  created: function () {
-    this.$store.dispatch("getReviews", this.setHeader());
-  },
+
   computed: {
     ...mapGetters(["reviews"]),
   },

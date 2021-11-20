@@ -18,12 +18,13 @@ export default new Vuex.Store({
     userlikegenres:[],
     token:'',
     weatherMovies:[],
+    movieInfo: [],
   },
   mutations: {
     GET_REVIEWS: function(state, data){
       state.reviews = data
     },
-    CREATE_REVIEWS(state,res){
+    CREATE_REVIEW(state,res){
       state.reviews.push(res)
     },
     DELETE_REVIEW: function(state,data){
@@ -43,18 +44,23 @@ export default new Vuex.Store({
     },
     GET_WEATHERMOVIES(state,data){
       state.weatherMovies = data
-    }
+    },
+    GET_MOVIEINFO(state,data){
+      state.movieInfo = data
+    },
   },
   actions: {
     // 리뷰 목록 가져오기
-    getReviews({commit}, header) {
+    getReviews({commit}, data) {
       axios({
-        method: "get",
-        url: "http://127.0.0.1:8000/communities/",
-        headers: header,
+        method: "GET",
+        url: `${SERVER_URL}communities/review/`,
+        headers: '',
+        params: {
+          movie_title: `${data['movie']['title']}`
+        }
       })
         .then((res) => {
-          // console.log(res.data);
           commit('GET_REVIEWS', res.data)
         })
         .catch((err) => {
@@ -62,28 +68,26 @@ export default new Vuex.Store({
         });
     },
     deleteReview:function({commit}, data){
+      console.log(data)
       axios({
         method: "delete",
-        url: `http://127.0.0.1:8000/communities/${data}`,
       })
         .then((res) => {
           commit('DELETE_REVIEW', res);
         })
         .catch((err) => {
           console.log(err);
-          console.log(data)
         });
     },
     CreateReview({commit}, item){
       axios({
         method: "POST",
-        url: "http://127.0.0.1:8000/communities/",
+        url: `${SERVER_URL}communities/`,
         data: item.info,
         headers: item.token,
       })
         .then(() => {
           commit('CREATE_REVIEW')
-          this.$router.push({name:'Community'})
         })
         .catch((err) => {
           console.log(err);
@@ -102,12 +106,10 @@ export default new Vuex.Store({
         commit('GET_MOVIELIST', res.data)
       })
       .catch(err => {
-        console.log('getmovieaction')
         console.log(err)
       })
     },
     getLikeGenre: function ({commit},token) {
-      console.log('!!!!!!!!')
       axios({
         method: "get",
         url: `${SERVER_URL}accounts/likegenre/`,
@@ -116,7 +118,6 @@ export default new Vuex.Store({
         .then((res) => {
           const likeGenre = res.data;
           commit('GET_LIKEGENRE', likeGenre)
-          console.log(this.likeGenre);
         })
         .catch((err) => {
           console.log(err);
@@ -141,6 +142,9 @@ export default new Vuex.Store({
       .catch((err)=>{
         console.log(err)
       })
+    },
+    getMovieInfo({commit}, data){
+      commit('GET_MOVIEINFO', data)
     }
   },
   getters: {

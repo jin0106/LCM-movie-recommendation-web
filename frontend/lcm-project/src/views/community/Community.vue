@@ -2,6 +2,7 @@
   <div class="community">
     <header>
       <h2>Reviwe Board</h2>
+      <h2>영화 제목 : {{movietitle}}</h2>
     </header>
     <div v-if="reviews.length > 0">
       <ReviewList />
@@ -16,6 +17,11 @@ import ReviewList from "@/components/community/ReviewList.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "community",
+    data: function(){
+    return{
+      movietitle: this.$store.state.movieInfo.title
+    }
+  },
   components: {
     ReviewList,
   },
@@ -28,7 +34,11 @@ export default {
     },
   },
   created: function () {
-    this.$store.dispatch("getReviews");
+    const data = {
+      token : this.$store.state.token,
+      movie : this.$store.state.movieInfo
+    }
+    this.$store.dispatch("getReviews", data);
   },
 };
 </script>

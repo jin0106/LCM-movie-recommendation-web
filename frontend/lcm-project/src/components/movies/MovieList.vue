@@ -4,7 +4,7 @@
       <p class="title">How about this movies?</p>
       <div class="posters" v-if="totalMovieList.length">
         <div class="div-img" v-for="(movie, idx) in totalMovieList" :key="idx">
-          <img class="poster" :src="movie.poster_path" alt="thumnail" />
+          <img @click="createMovieReview(movie)" class="poster" :src="movie.poster_path" alt="thumnail" />
         </div>
       </div>
 
@@ -31,6 +31,11 @@ export default {
     getMovieList: function () {
       this.$store.dispatch("getMovieList", this.$store.state.token);
     },
+    createMovieReview: function(data) {
+      this.$store.dispatch('getMovieInfo', data)
+      //this.$router.push({ name: "Community" });
+    }
+
   },
   computed: {
     ...mapGetters(["totalMovieList"]),

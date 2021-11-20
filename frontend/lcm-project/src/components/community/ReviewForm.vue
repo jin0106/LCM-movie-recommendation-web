@@ -1,16 +1,14 @@
 <template>
   <div id="CreateReview">
     <h1>Create Review</h1>
+    <h2>영화 제목 : {{movietitle}}</h2>
     <hr />
     <div>
       <label for="title">제목</label>
       <input v-model="info.title" type="text" />
     </div>
     <br />
-    <div>
-      <label for="movie">영화 이름</label>
-      <input v-model="info.movie" type="text" name="movie" id="movie" />
-    </div>
+
 
     <label for="content">내용</label>
     <textarea
@@ -34,12 +32,13 @@ export default {
   data: function () {
     return {
       info: {
-        // movie: null,
+        movie: null,
         like_users: null,
         title: null,
         content: null,
         is_private: false,
       },
+      movietitle: this.$store.state.movieInfo.title
     };
   },
   methods: {
@@ -51,9 +50,10 @@ export default {
       return header;
     },
     goList: function () {
-      this.$router.push({ name: "ReviewList" });
+      this.$router.push({ name: "Community" });
     },
     Create() {
+      this.info.movie = this.$store.state.movieInfo
       const reviewItem = {
         info: this.info,
         token: this.setHeader(),
@@ -64,6 +64,7 @@ export default {
       this.title = null;
       this.content = null;
       this.is_private = false;
+      this.$router.push({ name: 'Community' })
     },
   },
   computed: {
