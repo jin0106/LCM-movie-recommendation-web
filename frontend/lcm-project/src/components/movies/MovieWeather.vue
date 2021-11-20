@@ -42,7 +42,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped src='./css/movielist.css'>
 /* 전체 글자 색깔 마진 없애주기 */
-@import "css/movielist.css";
 </style>

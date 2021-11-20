@@ -10,8 +10,14 @@ from rest_framework.decorators import api_view
 # GET일 때 전체 리뷰 불러오기, POST일때 리뷰 생성
 
 
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 def review_list_create(request):
+    # 리뷰 전체 리스트 받아오기
+    if request.method == 'GET':
+        reviews = get_list_or_404(Review)
+        serializers = ReviewListSerializer(reviews, many=True)
+        return Response(serializers.data, status=status.HTTP_201_CREATED)
+
     if request.method == 'POST':
         serializer = ReviewSerializer(data=request.data)
         movie = Movie.objects.get(title=request.data['movie']['title'])
@@ -19,7 +25,8 @@ def review_list_create(request):
             serializer.save(user=request.user, movie=movie)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-#사용자가 고른 영화의 review 받아오기
+
+# 사용자가 고른 영화의 review 받아오기
 @api_view(['GET'])
 def review_list_get(request):
     if request.method == 'GET':
@@ -29,9 +36,9 @@ def review_list_get(request):
         reviews = Review.objects.filter(movie_id=movie.id)
         serializer = ReviewListSerializer(reviews, many=True)
         return Response(serializer.data, status.HTTP_200_OK)
+
+
 # GET일때 하나의 리뷰 디테일 정보 불러오기, PUT일때 업데이트, DELETE일때 삭제
-
-
 @api_view(['GET', 'PUT', 'DELETE'])
 def review_update_delete(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)

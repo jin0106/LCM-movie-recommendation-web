@@ -47,13 +47,16 @@ export default {
           localStorage.setItem("JWT", res.data.access);
           this.$emit("login");
           this.$store.dispatch("setHeader");
-          this.$router.push({ name: "Profile" });
+          this.$router.push({ name: "Home" });
         })
         .catch((err) => {
           console.dir(err.response.data);
           this.errMsg = err.response.data.detail;
         });
     },
+  },
+  created() {
+    this.$store.dispatch("getReviews", this.$store.state.token);
   },
 };
 </script>

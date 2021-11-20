@@ -1,30 +1,13 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <h1 v-if="isLogin">
-        로그인 완료
-        <div>
-          <router-link :to="{ name: 'Community' }">Community</router-link> |
-          <router-link to="#" @click.native="Logout">Logout</router-link> |
-          <router-link :to="{ name: 'Profile' }">Profile</router-link> |
-          <router-link :to="{ name: 'Movies' }">Movies</router-link>
-        </div>
-      </h1>
-      <h2 v-else>
-        로그인 안됨
-        <div>
-          <router-link :to="{ name: 'Signup' }">Signup</router-link> |
-          <router-link :to="{ name: 'Login' }">Login</router-link> |
-        </div>
-      </h2>
-
-      <router-link :to="{ name: 'temp' }">temp</router-link>
-    </div>
-    <router-view @login="setLogin" />
+    <navbar />
   </div>
 </template>
 <script>
+import Navbar from "./components/navbar/navbar.vue";
+
 export default {
+  components: { Navbar },
   name: "App",
   data: function () {
     return {
@@ -53,6 +36,10 @@ export default {
 
 <style>
 #app {
+  display: flex;
+  flex-direction: column;
+}
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -71,5 +58,5 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>

@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  padding: 0;
+  position: relative;
+  background-color: #ffffff;
+}
+
+video {
+  width: 100%;
+}
+
+.overlay {
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.header {
+  display: flex;
+}
+
+.logo {
+  color: red;
+  margin-right: 2rem;
+  font-size: 1.7rem;
+  font-weight: 900;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  color: black;
+  align-items: center;
+  font-weight: 600;
+}
+
+.nav-item {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: black;
+}
+
+.menu {
+  display: flex;
+  margin-left: auto;
+  color: black;
+  align-items: center;
+  font-weight: 600
+}
+
+.menu-item {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: black;
+}

@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import axios from 'axios';
-const SERVER_URL = process.env.VUE_APP_SERVER_URL
+import axios from "axios";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
-  name : "MoviesRecommend",
+  name: "MoviesRecommend",
   methods: {
     setHeader: function () {
       const token = localStorage.getItem("JWT");
@@ -18,23 +18,22 @@ export default {
       return header;
     },
 
-    getRecommendMovieList: function() {
+    getRecommendMovieList: function () {
       axios({
         method: "GET",
-        url : `${SERVER_URL}movies/user_recommend/`,
-        headers: this.setHeader()
+        url: `${SERVER_URL}movies/user_recommend/`,
+        headers: this.setHeader(),
       })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    }
-  }
-}
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+};
 </script>
 
-<style>
-
+<style scoped src='./css/movielist.css'>
 </style>

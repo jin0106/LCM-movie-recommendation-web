@@ -1,16 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import createPersistedState from 'vuex-persistedstate';
+import createPersistedState from "vuex-persistedstate"
 import _ from 'lodash'
 Vue.use(Vuex)
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 
 export default new Vuex.Store({
-  plugins: [
-    createPersistedState()
-  ],
+  plugins: [createPersistedState()],
   state: {
     reviews: [],
     getUserName:'',
@@ -19,10 +17,15 @@ export default new Vuex.Store({
     token:'',
     weatherMovies:[],
     movieInfo: [],
+    review:'',
+    userMovies:[],
   },
   mutations: {
     GET_REVIEWS: function(state, data){
       state.reviews = data
+    },
+    GET_REVIEW: function(state, data){
+      state.review = data
     },
     CREATE_REVIEW(state,res){
       state.reviews.push(res)
@@ -48,10 +51,26 @@ export default new Vuex.Store({
     GET_MOVIEINFO(state,data){
       state.movieInfo = data
     },
+    GET_USER_MOVIES(state,data){
+      state.userMovies = data
+    }
   },
   actions: {
     // 리뷰 목록 가져오기
-    getReviews({commit}, data) {
+    getReviews({commit}, token) {
+      axios({
+        method: "GET",
+        url: `${SERVER_URL}communities/`,
+        headers: token,
+      })
+        .then((res) => {
+          commit('GET_REVIEWS', res.data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getReview({commit}, data) {
       axios({
         method: "GET",
         url: `${SERVER_URL}communities/review/`,
@@ -61,7 +80,7 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          commit('GET_REVIEWS', res.data)
+          commit('GET_REVIEW', res.data)
         })
         .catch((err) => {
           console.log(err);
@@ -71,6 +90,7 @@ export default new Vuex.Store({
       console.log(data)
       axios({
         method: "delete",
+        url: `${SERVER_URL}communities/${data}`,
       })
         .then((res) => {
           commit('DELETE_REVIEW', res);
@@ -145,12 +165,24 @@ export default new Vuex.Store({
     },
     getMovieInfo({commit}, data){
       commit('GET_MOVIEINFO', data)
+    },
+    // 유저 프로필 장르 기반으로 영화 받아오기
+    getUserMovies({commit},token){
+      axios({
+        method:'get',
+        url:`${SERVER_URL}movies/user_recommend/`,
+        headers:token,
+      })
+      .then((res =>{
+        commit('GET_USER_MOVIES', res.data)
+      }))
+      .catch((err =>{
+        console.log(err)
+      }))
+      
     }
   },
   getters: {
-    getUserName : function(state){
-      return state.getUserName
-    },
     reviews: function(state){
       return state.reviews
     },
@@ -159,6 +191,9 @@ export default new Vuex.Store({
     },
     WeatherMovies(state){
       return state.weatherMovies
+    },
+    userMovies(state){
+      return _.sampleSize(state.userMovies,10)
     }
     }
   })

@@ -14,7 +14,7 @@ for genre in genres:
     movies.append(temp)
 
 
-for i in range(1, 10):
+for i in range(1, 50):
     data = requests.get(
         f'https://api.themoviedb.org/3/movie/popular?api_key=245ecc0e095645bb9a67ccf2d25856ec&language=en-US&page={i}').json()
     data_result = data['results']
@@ -31,10 +31,11 @@ for i in range(1, 10):
             elif key in movie_field and key == 'poster_path':
                 field['poster_path'] = f'https://image.tmdb.org/t/p/w500/{value}'
             elif key in movie_field:
-                field[key] = value
+                if value:
+                    field[key] = value
 
         temp['fields'] = field
         movies.append(temp)
 
-with open('moviedata.json', 'w', encoding="UTF-8") as make_file:
+with open('movie.json', 'w', encoding="UTF-8") as make_file:
     json.dump(movies, make_file, indent='\t')

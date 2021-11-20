@@ -2,22 +2,23 @@
   <div>
     <div class="contents">
       <p class="title">Based on your profile</p>
-      <!-- <div class="posters" v-if="totalMovieList.length">
-        <div class="div-img" v-for="(movie, idx) in totalMovieList" :key="idx">
+      <div class="posters" v-if="userMovies">
+        <div class="div-img" v-for="(movie, idx) in userMovies" :key="idx">
           <img class="poster" :src="movie.poster_path" alt="thumnail" />
-        </div> -->
-      <!-- </div> -->
+        </div>
+      </div>
 
-      <!-- <div v-else>
+      <div v-else>
         <div>
           <b-spinner style="width: 3rem; height: 3rem" label=""></b-spinner>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "UserRecommend",
   data: function () {
@@ -25,16 +26,14 @@ export default {
       genres: [],
     };
   },
-  methods: {
-    get_genres() {
-      console.log(this.$store.state.userlikegenres);
-    },
-  },
   created() {
-    this.get_genres();
+    this.$store.dispatch("getUserMovies", this.$store.state.token);
+  },
+  computed: {
+    ...mapGetters(["userMovies"]),
   },
 };
 </script>
 
-<style>
+<style scoped src='./css/movielist.css'>
 </style>

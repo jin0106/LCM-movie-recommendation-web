@@ -1,14 +1,13 @@
 <template>
   <div id="CreateReview">
     <h1>Create Review</h1>
-    <h2>영화 제목 : {{movietitle}}</h2>
+    <h2>영화 제목 : {{ movietitle }}</h2>
     <hr />
     <div>
       <label for="title">제목</label>
       <input v-model="info.title" type="text" />
     </div>
     <br />
-
 
     <label for="content">내용</label>
     <textarea
@@ -26,7 +25,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
   name: "ReviewForm",
   data: function () {
@@ -38,7 +36,7 @@ export default {
         content: null,
         is_private: false,
       },
-      movietitle: this.$store.state.movieInfo.title
+      movietitle: this.$store.state.movieInfo.title,
     };
   },
   methods: {
@@ -53,7 +51,8 @@ export default {
       this.$router.push({ name: "Community" });
     },
     Create() {
-      this.info.movie = this.$store.state.movieInfo
+      this.info.movie = this.$store.state.movieInfo;
+      console.log(this.info.movie.title);
       const reviewItem = {
         info: this.info,
         token: this.setHeader(),
@@ -64,11 +63,8 @@ export default {
       this.title = null;
       this.content = null;
       this.is_private = false;
-      this.$router.push({ name: 'Community' })
+      this.$router.push({ name: "Community" });
     },
-  },
-  computed: {
-    ...mapGetters(["getUserName"]),
   },
 };
 </script>

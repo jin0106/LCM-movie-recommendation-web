@@ -1,13 +1,13 @@
 <template>
   <div id="ReviewList">
-    <div v-if="check.length">
+    <div v-if="reviews.length">
       <div v-for="(review, idx) in reviews" :key="idx">
-        <p  @click="detail(review)">{{ review.title }}</p>
+        <p @click="detail(review)">{{ review.title }}</p>
       </div>
     </div>
-  
-
-    
+    <div v-else>
+      <p>작성된 글이 없습니다</p>
+    </div>
   </div>
 </template>
 
@@ -17,11 +17,10 @@ import { mapGetters } from "vuex";
 export default {
   name: "ReviewList",
   // 받아온 게시글 데이터의 유무를 위해서 변수 정의
-  data: function(){
-    return{
+  data: function () {
+    return {
       movietitle: this.$store.state.movieInfo.title,
-      check: this.$store.state.reviews
-    }
+    };
   },
   methods: {
     setHeader: function () {
@@ -32,7 +31,7 @@ export default {
       return header;
     },
     detail: function (review) {
-      console.log(this.check)
+      console.log(this.check);
       this.$router.push({
         name: "ReviewDetail",
         params: {
@@ -41,7 +40,13 @@ export default {
       });
     },
   },
-
+  // 처음과 업데이트될 때 리뷰 리스트 다시 불러오기
+  created() {
+    this.$store.dispatch("getReviews", this.$store.state.token);
+  },
+  updated() {
+    this.$store.dispatch("getReviews", this.$store.state.token);
+  },
   computed: {
     ...mapGetters(["reviews"]),
   },

@@ -4,7 +4,12 @@
       <p class="title">How about this movies?</p>
       <div class="posters" v-if="totalMovieList.length">
         <div class="div-img" v-for="(movie, idx) in totalMovieList" :key="idx">
-          <img @click="createMovieReview(movie)" class="poster" :src="movie.poster_path" alt="thumnail" />
+          <img
+            @click="createMovieReview(movie)"
+            class="poster"
+            :src="movie.poster_path"
+            alt="thumnail"
+          />
         </div>
       </div>
 
@@ -31,11 +36,10 @@ export default {
     getMovieList: function () {
       this.$store.dispatch("getMovieList", this.$store.state.token);
     },
-    createMovieReview: function(data) {
-      this.$store.dispatch('getMovieInfo', data)
+    createMovieReview: function (data) {
+      this.$store.dispatch("getMovieInfo", data);
       //this.$router.push({ name: "Community" });
-    }
-
+    },
   },
   computed: {
     ...mapGetters(["totalMovieList"]),
@@ -47,7 +51,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped src='./css/movielist.css'>
 /* 전체 글자 색깔 마진 없애주기 */
-@import "css/movielist.css";
 </style>

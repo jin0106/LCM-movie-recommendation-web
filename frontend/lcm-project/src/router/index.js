@@ -6,15 +6,21 @@ import temp from '@/views/accounts/temp'
 import Profile from '@/views/accounts/Profile'
 import Community from '@/views/community/Community'
 import Movies from '@/views/movies/Movies'
-
+import Home from '@/views/mainpage/Home'
 import ReviewDetail from '@/components/community/ReviewDetail'
 import ReviewForm from '@/components/community/ReviewForm'
 import MovieDetail from '@/components/movies/MovieDetail'
 import MovieList from '@/components/movies/MovieList'
 import UserRecommend from '@/components/movies/UserRecommend'
+
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/home',
+    name:'Home',
+    component:Home,
+  },
   {
     path: '/accounts/signup',
     name: 'Signup',
@@ -67,7 +73,7 @@ const routes = [
     component: MovieList,
   },
   {
-    path:'/movies/UserRecommend',
+    path:'/movies/userRecommend',
     name: 'UserRecommend',
     component: UserRecommend,
   },

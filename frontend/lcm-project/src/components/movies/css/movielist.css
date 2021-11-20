@@ -1,7 +1,13 @@
+html {
+  font-size: 100px;
+}
+
 * {
   color: black;
   margin: 0;
 }
+
+
 
 #MoviList {
   width: 100%;
@@ -31,6 +37,7 @@
 }
 
 .contents {
+  padding: 0 1rem;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
