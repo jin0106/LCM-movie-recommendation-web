@@ -33,9 +33,9 @@ export default {
       this.$router.push({ name: "ReviewForm" });
     },
   },
-  created() {
-    this.$store.dispatch("getReviews", this.$store.state.token);
-  },
+  // created() {
+  //   this.$store.dispatch("getReviews", this.$store.state.token);
+  // },
 };
 </script>
 

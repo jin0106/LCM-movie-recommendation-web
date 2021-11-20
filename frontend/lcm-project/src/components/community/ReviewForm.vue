@@ -31,7 +31,6 @@ export default {
     return {
       info: {
         movie: null,
-        like_users: null,
         title: null,
         content: null,
         is_private: false,
@@ -52,7 +51,7 @@ export default {
     },
     Create() {
       this.info.movie = this.$store.state.movieInfo;
-      console.log(this.info.movie.title);
+      console.log(this.info);
       const reviewItem = {
         info: this.info,
         token: this.setHeader(),

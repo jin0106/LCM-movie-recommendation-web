@@ -12,6 +12,8 @@ import ReviewForm from '@/components/community/ReviewForm'
 import MovieDetail from '@/components/movies/MovieDetail'
 import MovieList from '@/components/movies/MovieList'
 import UserRecommend from '@/components/movies/UserRecommend'
+import ReviewUpdated from '@/components/community/ReviewUpdate'
+
 
 Vue.use(VueRouter)
 
@@ -55,6 +57,11 @@ const routes = [
     path:'/community/create',
     name: 'ReviewForm',
     component: ReviewForm,
+  },
+  {
+    path:'/community/update/:reviewId',
+    name:'ReviewUpdate',
+    component: ReviewUpdated,
   },
   {
     path:'/movies',

@@ -6,14 +6,11 @@
       <p>시청 영화 :{{ data.movie["title"] }}</p>
       <p>내용 :{{ data.content }}</p>
       <p>작성일자 : {{ data.created_at }}</p>
+      <p>마지막 수정 일자: {{ data.updated_at }}</p>
       <button @click="Delete">Delete</button>
-      <button @click="Update">Update</button>
-    </div>
-    <div>
-      <form>
-        <input v-model.trim="content" type="text" id="comments" />
-        <button @click="Comment">작성</button>
-      </form>
+      <button data="data" @click="Update">Update</button>
+      <comments />
+      <comment-form />
     </div>
   </div>
 </template>
@@ -21,8 +18,12 @@
 <script>
 import axios from "axios";
 import { mapGetters } from "vuex";
+import Comments from "./Comments.vue";
+import CommentForm from "./CommentForm.vue";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
+  components: { Comments, CommentForm },
   name: "ReviewDetail",
   data: function () {
     return {
@@ -35,7 +36,7 @@ export default {
   created: function () {
     axios({
       method: "get",
-      url: `http://127.0.0.1:8000/communities/${this.reviewId}`,
+      url: `${SERVER_URL}communities/${this.reviewId}`,
     })
       .then((res) => {
         this.data = res.data;
@@ -58,30 +59,7 @@ export default {
       this.$router.push({ name: "Community" });
     },
     Update: function () {
-      axios({
-        method: "put",
-        url: `http://127.0.0.1:8000/communities/${this.reviewId}/`,
-      })
-        .then((res) => {
-          console.log(res);
-          // this.$router.push({ name: "ReviewList" });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    Comment: function () {
-      axios({
-        method: "post",
-        url: `http://127.0.0.1:8000/communities/${this.reviewId}/comments/`,
-        data: this.content,
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.$router.push({ name: "ReviewUpdate" });
     },
   },
   computed: {

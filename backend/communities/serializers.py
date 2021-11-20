@@ -15,27 +15,24 @@ class ReviewSerializer(serializers.ModelSerializer):
         class Meta:
             model = Movie
             fields = ('id', 'title')
-        
-    
-    movie = MovieSerializer(required=False)
+
+    movie = MovieSerializer(read_only=True)
 
     class UserSerializer(serializers.ModelSerializer):
         class Meta:
             model = get_user_model()
             fields = ('username'),
 
-    user = UserSerializer(required=False)
+    user = UserSerializer(read_only=True, required=False)
 
     class Meta:
         model = Review
         fields = ('title', 'content',
-                  'created_at', 'updated_at','movie', 'user')
+                  'created_at', 'updated_at', 'movie', 'user')
 
     def create(self, validated_data):
         return Review.objects.create(**validated_data)
 
-
-        
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:

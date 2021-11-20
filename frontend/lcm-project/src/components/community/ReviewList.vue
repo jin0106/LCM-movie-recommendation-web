@@ -1,7 +1,7 @@
 <template>
   <div id="ReviewList">
-    <div v-if="reviews.length">
-      <div v-for="(review, idx) in reviews" :key="idx">
+    <div v-if="reviews">
+      <div v-for="review in reviews" :key="review.id">
         <p @click="detail(review)">{{ review.title }}</p>
       </div>
     </div>
@@ -31,7 +31,6 @@ export default {
       return header;
     },
     detail: function (review) {
-      console.log(this.check);
       this.$router.push({
         name: "ReviewDetail",
         params: {
@@ -42,11 +41,11 @@ export default {
   },
   // 처음과 업데이트될 때 리뷰 리스트 다시 불러오기
   created() {
-    this.$store.dispatch("getReviews", this.$store.state.token);
+    this.$store.dispatch("getReviews", this.setHeader());
   },
-  updated() {
-    this.$store.dispatch("getReviews", this.$store.state.token);
-  },
+  // updated() {
+  //   this.$store.dispatch("getReviews", this.setHeader());
+  // },
   computed: {
     ...mapGetters(["reviews"]),
   },

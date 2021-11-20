@@ -45,7 +45,6 @@ def user_recommend(request):
     for i in range(len(genres)):
         a = Movie.objects.filter(genres=int(genres[i]))
         input_serializer.extend(a)
-    print(input_serializer)
     serializer = MovieListSerializer(input_serializer, many=True)
 
     return Response(serializer.data, status.HTTP_200_OK)

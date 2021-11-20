@@ -25,7 +25,7 @@ export default {
         headers: this.setHeader(),
       })
         .then((res) => {
-          console.log(res);
+          a = res;
         })
         .catch((err) => {
           console.log(err);

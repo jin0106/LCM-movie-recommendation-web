@@ -87,7 +87,6 @@ export default new Vuex.Store({
         });
     },
     deleteReview:function({commit}, data){
-      console.log(data)
       axios({
         method: "delete",
         url: `${SERVER_URL}communities/${data}`,
@@ -107,6 +106,7 @@ export default new Vuex.Store({
         headers: item.token,
       })
         .then(() => {
+          console.log('bbbbbbbbb')
           commit('CREATE_REVIEW')
         })
         .catch((err) => {

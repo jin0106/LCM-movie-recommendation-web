@@ -49,8 +49,9 @@ def review_update_delete(request, review_pk):
 
     elif request.method == 'PUT':
         serializer = ReviewSerializer(instance=review, data=request.data)
+        movie = Movie.objects.get(title=request.data['movie']['title'])
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            serializer.save(movie=movie)
             return Response(serializer.data)
 
     elif request.method == 'DELETE':
