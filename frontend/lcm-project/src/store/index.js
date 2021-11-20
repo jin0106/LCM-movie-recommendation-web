@@ -19,6 +19,29 @@ export default new Vuex.Store({
     movieInfo: [],
     review:'',
     userMovies:[],
+    genreMovies: {
+      Adventure : [],
+      Fantasy : [],
+      Animation : [],
+      Drama : [],
+      Horror : [],
+      Action : [],
+      Comedy : [],
+      History : [],
+      Western : [],
+      Thriller : [],
+      Crime : [],
+      Documentary : [],
+      ScienceFiction : [],
+      Mystery : [],
+      Music : [],
+      Romance : [],
+      Family : [],
+      War : [],
+      TVMovie : [],
+    }
+
+    
   },
   mutations: {
     GET_REVIEWS: function(state, data){
@@ -53,7 +76,88 @@ export default new Vuex.Store({
     },
     GET_USER_MOVIES(state,data){
       state.userMovies = data
-    }
+    },
+    GET_GENREMOVIES(state,data){
+      switch(data['genre']) {
+        case 'Adventure' : {
+          state.genreMovies.Adventure = data['movie']
+          break
+        }
+        case 'Fantasy' : {
+          state.genreMovies.Fantasy = data['movie']
+          break
+        }
+        case 'Animation' : {
+          state.genreMovies.Animation = data['movie']
+          break
+        }
+        case 'Drama' : {
+          state.genreMovies.Drama = data['movie']
+          break
+        }
+        case 'Horror' : {
+          state.genreMovies.Horror = data['movie']
+          break
+        }
+        case 'Action' : {
+          state.genreMovies.Action = data['movie']
+          break
+        }
+        case 'Comedy' : {
+          state.genreMovies.Comedy = data['movie']
+          break
+        }
+        case 'History' : {
+          state.genreMovies.History = data['movie']
+          break
+        }
+        case 'Western' : {
+          state.genreMovies.Western = data['movie']
+          break
+        }
+        case 'Thriller' : {
+          state.genreMovies.Thriller = data['movie']
+          break
+        }
+        case 'Crime' : {
+          state.genreMovies.Crime = data['movie']
+          break
+        }
+        case 'Documentary' : {
+          state.genreMovies.Documentary = data['movie']
+          break
+        }
+        case 'Science Fiction' : {
+          state.genreMovies.ScienceFiction = data['movie']
+          break
+        }
+        case 'Mystery' : {
+          state.genreMovies.Mystery = data['movie']
+          break
+        }
+        case 'Music' : {
+          state.genreMovies.Music = data['movie']
+          break
+        }
+        case 'Romance' : {
+          state.genreMovies.Romance = data['movie']
+          break
+        }
+        case 'Family' : {
+          state.genreMovies.Family = data['movie']
+          break
+        }
+        case 'War' : {
+          state.genreMovies.War = data['movie']
+          break
+        }
+        case 'TV Movie' : {
+          state.genreMovies.TVMovie = data['movie']
+          break
+        }
+      }
+      
+    },
   },
   actions: {
     // 리뷰 목록 가져오기
@@ -106,7 +210,6 @@ export default new Vuex.Store({
         headers: item.token,
       })
         .then(() => {
-          console.log('bbbbbbbbb')
           commit('CREATE_REVIEW')
         })
         .catch((err) => {
@@ -167,7 +270,7 @@ export default new Vuex.Store({
       commit('GET_MOVIEINFO', data)
     },
     // 유저 프로필 장르 기반으로 영화 받아오기
-    getUserMovies({commit},token){
+    getUserMovies({commit}, token){
       axios({
         method:'get',
         url:`${SERVER_URL}movies/user_recommend/`,
@@ -180,6 +283,27 @@ export default new Vuex.Store({
         console.log(err)
       }))
       
+    },
+    // 단순 장르 기반으로 영화 받아오기
+    GenreMovies({commit}, data){
+      axios({
+        method: "GET",
+        url: `${SERVER_URL}movies/genre_recommend/`,
+        headers: data['token'],
+        params: {
+          genre: data['genre']
+        }
+      })
+        .then((res) => {
+          const response = {
+            movie : res.data,
+            genre : data['genre']
+          }
+          commit('GET_GENREMOVIES', response)
+        })
+        .catch((err) => {
+          console.log(err)
+        });
     }
   },
   getters: {

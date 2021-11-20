@@ -5,6 +5,7 @@
         <MovieList />
         <MovieWeather />
         <user-recommend />
+        <MovieGenre />
       </div>
     </header>
   </div>
@@ -14,6 +15,7 @@
 import MovieList from "@/components/movies/MovieList.vue";
 import MovieWeather from "@/components/movies/MovieWeather.vue";
 import UserRecommend from "@/components/movies/UserRecommend.vue";
+import MovieGenre from "@/components/movies/MovieGenre.vue";
 // import MoviesRecommend from "@/components/movies/MoviesRecommend.vue";
 
 export default {
@@ -22,6 +24,7 @@ export default {
     MovieList,
     MovieWeather,
     UserRecommend,
+    MovieGenre,
     // MoviesRecommend,
   },
 };

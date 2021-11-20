@@ -91,3 +91,14 @@ def weather_recommend(request):
     serializers = MovieListSerializer(a, many=True)
 
     return Response(serializers.data, status.HTTP_200_OK)
+
+ # 장르별 영화 받아오기
+@api_view(['GET'])
+def genre_recommend(request):
+    if request.method == 'GET':
+        genre_name = request.GET['genre']
+        genre_number = Genre.objects.get(name=genre_name)
+        movies = Movie.objects.filter(genres=genre_number)
+        serializers = MovieListSerializer(movies, many=True)
+        return Response(serializers.data, status.HTTP_200_OK)
+
