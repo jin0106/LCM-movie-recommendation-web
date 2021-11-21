@@ -51,7 +51,6 @@ export default {
     },
     Create() {
       this.info.movie = this.$store.state.movieInfo;
-      console.log(this.info);
       const reviewItem = {
         info: this.info,
         token: this.setHeader(),

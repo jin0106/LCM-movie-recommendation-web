@@ -1,6 +1,6 @@
 <template>
   <div id="MovieGenre">
-    <h2>check</h2>
+      <h2>check</h2>
   </div>
 </template>
 
@@ -16,28 +16,42 @@ export default {
   },
   methods: {
     GenreMovies: function () {
+      // direction이 true면 오름차순 false면 내림차순
       const data1 = {
         token : this.$store.state.token,
-        genre : 'Adventure'
+        genre : 'Adventure',
+        orderby : 'title',
+        direction : true,
       }
       const data2 = {
         token : this.$store.state.token,
-        genre : 'Fantasy'
+        genre : 'Fantasy',
+        orderby : 'release_date',
+        direction : false,
       }
       const data3 = {
         token : this.$store.state.token,
-        genre : 'Science Fiction'
+        genre : 'Science Fiction',
+        orderby : 'popularity',
+        direction : false,
+      }
+      const data4 = {
+        token : this.$store.state.token,
+        genre : 'Comedy',
+        orderby : 'vote_average',
+        direction : false,
       }
       this.$store.dispatch("GenreMovies", data1);
       this.$store.dispatch("GenreMovies", data2);
       this.$store.dispatch("GenreMovies", data3);
+      this.$store.dispatch("GenreMovies", data4);
     },
     createMovieReview: function (data) {
       this.$store.dispatch("getMovieInfo", data);
     },
   },
   computed: {
-    ...mapGetters(["totalMovieList"]),
+    ...mapGetters([""]),
   },
 
   created: function () {

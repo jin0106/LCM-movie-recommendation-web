@@ -31,22 +31,15 @@ def movie_detail(request, movie_pk):
 
 @api_view(['GET'])
 def user_recommend(request):
-    user = request.user.genre.all()
+    user_genres = request.user.genre.all()
     genres = []
-    for i in user:
-        a = json.loads(json.dumps(str(i)))
-        b = ''
-        for j in str(a):
-            if j.isdigit():
-                b += j
-        genres.append(b)
-
+    for user_genre in user_genres:
+        genres.append(user_genre)
     input_serializer = []
-    for i in range(len(genres)):
-        a = Movie.objects.filter(genres=int(genres[i]))
-        input_serializer.extend(a)
+    for id in genres:
+        movie = Movie.objects.filter(genres=id)
+        input_serializer.extend(movie)
     serializer = MovieListSerializer(input_serializer, many=True)
-
     return Response(serializer.data, status.HTTP_200_OK)
 
 
@@ -75,11 +68,14 @@ def weather_recommend(request):
         'description': city_weather['weather'][0]['description'],
         'icon': city_weather['weather'][0]['icon']
     }
-
+    
     # 일단 딕셔너리로 날씨에 장르들 하나씩을 선택 하도록 함(더 좋은 방법 있으면 그걸로 구현)
     lst = {'clear sky': 28, 'few clouds': 12, 'overcast cloud': 16, 'drizzle': 35, 'rain': 80, 'shower rain': 99, 'thunderstorm': 18,
            'snow': 10751, 'mist': 14, 'broken clouds': 27, 'scattered clouds': 10749}
-    genre = lst[weather['description']]
+    if weather['description'] not in lst:
+        genre = 28
+    else:
+        genre = lst[weather['description']]
     # 장르와 같은 영화 정보들 가지고오기
 
     movies = Movie.objects.filter(genres=genre)
@@ -92,13 +88,38 @@ def weather_recommend(request):
 
     return Response(serializers.data, status.HTTP_200_OK)
 
- # 장르별 영화 받아오기
+# 장르별 영화 받아오기
 @api_view(['GET'])
 def genre_recommend(request):
     if request.method == 'GET':
-        genre_name = request.GET['genre']
-        genre_number = Genre.objects.get(name=genre_name)
-        movies = Movie.objects.filter(genres=genre_number)
-        serializers = MovieListSerializer(movies, many=True)
-        return Response(serializers.data, status.HTTP_200_OK)
+        orderby = request.GET['orderby']
+        direction = request.GET['direction']
+        # 정렬 분기점
+        if orderby == 'title':
+            serializers = genre_orderby(request, orderby, direction)
+            return Response(serializers.data, status.HTTP_200_OK)
+        elif orderby == 'release_date':
+            serializers = genre_orderby(request, orderby, direction)
+            return Response(serializers.data, status.HTTP_200_OK)
+        elif orderby == 'popularity':
+            serializers = genre_orderby(request, orderby, direction)
+            return Response(serializers.data, status.HTTP_200_OK)
+        elif orderby == 'vote_average':
+            serializers = genre_orderby(request, orderby, direction)
+            return Response(serializers.data, status.HTTP_200_OK)
+        else:
+            serializers = genre_orderby(request, orderby, direction)
+            return Response(serializers.data, status.HTTP_200_OK)
 
+# 장르별 정렬한 데이터 돌려줌
+def genre_orderby(request, orderby, direction):
+    genre_name = request.GET['genre']
+    genre_number = Genre.objects.get(name=genre_name)
+    # 오름차순인 경우
+    if direction=='true':
+        movies = Movie.objects.filter(genres=genre_number).order_by(orderby)
+    # 내림차순인 경우
+    elif direction=='false':
+        movies = Movie.objects.filter(genres=genre_number).order_by(f'-{orderby}')
+    serializers = MovieListSerializer(movies, many=True)
+    return serializers

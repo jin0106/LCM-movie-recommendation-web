@@ -9,8 +9,8 @@
       <p>마지막 수정 일자: {{ data.updated_at }}</p>
       <button @click="Delete">Delete</button>
       <button data="data" @click="Update">Update</button>
-      <comments />
-      <comment-form />
+      <comment-form :review="data"/>
+      <comments :review="data" :reviewId="reviewId"/>
     </div>
   </div>
 </template>

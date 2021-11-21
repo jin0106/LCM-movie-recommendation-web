@@ -35,6 +35,21 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    review = ReviewSerializer(read_only=True)
+
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = get_user_model()
+            fields = ('username'),
+    user = UserSerializer(read_only=True)
+    
     class Meta:
         model = Comment
         fields = '__all__'
+
+
+
+
+
+    def create(self, validated_data):
+        return Comment.objects.create(**validated_data)

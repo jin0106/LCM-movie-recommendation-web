@@ -31,6 +31,7 @@ export default {
       return header;
     },
     detail: function (review) {
+      console.log(review)
       this.$router.push({
         name: "ReviewDetail",
         params: {

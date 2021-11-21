@@ -64,23 +64,35 @@ def review_update_delete(request, review_pk):
 
 @api_view(['GET', 'POST'])
 def comment_list_create(request, review_pk):
-    review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
-        comments = Comment.objects.filter(pk=review_pk)
+        comments = Comment.objects.filter(review_id=review_pk)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
     if request.method == 'POST':
+        review = Review.objects.get(id=review_pk)
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(review=review, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
+  
+       
+@api_view(['DELETE', 'PUT'])
 def comment_delete_update(request, review_pk, comment_pk):
-    comment = get_object_or_404(Comment, pk=comment_pk)
-    if request.user == comment.user:
+    comment = Comment.objects.get(id = comment_pk)
+
+    if request.method == 'DELETE':
         comment.delete()
+        return Response(status.HTTP_200_OK)
+
+    if request.method == 'PUT':
+        serializer = ReviewSerializer(instance=review, data=request.data)
+        movie = Movie.objects.get(title=request.data['movie']['title'])
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(movie=movie)
+            return Response(serializer.data)
+            
+        return Response(status.HTTP_200_OK)
 
 
 def like(request, review_pk):
