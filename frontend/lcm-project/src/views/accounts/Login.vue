@@ -1,22 +1,37 @@
 <template>
   <div id="Login">
-    <h2>로그인</h2>
-    <hr />
-    <div v-if="errMsg">{{ errMsg }}</div>
-    <div>
-      <label for="username">아이디 :</label>
-      <input type="text" id="username" v-model="credentials.username" />
+    <div class="login">
+      <h2>Sign In</h2>
+
+      <div v-if="errMsg">{{ errMsg }}</div>
+      <div class="login-info">
+        <input
+          placeholder="type your ID"
+          type="text"
+          id="username"
+          v-model="credentials.username"
+        />
+        <input
+          type="password"
+          id="password"
+          v-model="credentials.password"
+          @keyup.enter="login"
+          placeholder="Password"
+        />
+      </div>
+      <button @click="login">Sign In</button>
+      <div class="social">
+        <p>or</p>
+        <p>Sign In with Facebook</p>
+        <p>Sign In with Naver</p>
+      </div>
     </div>
-    <div>
-      <label for="password">비밀번호 :</label>
-      <input
-        type="password"
-        id="password"
-        v-model="credentials.password"
-        @keyup.enter="login"
-      />
+    <div class="signup">
+      <span>Are you New?</span>
+      <router-link class="nav-item" :to="{ name: 'Signup' }"
+        >Signup</router-link
+      >
     </div>
-    <button @click="login">로그인</button>
   </div>
 </template>
 
@@ -60,3 +75,6 @@ export default {
   },
 };
 </script>
+
+<style scoped src='./css/login.css'>
+</style>

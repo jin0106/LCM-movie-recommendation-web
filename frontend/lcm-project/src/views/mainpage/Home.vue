@@ -5,15 +5,15 @@
       poster="https://i.ytimg.com/vi/PWK8EuUSMSI/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAjU_qRq1tTQGSQj-TcFvsU3tmXWA"
       autoplay
     ></video>
-    <movies />
+    <Main />
   </div>
 </template>
 
 <script>
-import Movies from "../movies/Movies.vue";
+import Main from "../movies/Main.vue";
 export default {
   name: "home",
-  components: { Movies },
+  components: { Main },
 };
 </script>
 

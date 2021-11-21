@@ -1,25 +1,57 @@
 <template>
   <div id="ReviewDetail">
     <div v-if="data">
-      <h2>제목 : {{ data.title }}</h2>
-      <p>작성자: {{ data.user["username"] }}</p>
-      <p>시청 영화 :{{ data.movie["title"] }}</p>
-      <p>내용 :{{ data.content }}</p>
-      <p>작성일자 : {{ data.created_at }}</p>
-      <p>마지막 수정 일자: {{ data.updated_at }}</p>
-      <button @click="DeleteReview">Delete</button>
-      <button data="data" @click="UpdateReview">Update</button>
-      <div>
-        <h1>댓글 목록</h1>
-        <div v-for="(comment, idx) in comments" :key="idx">
-          <hr />
-          <p>{{ comment.user.username }} : {{ comment.content }}</p>
-          <button @click="deleteComment(comment)">Delete</button>
-          <hr />
+      <h4 class="title">{{ data.title }}</h4>
+      <div class="tab">
+        <div class="tab-info">
+          <span>{{ data.user["username"] }}</span>
+          <span class="date">{{ data.created_at }}</span>
         </div>
         <div>
-          <input @keyup.enter="createComment" v-model="content" type="text" />
-          <button @click="createComment">작성</button>
+          <p>댓글 수 : {{ comments.length }}</p>
+        </div>
+      </div>
+      <div class="content">
+        <p>시청 영화 :{{ data.movie["title"] }}</p>
+        <img :src="data.movie.poster_path" alt="" />
+
+        <p>내용 :{{ data.content }}</p>
+      </div>
+      <div class="btn">
+        <button @click="DeleteReview">Delete</button>
+        <button data="data" @click="UpdateReview">Update</button>
+      </div>
+
+      <div>
+        <div class="comment-tab">
+          <span>댓글</span>
+          <p>{{ comments.length }}</p>
+        </div>
+        <div class="comments" v-if="comments.length">
+          <div v-for="(comment, idx) in comments" :key="idx">
+            <p class="comment-writer">{{ comment.user.username }}</p>
+            <div class="comment-content">
+              <span>{{ comment.content }}</span>
+              <button @click="deleteComment(comment)">Delete</button>
+            </div>
+          </div>
+        </div>
+        <span v-else class="no-comment">댓글이 아직 없습니다.</span>
+
+        <div class="comment-create">
+          <div class="comment-box">
+            <p>{{ data.user.username }}</p>
+            <textarea
+              class="comment-write"
+              @keyup.enter="createComment"
+              v-model="content"
+              type="text"
+              placeholder="댓글을 남겨보세요"
+            />
+            <div class="create">
+              <button @click="createComment">등록</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -129,5 +161,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped src='./css/reviewdetail.css'>
 </style>

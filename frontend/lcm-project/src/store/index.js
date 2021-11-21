@@ -39,7 +39,9 @@ export default new Vuex.Store({
       Family : [],
       War : [],
       TVMovie : [],
-    }
+    },
+    searchMovies:[],
+
 
     
   },
@@ -157,6 +159,9 @@ export default new Vuex.Store({
         }
       }
     },
+    GET_SEARCHMOVIES(state,data){
+      state.searchMovies = data
+    }
   },
   actions: {
     // 리뷰 목록 가져오기
@@ -306,6 +311,9 @@ export default new Vuex.Store({
           console.log(err)
         });
     },
+    searchMovies({commit}, data){
+      commit('GET_SEARCHMOVIES', data)
+    }
     
   },
   getters: {
@@ -327,6 +335,9 @@ export default new Vuex.Store({
     genreMovies1(state){
       return state.genreMovies
     },
+    SearchResultMovies(state){
+      return state.searchMovies
+    }
 
     }
   })

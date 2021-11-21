@@ -5,6 +5,14 @@ from django.contrib.auth import get_user_model
 
 
 class ReviewListSerializer(serializers.ModelSerializer):
+
+    class UserSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = get_user_model()
+            fields = ('username'),
+
+    user = UserSerializer(read_only=True, required=False)
+
     class Meta:
         model = Review
         fields = '__all__'
@@ -14,7 +22,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class MovieSerializer(serializers.ModelSerializer):
         class Meta:
             model = Movie
-            fields = ('id', 'title')
+            fields = ('id', 'title', 'poster_path', 'overview')
 
     movie = MovieSerializer(read_only=True)
 
@@ -42,7 +50,7 @@ class CommentSerializer(serializers.ModelSerializer):
             model = get_user_model()
             fields = ('username'),
     user = UserSerializer(read_only=True)
-    
+
     class Meta:
         model = Comment
         fields = '__all__'

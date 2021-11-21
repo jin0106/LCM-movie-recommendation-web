@@ -1,14 +1,14 @@
 <template>
   <div class="community">
     <header>
-      <h2>Reviwe Board</h2>
-      <h2>영화 제목 : {{ movietitle }}</h2>
+      <h3>Community</h3>
+      <h5>영화 제목 : {{ movietitle }}</h5>
     </header>
     <div v-if="reviews.length > 0">
       <ReviewList />
+      <button class="write" @click="movieCreate">글 작성</button>
     </div>
     <div v-else>작성된 글이 없습니다.</div>
-    <button @click="movieCreate">글 작성</button>
   </div>
 </template>
 
@@ -40,4 +40,17 @@ export default {
 </script>
 
 <style>
+.community {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0 3rem;
+  display: flex;
+  flex-direction: column;
+}
+.write {
+  margin-top: 1rem;
+  background: skyblue;
+  border: none;
+  border-radius: 8%;
+}
 </style>

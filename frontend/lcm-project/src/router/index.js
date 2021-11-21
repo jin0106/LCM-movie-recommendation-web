@@ -3,13 +3,15 @@ import VueRouter from 'vue-router'
 import Signup from '@/views/accounts/Signup'
 import Login from '@/views/accounts/Login'
 import Profile from '@/views/accounts/Profile'
-import Community from '@/views/community/Community'
 import Movies from '@/views/movies/Movies'
+import MovieDetail from '@/components/movies/MovieDetail'
+import MovieSearchResult from '@/components/movies/MovieSearchResult'
 import Home from '@/views/mainpage/Home'
+import Community from '@/views/community/Community'
 import ReviewDetail from '@/components/community/ReviewDetail'
 import ReviewForm from '@/components/community/ReviewForm'
-import MovieDetail from '@/components/movies/MovieDetail'
 import ReviewUpdated from '@/components/community/ReviewUpdate'
+
 
 
 Vue.use(VueRouter)
@@ -66,6 +68,11 @@ const routes = [
     name: 'MovieDetail',
     component: MovieDetail,
   },
+  {
+    path:'/movies/searchresult/',
+    name: 'MovieSearchResult',
+    component : MovieSearchResult
+  }
 ]
 
 const router = new VueRouter({

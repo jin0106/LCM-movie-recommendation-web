@@ -14,7 +14,7 @@ video {
 
 .overlay {
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 3rem;
 }
 
 .header {
@@ -22,7 +22,7 @@ video {
 }
 
 .logo {
-  color: red;
+  color: rgb(58, 149, 239);
   margin-right: 2rem;
   font-size: 1.7rem;
   font-weight: 900;
@@ -55,4 +55,28 @@ video {
   margin-left: 1rem;
   text-decoration: none;
   color: black;
+}
+
+
+
+.serach img {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  transition: all 1s;
+}
+
+.search-bar {
+  border: 0.5px solid black;
+  border-radius: 10px;
+  text-align: center;
+  padding: 3px;
+}
+
+.search-bar:focus::-webkit-input-placeholder {
+  color: transparent
+}
+
+.hidden {
+  display: none;
 }
