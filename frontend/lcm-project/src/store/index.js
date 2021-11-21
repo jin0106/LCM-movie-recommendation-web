@@ -19,8 +19,6 @@ export default new Vuex.Store({
     movieInfo: [],
     review:'',
     userMovies:[],
-    comment: [],
-    comments : [],
     genreMovies: {
       Adventure : [],
       Fantasy : [],
@@ -158,12 +156,6 @@ export default new Vuex.Store({
           break
         }
       }
-    },
-    CREATE_COMMENT(state, data){
-      state.comment = data
-    },
-    GET_COMMENTS(state, data){
-      state.comments = data
     },
   },
   actions: {
@@ -309,41 +301,12 @@ export default new Vuex.Store({
             genre : data['genre'],
           }
           commit('GET_GENREMOVIES', response)
-          console.log(data['genre'])
-          console.log(res.data)
-
         })
         .catch((err) => {  
           console.log(err)
         });
     },
-    getCommentList({commit}, data){
-      axios({
-        method: "GET",
-        url: `${SERVER_URL}communities/${data['reviewId']}/comments/`,
-        headers: data['token'],
-      })
-      .then((res) => {
-        commit("GET_COMMENTS", res.data)
-      })
-    },
-    createComment({commit}, data){
-      axios({
-        method: "POST",
-        url: `${SERVER_URL}communities/${data['reviewId']}/comments/`,
-        headers: data['token'],
-        data : {
-          review : data['review'],
-          content : data['content']
-        },
-      })
-        .then((res) => {
-          commit('CREATE_COMMENT', res.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        });
-    },
+    
   },
   getters: {
     reviews: function(state){
@@ -357,6 +320,12 @@ export default new Vuex.Store({
     },
     userMovies(state){
       return _.sampleSize(state.userMovies,10)
+    },
+    genreMovies(state){
+      return state.genreMovies
+    },
+    genreMovies1(state){
+      return state.genreMovies
     },
 
     }

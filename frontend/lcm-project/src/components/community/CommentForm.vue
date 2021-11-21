@@ -10,27 +10,27 @@
 <script>
 export default {
   name: "CommentForm",
-  data: function(){
+  data: function () {
     return {
       reviewId: this.$route.params.reviewId,
-      content : ''
-    }
+      content: "",
+    };
   },
   props: {
-    review : Object
+    review: Object,
   },
   methods: {
-    createComment: function(){
+    createComment: function () {
       const data = {
-        token : this.$store.state.token,
-        reviewId : this.reviewId,
-        content : this.content,
+        token: this.$store.state.token,
+        reviewId: this.reviewId,
+        content: this.content,
         review: this.review,
-      }
-      this.$store.dispatch("createComment", data)
-      this.content = ''
-    }
-  }
+      };
+      this.$store.dispatch("createComment", data);
+      this.content = "";
+    },
+  },
 };
 </script>
 

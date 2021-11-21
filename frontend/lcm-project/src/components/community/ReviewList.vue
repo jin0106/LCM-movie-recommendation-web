@@ -31,7 +31,6 @@ export default {
       return header;
     },
     detail: function (review) {
-      console.log(review)
       this.$router.push({
         name: "ReviewDetail",
         params: {
@@ -44,9 +43,9 @@ export default {
   created() {
     this.$store.dispatch("getReviews", this.setHeader());
   },
-  // updated() {
-  //   this.$store.dispatch("getReviews", this.setHeader());
-  // },
+  beforemount() {
+    this.$store.dispatch("getReviews", this.setHeader());
+  },
   computed: {
     ...mapGetters(["reviews"]),
   },

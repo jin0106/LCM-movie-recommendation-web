@@ -60,7 +60,6 @@ export default {
       this.$router.push({ name: "Community" });
     },
     Create() {
-      console.log(this.data);
       axios({
         method: "put",
         url: `${SERVER_URL}communities/${this.reviewId}/`,
@@ -78,12 +77,6 @@ export default {
           console.log(err);
           console.log("요청실패 ");
         });
-      // console.log(this.data);
-      // const reviewItem = {
-      //   info: this.data,
-      //   token: this.$store.state.token,
-      // };
-      // this.$store.dispatch("CreateReview", reviewItem);
       this.$router.push({ name: "Community" });
     },
   },

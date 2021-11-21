@@ -10,7 +10,7 @@
             >Home</router-link
           >
           <router-link class="nav-item" :to="{ name: 'Movies' }"
-            >Popular Movies</router-link
+            >Movies</router-link
           >
           <router-link class="nav-item" :to="{ name: 'Community' }"
             >Community</router-link
