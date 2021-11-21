@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 import requests
 import json
-import random
+import pprint
 
 # 전체 영화 목록 조회
 
@@ -78,13 +78,8 @@ def weather_recommend(request):
         genre = lst[weather['description']]
     # 장르와 같은 영화 정보들 가지고오기
 
-    movies = Movie.objects.filter(genres=genre)
-    number = random.sample(range(0, len(movies)), 10)
-    a = []
-    for i in number:
-        a.append(Movie.objects.filter(genres=genre)[i])
-
-    serializers = MovieListSerializer(a, many=True)
+    movies = Movie.objects.filter(genres=genre).order_by("?")[:10]
+    serializers = MovieListSerializer(movies, many=True)
 
     return Response(serializers.data, status.HTTP_200_OK)
 
@@ -110,12 +105,8 @@ def genre_recommend(request):
         elif orderby == 'random':
             genre_name = request.GET['genre']
             genre_number = Genre.objects.get(name=genre_name)
-            movies = Movie.objects.filter(genres=genre_number)
-            number = random.sample(range(0, len(movies)), 10)
-            movie_list = []
-            for i in number:
-                movie_list.append(Movie.objects.filter(genres=genre_number)[i])
-            serializers = MovieListSerializer(movie_list, many=True)
+            movies = Movie.objects.filter(genres=genre_number).order_by("?")[:10]
+            serializers = MovieListSerializer(movies, many=True)
             return Response(serializers.data, status.HTTP_200_OK)
 
 # 장르별 정렬한 데이터 돌려줌
@@ -130,3 +121,34 @@ def genre_orderby(request, orderby, direction):
         movies = Movie.objects.filter(genres=genre_number).order_by(f'-{orderby}')
     serializers = MovieListSerializer(movies, many=True)
     return serializers
+
+
+@api_view(['GET'])
+def movie_search(request):
+    
+    ##네이버 영화정보 요청
+    search_string = request.GET['search_string']
+    client_id = "IqjBx_CPQ1tCtiy9M1Yy"
+    client_secret = "_k5sl9Zyeb"
+    url = f'https://openapi.naver.com/v1/search/movie.json?query={search_string}'
+    header = {
+        "X-Naver-Client-Id" : client_id,
+        "X-Naver-Client-Secret" : client_secret,
+    }
+    res = requests.get(url, headers=header).json()
+    english_title = []
+    for movie in res['items']:
+        english_title.append(movie['subtitle'])
+
+    movies = []
+    for title in english_title:
+        try:
+            movie = Movie.objects.filter(title=title).first()
+            if movie == None:
+                continue
+            movies.append(movie)
+        except Movie.DoesNotExist:
+            continue
+    
+    serializers = MovieSerializer(movies, many=True)
+    return Response(serializers.data, status.HTTP_200_OK)
