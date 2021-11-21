@@ -107,8 +107,15 @@ def genre_recommend(request):
         elif orderby == 'vote_average':
             serializers = genre_orderby(request, orderby, direction)
             return Response(serializers.data, status.HTTP_200_OK)
-        else:
-            serializers = genre_orderby(request, orderby, direction)
+        elif orderby == 'random':
+            genre_name = request.GET['genre']
+            genre_number = Genre.objects.get(name=genre_name)
+            movies = Movie.objects.filter(genres=genre_number)
+            number = random.sample(range(0, len(movies)), 10)
+            movie_list = []
+            for i in number:
+                movie_list.append(Movie.objects.filter(genres=genre_number)[i])
+            serializers = MovieListSerializer(movie_list, many=True)
             return Response(serializers.data, status.HTTP_200_OK)
 
 # 장르별 정렬한 데이터 돌려줌

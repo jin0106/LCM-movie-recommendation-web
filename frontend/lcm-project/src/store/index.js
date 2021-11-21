@@ -309,6 +309,8 @@ export default new Vuex.Store({
             genre : data['genre'],
           }
           commit('GET_GENREMOVIES', response)
+          console.log(data['genre'])
+          console.log(res.data)
 
         })
         .catch((err) => {  

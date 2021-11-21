@@ -47,9 +47,5 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = '__all__'
 
-
-
-
-
     def create(self, validated_data):
         return Comment.objects.create(**validated_data)
