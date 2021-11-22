@@ -20,6 +20,7 @@ def review_list_create(request):
 
     if request.method == 'POST':
         serializer = ReviewSerializer(data=request.data)
+        print(request.data)
         movie = Movie.objects.get(title=request.data['movie']['title'])
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, movie=movie)
@@ -80,7 +81,7 @@ def comment_list_create(request, review_pk):
 @api_view(['DELETE', 'PUT'])
 def comment_delete_update(request, review_pk, comment_pk):
     comment = Comment.objects.get(id = comment_pk)
-
+    review = Review.objects.get(id=review_pk)
     if request.method == 'DELETE':
         comment.delete()
         return Response(status.HTTP_200_OK)

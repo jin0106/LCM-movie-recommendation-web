@@ -90,19 +90,18 @@ def weather_recommend(request):
 def genre_recommend(request):
     if request.method == 'GET':
         orderby = request.GET['orderby']
-        direction = request.GET['direction']
         # 정렬 분기점
         if orderby == 'title':
-            serializers = genre_orderby(request, orderby, direction)
+            serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
         elif orderby == 'release_date':
-            serializers = genre_orderby(request, orderby, direction)
+            serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
         elif orderby == 'popularity':
-            serializers = genre_orderby(request, orderby, direction)
+            serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
         elif orderby == 'vote_average':
-            serializers = genre_orderby(request, orderby, direction)
+            serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
         elif orderby == 'random':
             genre_name = request.GET['genre']
@@ -112,15 +111,15 @@ def genre_recommend(request):
             return Response(serializers.data, status.HTTP_200_OK)
 
 # 장르별 정렬한 데이터 돌려줌
-def genre_orderby(request, orderby, direction):
+def genre_orderby(request, orderby):
     genre_name = request.GET['genre']
     genre_number = Genre.objects.get(name=genre_name)
     # 오름차순인 경우
-    if direction=='true':
+    if '-' not in orderby:
         movies = Movie.objects.filter(genres=genre_number).order_by(orderby)
     # 내림차순인 경우
-    elif direction=='false':
-        movies = Movie.objects.filter(genres=genre_number).order_by(f'-{orderby}')
+    else:
+        movies = Movie.objects.filter(genres=genre_number).order_by(orderby)
     serializers = MovieListSerializer(movies, many=True)
     return serializers
 
@@ -217,5 +216,23 @@ def movie_watched_list(request):
 
     else:
         movies = Movie.objects.filter(user_watched=request.user.id)
+        serializer = MovieSerializer(movies, many=True) 
+        return Response(serializer.data, status.HTTP_200_OK)
+
+@api_view(['GET', 'POST'])
+def movie_wish_list(request):
+    
+    if request.method == 'POST':
+        user = get_user_model().objects.get(id=request.user.id)
+        movie = Movie.objects.get(id=request.data['id'])
+        if movie in user.wish_list.all():
+            user.wish_list.remove(movie)
+        else:
+            user.wish_list.add(movie)
+        user.save()
+        return Response(status.HTTP_200_OK)
+
+    else:
+        movies = Movie.objects.filter(user_wish=request.user.id)
         serializer = MovieSerializer(movies, many=True) 
         return Response(serializer.data, status.HTTP_200_OK)

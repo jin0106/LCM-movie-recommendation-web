@@ -37,12 +37,24 @@ INSTALLED_APPS = [
     'communities',
     'movies',
 
+    # restframework
     'rest_framework',
     "corsheaders",
     'rest_framework_simplejwt',
 
+    # allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+
+
+    #provider
+    'allauth.socialaccount.providers.google',
+
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -151,8 +163,21 @@ REST_FRAMEWORK = {
 }
 
 
+AUTHENTICATION_BACKENDS = ( 
+    # Needed to login by username in Django admin, regardless of 'allauth' 
+    'django.contrib.auth.backends.ModelBackend', 
+    'allauth.account.auth_backends.AuthenticationBackend', 
+) 
+SITE_ID = 1 
+LOGIN_REDIRECT_URL = '/'
+
+
 from datetime import timedelta
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=300),
 }
+
+SECRET_KEY='xktmxkem'
+ALGORITHM = 'HS256'
+PASSWORD = 'xktmxkem'

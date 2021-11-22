@@ -77,7 +77,6 @@ export default {
       return header;
     },
     getLikeGenres() {
-      console.log("000000");
       this.likeGenre = this.$store.state.userlikegenres;
     },
     getUser: function () {
