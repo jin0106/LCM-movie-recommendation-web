@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  margin-bottom: 25px;
+
+}
+
+.review {
+  display: flex;
+
+}
+
+.review button {
+  margin-top: 20px;
+  width: 120px;
+  height: 35px;
+  border: none;
+  background-color: rgb(58, 149, 239);
+  border-radius: 5px;
+  font-weight: 700;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.movie-info {
+  display: flex;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: ;
+  margin-left: 15px;
+}
+
+.info p {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.ge {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.genres {
+  display: flex;
+  /* justify-content: flex-end; */
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.genres span:first-child {
+  margin-right: 5px;
+}
+
+.genre {
+  font-size: 14px;
+  display: block;
+  margin-right: 10px;
+}
+
+.info-num {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.overview {
+  margin: 25px 0;
+}

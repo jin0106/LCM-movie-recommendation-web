@@ -42,5 +42,6 @@ export default {
 <style>
 #Main {
   padding: 0 3rem;
+  margin-top: 5rem;
 }
 </style>

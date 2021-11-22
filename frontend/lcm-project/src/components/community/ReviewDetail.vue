@@ -84,9 +84,7 @@ export default {
       currentUser: this.$store.state.getUserName,
     };
   },
-  computed: {
-    // ...mapGetters(["currentUser"]),
-  },
+
   methods: {
     setHeader: function () {
       const token = localStorage.getItem("JWT");

@@ -331,6 +331,9 @@ export default new Vuex.Store({
     totalMovieList: function(state){
       return _.sampleSize(state.totalMovieList,10)
     },
+    allMovies(state){
+      return state.totalMovieList
+    },
     WeatherMovies(state){
       return state.weatherMovies
     },
@@ -348,6 +351,9 @@ export default new Vuex.Store({
     },
     currentUser(state){
       return state.getUserName
+    },
+    currentMovie(state){
+      return state.movieInfo
     }
 
     }

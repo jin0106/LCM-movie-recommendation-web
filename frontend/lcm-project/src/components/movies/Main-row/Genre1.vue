@@ -3,11 +3,15 @@
     <div class="contents">
       <p class="title">How about {{ getgenre }} movies?</p>
       <div v-if="genreMovies" class="div-img">
+        <ModalView v-if="isModal" @close-modal="isModal = false">
+          <Content movie="this.movie" />
+        </ModalView>
         <img
           @click="createMovieReview(movie)"
           v-for="(movie, idx) in genreMovies[getgenre]"
           :key="idx"
           class="poster"
+          :v-model="movie.poster_path"
           :src="movie.poster_path"
           alt="thumnail"
         />
@@ -24,13 +28,20 @@
 
 <script>
 import { mapGetters } from "vuex";
-
+import Content from "@/components/movies/Modal/Content";
+import ModalView from "@/components/movies/Modal/ModalView";
 export default {
   name: "Genre1",
   data: function () {
     return {
       movieList: [],
+      isModal: false,
+      movie: null,
     };
+  },
+  components: {
+    Content,
+    ModalView,
   },
   methods: {
     GenreMovies: function () {
@@ -51,6 +62,7 @@ export default {
       this.$store.dispatch("GenreMovies", data);
     },
     createMovieReview: function (data) {
+      this.isModal = true;
       this.$store.dispatch("getMovieInfo", data);
     },
   },

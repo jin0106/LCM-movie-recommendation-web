@@ -44,6 +44,10 @@ body {
   transition: .4s;
 }
 
+.poster:first-child:hover {
+  transform: scale(1.12) translate(10px, -10px);
+}
+
 .div-img:first-child>.poster {
   padding: 0;
 }

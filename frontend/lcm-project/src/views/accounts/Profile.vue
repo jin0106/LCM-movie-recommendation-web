@@ -1,55 +1,58 @@
 <template>
   <div id="Profile">
-    <div v-if="likeGenre.length">
-      현재 좋아하는 Genre
-      <div v-for="(genre, idx) in likeGenre" :key="idx">
-        <p></p>
-        {{ genre.name }}
-        <p></p>
+    <div class="profile-tab">
+      <h2>Edit Profile</h2>
+      <hr />
+      <div class="input-div">
+        <span class="label">Username : </span>
+        <input class="input" v-model="credentials.username" type="text" />
       </div>
-    </div>
-    <div v-else>
-      현재 좋아하는 장르가 없습니다.
-      <button @click="getLikeGenres">click</button>
-    </div>
-    <hr />
-    <div>
-      <p>Genre 수정하기</p>
-      <input type="checkbox" v-model="credentials.genre" value="12" />Adventure
-      <input type="checkbox" v-model="credentials.genre" value="14" />Fantasy
-      <input type="checkbox" v-model="credentials.genre" value="16" />Animation
-      <input type="checkbox" v-model="credentials.genre" value="18" />Drama
-      <input type="checkbox" v-model="credentials.genre" value="27" />Horror
-      <input type="checkbox" v-model="credentials.genre" value="28" />Action
-      <input type="checkbox" v-model="credentials.genre" value="35" />Comedy
-      <input type="checkbox" v-model="credentials.genre" value="36" />Horror
-      <input type="checkbox" v-model="credentials.genre" value="37" />Western
-      <input type="checkbox" v-model="credentials.genre" value="53" />Thriller
-      <input type="checkbox" v-model="credentials.genre" value="80" />Crime
-      <input
-        type="checkbox"
-        v-model="credentials.genre"
-        value="99"
-      />Documentary
-      <input type="checkbox" v-model="credentials.genre" value="878" />Science
-      Fiction
-      <input type="checkbox" v-model="credentials.genre" value="9648" />Mystery
-      <input type="checkbox" v-model="credentials.genre" value="10402" />Music
-      <input type="checkbox" v-model="credentials.genre" value="10749" />Romance
-      <input type="checkbox" v-model="credentials.genre" value="10751" />Family
-      <input type="checkbox" v-model="credentials.genre" value="10752" />War
-      <input type="checkbox" v-model="credentials.genre" value="10770" />TV
-      Movie
-    </div>
+      <div class="input-div">
+        <span class="label">NickName : </span>
+        <input class="input" v-model="credentials.nickname" type="text" />
+      </div>
 
-    <hr />
-    <label for="nickname">닉네임수정 : </label>
-    <input
-      v-model="credentials.nickname"
-      type="text"
-      @keyup.enter="updateUser"
-    />
-    <button @click="updateUser">수정하기</button>
+      <hr />
+      <div class="select-genre">
+        <p>Select genres you love</p>
+        <select
+          multiple
+          class="genre"
+          v-model="credentials.genre"
+          required
+          v-if="credentials.genre.length < 3"
+        >
+          <option value="12">Adventure</option>
+          <option value="14">Fantasy</option>
+          <option value="16">Animation</option>
+          <option value="18">Drama</option>
+          <option value="27">Horror</option>
+          <option value="28">Action</option>
+          <option value="35">Comedy</option>
+          <option value="36">Horror</option>
+          <option value="37">Western</option>
+          <option value="53">Thriller</option>
+          <option value="80">Crime</option>
+          <option type="checkbox" value="99">Documentary</option>
+          <option value="878">Science Fiction</option>
+          <option value="9648">Mystery</option>
+          <option value="10402">Music</option>
+          <option value="10749">Romance</option>
+          <option value="10751">Family</option>
+          <option value="10752">War</option>
+          <option value="10770">TV Movie</option>
+        </select>
+      </div>
+      <div class="btn">
+        <button @click="updateUser">Save</button>
+        <button class="go-home">
+          <router-link class="router" :to="{ name: 'Home' }"
+            >Cancel</router-link
+          >
+        </button>
+      </div>
+      <button class="delete">Delete Account</button>
+    </div>
   </div>
 </template>
 
@@ -104,6 +107,8 @@ export default {
       })
         .then((res) => {
           console.log(res);
+          alert("수정이 성공적으로 완료되었습니다.");
+          this.$router.push({ name: "Home" });
         })
         .catch((err) => {
           console.log(err);
@@ -121,5 +126,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped src='./css/profile.css'>
 </style>

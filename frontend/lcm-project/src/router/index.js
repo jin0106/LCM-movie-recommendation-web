@@ -12,8 +12,6 @@ import ReviewDetail from '@/components/community/ReviewDetail'
 import ReviewForm from '@/components/community/ReviewForm'
 import ReviewUpdated from '@/components/community/ReviewUpdate'
 
-
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -61,8 +59,7 @@ const routes = [
     path:'/movies',
     name: "Movies",
     component: Movies,
-  }
-  ,
+  },
   {
     path:'/movies/MovieDetail',
     name: 'MovieDetail',
@@ -72,7 +69,11 @@ const routes = [
     path:'/movies/searchresult/',
     name: 'MovieSearchResult',
     component : MovieSearchResult
-  }
+  },
+  
+
+
+
 ]
 
 const router = new VueRouter({
