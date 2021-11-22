@@ -5,7 +5,7 @@
         <div>
           <router-link class="logo" :to="{ name: 'Home' }">LCM</router-link>
         </div>
-        <div class="nav">
+        <div v-if="currentUser" class="nav">
           <router-link class="nav-item" :to="{ name: 'Home' }"
             >Home</router-link
           >
@@ -17,7 +17,7 @@
           >
           <div class="nav-item">My List</div>
         </div>
-        <div class="menu" v-if="!isLogin">
+        <div class="menu" v-if="!currentUser">
           <router-link class="menu-item" :to="{ name: 'Signup' }"
             >Signup</router-link
           >
@@ -57,6 +57,8 @@
 <script>
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 import axios from "axios";
+import { mapGetters } from "vuex";
+
 export default {
   name: "navbar",
   data: function () {
@@ -64,6 +66,7 @@ export default {
       isLogin: false,
       isSearch: false,
       content: "",
+      userName: this.$store.state.getUserName,
     };
   },
   methods: {
@@ -79,7 +82,8 @@ export default {
     Logout: function () {
       localStorage.removeItem("JWT");
       this.isLogin = false;
-      this.$router.push({ name: "Home" });
+      this.$store.state.getUserName = "";
+      this.$router.push({ name: "Login" });
     },
     search() {
       if (this.content) {
@@ -103,7 +107,7 @@ export default {
             console.log(err);
           });
       } else {
-        alert("입력해");
+        alert("검색어를 입력하세요");
       }
     },
   },
@@ -113,6 +117,9 @@ export default {
     } else {
       this.$router.push({ name: "Login" }).catch(() => {});
     }
+  },
+  computed: {
+    ...mapGetters(["currentUser"]),
   },
 };
 </script>

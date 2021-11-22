@@ -18,8 +18,12 @@ export default {
 </script>
 
 <style>
+#home {
+  width: 100%;
+}
 video {
-  padding: 0 1rem;
+  margin-top: 5rem;
+  padding: 0 3rem;
   width: 100%;
 }
 </style>

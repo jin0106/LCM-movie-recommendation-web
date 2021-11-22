@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+#ReviewUpdate {
+  width: 70%;
+}
+
+.update {
+  padding: 1rem 3rem;
+}
+
+.reviewupdate {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid rgb(233, 235, 233, 0.8);
+  border-radius: 2%;
+  margin: 1rem 0 0 2rem;
+  padding: 2rem;
+}
+
+.movie-title {
+  margin-bottom: 15px;
+}
+
+.title {
+  margin: 5% 0;
+}
+
+.title label {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.title input {
+  width: 500px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.content {
+  display: flex;
+}
+
+.content label {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.content textarea {
+  width: 500px;
+  resize: none;
+  border-radius: 10px;
+}
+
+
+
+
+
+
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn button {
+  margin-right: 0.5rem;
+  background-color: #ffffff;
+  border: none;
+  font-weight: 800;
+  border-radius: 8%;
+}
+
+.btn button:last-child {
+  margin-right: 0;
+}
+
+.create {
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.create button {
+  border: none;
+  z-index: inheritl;
+  background-color: #ffffff;
+  color: rgb(142, 143, 142);
+  font-size: 14px;
+  right: 10%;
+  font-weight: 600;
+}

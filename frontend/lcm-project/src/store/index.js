@@ -41,6 +41,7 @@ export default new Vuex.Store({
       TVMovie : [],
     },
     searchMovies:[],
+    value:'',
 
 
     
@@ -161,6 +162,9 @@ export default new Vuex.Store({
     },
     GET_SEARCHMOVIES(state,data){
       state.searchMovies = data
+    },
+    SENDING_VALUE(state, data){
+      state.value = data
     }
   },
   actions: {
@@ -313,7 +317,11 @@ export default new Vuex.Store({
     },
     searchMovies({commit}, data){
       commit('GET_SEARCHMOVIES', data)
+    },
+    sendingValue({commit}, data){
+      commit('SENDING_VALUE', data)
     }
+    
     
   },
   getters: {
@@ -337,6 +345,9 @@ export default new Vuex.Store({
     },
     SearchResultMovies(state){
       return state.searchMovies
+    },
+    currentUser(state){
+      return state.getUserName
     }
 
     }

@@ -1,23 +1,31 @@
 <template>
-  <div id="CreateReview" v-if="data.title">
-    <h1>Create Review</h1>
-    <h4>영화 제목 : {{ data.movie.title }}</h4>
-    <hr />
-    <div>
-      <label for="title">제목</label>
-      <input v-model="data.title" type="text" />
+  <div id="ReviewUpdate" v-if="data.title">
+    <div class="update">
+      <h2>Update the review</h2>
     </div>
-    <br />
 
-    <div>
-      <label for="content">내용</label>
-      <textarea
-        v-model="data.content"
-        name="content"
-        id="conent"
-        cols="30"
-        rows="10"
-      ></textarea>
+    <div class="reviewupdate">
+      <div class="data">
+        <h4 class="movie-title">Movie : {{ data.movie.title }}</h4>
+        <hr />
+        <div class="title">
+          <label for="title">제목 </label>
+          <input v-model="data.title" type="text" />
+        </div>
+        <br />
+
+        <div class="content">
+          <label for="content">내용</label>
+          <br />
+          <textarea
+            v-model="data.content"
+            name="content"
+            id="conent"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
+      </div>
     </div>
     <div class="btn">
       <button @click="goList">목록</button>
@@ -83,5 +91,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped src='./css/reviewupdate.css'>
 </style>

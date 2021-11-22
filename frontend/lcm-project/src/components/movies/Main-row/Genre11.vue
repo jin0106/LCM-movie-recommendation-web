@@ -1,5 +1,5 @@
 <template>
-  <div id="Genre4">
+  <div id="Genre1">
     <div class="contents">
       <p class="title">How about {{ getgenre }} movies?</p>
       <div v-if="genreMovies" class="div-img">
@@ -26,11 +26,10 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "Genre4",
+  name: "Genre1",
   data: function () {
     return {
       movieList: [],
-      getgenre: "",
     };
   },
   methods: {
@@ -38,7 +37,7 @@ export default {
       // direction이 true면 오름차순 false면 내림차순
       const data1 = {
         token: this.$store.state.token,
-        genre: "Horror",
+        genre: "Romance",
         orderby: "random",
         direction: true,
       };
@@ -49,12 +48,11 @@ export default {
       // direction이 true면 오름차순 false면 내림차순
       const data1 = {
         ...data,
-        genre: "Horror",
+        genre: "Romance",
       };
       this.getgenre = data1["genre"];
       this.$store.dispatch("GenreMovies", data1);
     },
-
     createMovieReview: function (data) {
       this.$store.dispatch("getMovieInfo", data);
     },

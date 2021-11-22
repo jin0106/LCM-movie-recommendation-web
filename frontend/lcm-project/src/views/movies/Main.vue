@@ -40,4 +40,7 @@ export default {
 </script>
 
 <style>
+#Main {
+  padding: 0 3rem;
+}
 </style>

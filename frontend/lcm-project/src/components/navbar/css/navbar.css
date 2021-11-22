@@ -4,7 +4,8 @@
 
 .navbar {
   padding: 0;
-  position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: #ffffff;
 }
 
@@ -13,8 +14,13 @@ video {
 }
 
 .overlay {
+  position: fixed;
+  top: 0;
+  background-color: #ffffff;
   width: 100%;
   padding: 0.5rem 3rem;
+  z-index: 1;
+  margin-bottom: 10px;
 }
 
 .header {
@@ -79,4 +85,9 @@ video {
 
 .hidden {
   display: none;
+}
+
+
+.back-ground {
+  background-color: #ffffff;
 }

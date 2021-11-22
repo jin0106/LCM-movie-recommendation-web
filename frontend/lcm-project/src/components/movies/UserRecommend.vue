@@ -1,11 +1,16 @@
 <template>
-  <div>
+  <div id="UserRecommend">
     <div class="contents">
       <p class="title">Based on your profile</p>
-      <div class="posters" v-if="userMovies">
-        <div class="div-img" v-for="(movie, idx) in userMovies" :key="idx">
-          <img class="poster" :src="movie.poster_path" alt="thumnail" />
-        </div>
+      <div v-if="userMovies" class="div-img">
+        <img
+          @click="createMovieReview(movie)"
+          v-for="(movie, idx) in userMovies"
+          :key="idx"
+          class="poster"
+          :src="movie.poster_path"
+          alt="thumnail"
+        />
       </div>
 
       <div v-else>

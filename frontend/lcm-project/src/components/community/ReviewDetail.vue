@@ -18,8 +18,11 @@
         <p>내용 :{{ data.content }}</p>
       </div>
       <div class="btn">
-        <button @click="DeleteReview">Delete</button>
-        <button data="data" @click="UpdateReview">Update</button>
+        <button @click="Back">Back</button>
+        <div v-if="data.user.username == currentUser">
+          <button @click="DeleteReview">Delete</button>
+          <button data="data" @click="UpdateReview">Update</button>
+        </div>
       </div>
 
       <div>
@@ -32,7 +35,12 @@
             <p class="comment-writer">{{ comment.user.username }}</p>
             <div class="comment-content">
               <span>{{ comment.content }}</span>
-              <button @click="deleteComment(comment)">Delete</button>
+              <button
+                v-if="comment.user.username == currentUser"
+                @click="deleteComment(comment)"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
@@ -54,17 +62,14 @@
           </div>
         </div>
       </div>
-
-      <!-- <comments :reviewId="reviewId" /> -->
-      <!-- <comment-form :review="data" /> -->
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-// import Comments from "./Comments.vue";
-// import CommentForm from "./CommentForm.vue";
+// import { mapGetters } from "vuex";
+
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -76,7 +81,11 @@ export default {
       data: "",
       content: "",
       comments: [],
+      currentUser: this.$store.state.getUserName,
     };
+  },
+  computed: {
+    // ...mapGetters(["currentUser"]),
   },
   methods: {
     setHeader: function () {
@@ -91,7 +100,11 @@ export default {
       this.$router.push({ name: "Community" });
     },
     UpdateReview: function () {
+      console.log(this.$store.state.getUserName);
       this.$router.push({ name: "ReviewUpdate" });
+    },
+    Back() {
+      this.$router.push({ name: "Community" });
     },
     getComments: function () {
       axios({

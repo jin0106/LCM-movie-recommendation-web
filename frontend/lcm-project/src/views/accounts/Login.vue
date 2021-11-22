@@ -60,6 +60,7 @@ export default {
       })
         .then((res) => {
           localStorage.setItem("JWT", res.data.access);
+          this.$store.dispatch("getUserName", this.credentials.username);
           this.$emit("login");
           this.$store.dispatch("setHeader");
           this.$router.push({ name: "Home" });

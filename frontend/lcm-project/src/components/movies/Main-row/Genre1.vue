@@ -2,19 +2,15 @@
   <div id="Genre1">
     <div class="contents">
       <p class="title">How about {{ getgenre }} movies?</p>
-      <div class="posters" v-if="genreMovies">
-        <div
-          class="div-img"
+      <div v-if="genreMovies" class="div-img">
+        <img
+          @click="createMovieReview(movie)"
           v-for="(movie, idx) in genreMovies[getgenre]"
           :key="idx"
-        >
-          <img
-            @click="createMovieReview(movie)"
-            class="poster"
-            :src="movie.poster_path"
-            alt="thumnail"
-          />
-        </div>
+          class="poster"
+          :src="movie.poster_path"
+          alt="thumnail"
+        />
       </div>
 
       <div v-else>
@@ -34,7 +30,6 @@ export default {
   data: function () {
     return {
       movieList: [],
-      getgenre: "",
     };
   },
   methods: {
@@ -48,6 +43,12 @@ export default {
       };
       this.getgenre = data1["genre"];
       this.$store.dispatch("GenreMovies", data1);
+    },
+    GenreMovie: function (data) {
+      // direction이 true면 오름차순 false면 내림차순
+
+      this.getgenre = data["genre"];
+      this.$store.dispatch("GenreMovies", data);
     },
     createMovieReview: function (data) {
       this.$store.dispatch("getMovieInfo", data);

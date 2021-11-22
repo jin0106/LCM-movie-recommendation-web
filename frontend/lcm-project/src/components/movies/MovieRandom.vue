@@ -1,16 +1,16 @@
 <template>
   <div id="MovieRandom">
     <div class="contents">
-      <p class="title">How about this movies?</p>
-      <div class="posters" v-if="totalMovieList.length">
-        <div class="div-img" v-for="(movie, idx) in totalMovieList" :key="idx">
-          <img
-            @click="createMovieReview(movie)"
-            class="poster"
-            :src="movie.poster_path"
-            alt="thumnail"
-          />
-        </div>
+      <p class="title">How about these movies?</p>
+      <div v-if="totalMovieList" class="div-img">
+        <img
+          @click="createMovieReview(movie)"
+          v-for="(movie, idx) in totalMovieList"
+          :key="idx"
+          class="poster"
+          :src="movie.poster_path"
+          alt="thumnail"
+        />
       </div>
 
       <div v-else>

@@ -1,22 +1,30 @@
 <template>
   <div id="CreateReview">
-    <h1>Create Review</h1>
-    <h2>영화 제목 : {{ movietitle }}</h2>
-    <hr />
-    <div>
-      <label for="title">제목</label>
-      <input v-model="info.title" type="text" />
+    <div class="create">
+      <h2>Create Review</h2>
     </div>
-    <br />
+    <div class="review-create">
+      <div class="data">
+        <h4 class="movie-title">Movie : {{ movietitle }}</h4>
+        <hr />
+        <div class="title">
+          <label for="title">제목</label>
+          <input v-model="info.title" type="text" />
+        </div>
+        <br />
+        <div class="content">
+          <label for="content">내용</label>
+          <textarea
+            v-model="info.content"
+            name="content"
+            id="conent"
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
+      </div>
+    </div>
 
-    <label for="content">내용</label>
-    <textarea
-      v-model="info.content"
-      name="content"
-      id="conent"
-      cols="30"
-      rows="10"
-    ></textarea>
     <div class="btn">
       <button @click="goList">목록</button>
       <button @click="Create">등록</button>
@@ -67,5 +75,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped src='./css/reviewform.css'>
 </style>
