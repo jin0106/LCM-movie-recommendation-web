@@ -4,7 +4,7 @@
       <p class="title">Based on the Weahter in your city</p>
       <div class="posters" v-if="WeatherMovies.length">
         <div class="div-img" v-for="(movie, idx) in WeatherMovies" :key="idx">
-          <img class="poster" :src="movie.poster_path" alt="thumnail" />
+          <img @click="watchedMovie(movie)" class="poster" :src="movie.poster_path" alt="thumnail" />
         </div>
       </div>
 
@@ -18,7 +18,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { mapGetters } from "vuex";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: "MovieWeather",
@@ -30,6 +32,23 @@ export default {
   methods: {
     getMovieList: function () {
       this.$store.dispatch("WeatherMovies", this.$store.state.token);
+    },
+
+    //POST요청일 때는 function(movie)로 바꿔주시고
+    //method 바꾸신 후 data주석처리 해제하면 작동됩니다
+    watchedMovie: function(movie) {
+      axios({
+        method: "POST",
+        url : `${SERVER_URL}movies/watched_movie/`,
+        headers: this.$store.state.token,
+        data : movie
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     },
   },
   computed: {

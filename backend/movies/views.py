@@ -9,7 +9,9 @@ from rest_framework.permissions import AllowAny
 import requests
 import json
 import pprint
-
+import urllib.request
+import os
+import sys
 # 전체 영화 목록 조회
 
 
@@ -140,15 +142,80 @@ def movie_search(request):
     for movie in res['items']:
         english_title.append(movie['subtitle'])
 
-    movies = []
+    search_movies = []
     for title in english_title:
         try:
             movie = Movie.objects.filter(title=title).first()
             if movie == None:
                 continue
-            movies.append(movie)
+            search_movies.append(movie)
         except Movie.DoesNotExist:
             continue
+
+    # 해당 한글을 영어로 번역후 검색    
+    translate_naver_id = "W7neAKLvLxpSenaSKg_r"
+    translate_naver_secret = "TMxEhZ9Qmh"
+
+    encText = urllib.parse.quote(search_string)
+    data = "source=ko&target=en&text=" + encText
+    url = "https://openapi.naver.com/v1/papago/n2mt"
+    request = urllib.request.Request(url)
+    request.add_header("X-Naver-Client-Id", translate_naver_id)
+    request.add_header("X-Naver-Client-Secret",translate_naver_secret)
+    response = urllib.request.urlopen(request, data=data.encode("utf-8"))
+    rescode = response.getcode()
     
+    if(rescode==200):
+        response_body = response.read()
+        search_result = json.loads(response_body)['message']['result']['translatedText']
+        if search_result[-1] == '.':
+            search_result = search_result[:len(search_result) -1]
+        word = search_result.split()
+        if len(word) > 1:
+            if word[0] == 'The':
+                search_result = ''.join(word[1:])
+
+        translate_movie = Movie.objects.filter(title__contains=search_result)
+    else:
+        print("Error Code:" + rescode)
+
+
+
+    # 만약 네이버 api로도 검색 못하고 한글로도 검색 못했을 때 영어검색
+    
+    origin_movies = Movie.objects.filter(title__contains=search_string)
+
+    search = len(search_movies)
+    translate = len(translate_movie)
+    origin = len(origin_movies)
+    
+    num = max(search, translate, origin)
+    if num == search:
+        movies = search_movies
+    elif num == translate:
+        movies = translate_movie
+    else: 
+        movies = origin_movies
+
+
     serializers = MovieSerializer(movies, many=True)
     return Response(serializers.data, status.HTTP_200_OK)
+
+
+@api_view(['GET', 'POST'])
+def movie_watched_list(request):
+    
+    if request.method == 'POST':
+        user = get_user_model().objects.get(id=request.user.id)
+        movie = Movie.objects.get(id=request.data['id'])
+        if movie in user.watched_list.all():
+            user.watched_list.remove(movie)
+        else:
+            user.watched_list.add(movie)
+        user.save()
+        return Response(status.HTTP_200_OK)
+
+    else:
+        movies = Movie.objects.filter(user_watched=request.user.id)
+        serializer = MovieSerializer(movies, many=True) 
+        return Response(serializer.data, status.HTTP_200_OK)

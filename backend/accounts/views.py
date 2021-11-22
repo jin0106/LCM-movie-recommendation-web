@@ -46,3 +46,4 @@ def likegenre(request):
         genres = request.user.genre.all()
         serializer = GenreListSerializer(genres, many=True)
         return Response(serializer.data, status.HTTP_200_OK)
+
