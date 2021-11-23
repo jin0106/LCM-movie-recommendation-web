@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+}
+
+
+
+.navbar {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  /* background-color: black; */
+}
+
+video {
+  width: 100%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  background-color: black;
+  width: 100%;
+  padding: 0.5rem 3rem;
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+}
+
+.logo {
+  color: rgb(211, 47, 39);
+  margin-right: 2rem;
+  font-size: 1.7rem;
+  font-weight: 900;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  color: #ffffff;
+  align-items: center;
+  font-weight: 600;
+}
+
+.nav-item {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #ffffff
+}
+
+.menu {
+  display: flex;
+  margin-left: auto;
+  color: #ffffff;
+  align-items: center;
+  font-weight: 600
+}
+
+.menu-item {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+
+
+.serach img {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  transition: all 1s;
+}
+
+.search-bar {
+  border: 0.5px solid #ffffff;
+  border-radius: 10px;
+  text-align: center;
+  padding: 3px;
+  background-color: black;
+}
+
+.search-bar:focus::-webkit-input-placeholder {
+  color: transparent
+}
+
+.hidden {
+  display: none;
+}
+
+
+.back-ground {
+  background-color: #ffffff;
+}

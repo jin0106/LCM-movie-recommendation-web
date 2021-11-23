@@ -14,7 +14,7 @@ from rest_framework.decorators import api_view
 def review_list_create(request):
     # 리뷰 전체 리스트 받아오기
     if request.method == 'GET':
-        reviews = get_list_or_404(Review)
+        reviews = Review.objects.all()
         serializers = ReviewListSerializer(reviews, many=True)
         return Response(serializers.data, status=status.HTTP_201_CREATED)
 
@@ -76,11 +76,11 @@ def comment_list_create(request, review_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save(review=review, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-  
-       
+
+
 @api_view(['DELETE', 'PUT'])
 def comment_delete_update(request, review_pk, comment_pk):
-    comment = Comment.objects.get(id = comment_pk)
+    comment = Comment.objects.get(id=comment_pk)
     review = Review.objects.get(id=review_pk)
     if request.method == 'DELETE':
         comment.delete()
@@ -92,7 +92,7 @@ def comment_delete_update(request, review_pk, comment_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save(movie=movie)
             return Response(serializer.data)
-            
+
         return Response(status.HTTP_200_OK)
 
 

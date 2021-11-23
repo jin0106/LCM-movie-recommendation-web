@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  color: #ffffff;
+  background-color: black;
+}
+
+#ReviewList {
+  margin-top: 2rem;
+  width: 100%;
+  border: 0
+}
+
+table {
+  width: 100%;
+  border-top: 2px solid black;
+  border-radius: 50%;
+  margin: 0;
+  position: relative;
+  /* left: 50%; */
+  /* transform: translate(50%, 0); */
+  text-align: center;
+
+}
+
+thead {
+  background-color: rgb(233, 235, 233, 0.5)
+}
+
+tr {
+  border-bottom: 1px solid rgb(211, 211, 211);
+}
+
+.num {
+  width: 5%
+}
+
+.writer {
+  width: 10%;
+}
+
+.title {
+  width: 70%;
+}
+
+.data {
+  width: 15%;
+}

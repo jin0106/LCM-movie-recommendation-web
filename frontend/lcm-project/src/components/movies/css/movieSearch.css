@@ -1,0 +1,60 @@
+* {
+  color: black;
+  margin: 0;
+}
+
+#MovieSearchResult {
+  padding-top: 1rem;
+  width: 100%;
+  height: 100vh;
+}
+
+.title {
+  font-size: 1.25rem;
+  text-align: left;
+  margin: 0;
+  font-weight: 700;
+}
+
+.divimg {
+  width: auto;
+  height: auto;
+}
+
+.poster {
+  width: 124.844px;
+  height: 186.531px;
+  padding-left: 2px;
+  border-radius: 4px;
+}
+
+.poster:hover {
+  transform: scale(1.5);
+  transition: .1s;
+}
+
+.div-img:first-child>.poster {
+  padding: 0;
+}
+
+.contents {
+  padding: 0 1rem;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+
+.posters {
+  display: flex;
+  justify-content: left;
+  /* flex-wrap: nowrap; */
+}
+
+.fail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
