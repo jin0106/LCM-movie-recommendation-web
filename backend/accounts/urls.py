@@ -12,5 +12,6 @@ urlpatterns = [
     path('updateuserinfo/', views.updateuserinfo, name='updateuserinfo'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('google/', views.google, name='google')
+    path('google/', views.google, name='google'),
+    path('naver/', views.get_naver_info, name='naver')
 ]

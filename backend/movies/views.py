@@ -10,8 +10,14 @@ import requests
 import json
 import pprint
 import urllib.request
-import os
-import sys
+from config.settings import (
+    CLIENT_ID, 
+    CLIENT_SECRET, 
+    TRANSLATE_NAVER_ID, 
+    TRANSLATE_NAVER_SECRET,
+    LOCATION_API_KEY,
+    WEATHER_API_KEY,
+)
 # 전체 영화 목록 조회
 
 
@@ -49,7 +55,6 @@ def user_recommend(request):
 def weather_recommend(request):
     # serializer.data,
     # 현재 위치 정보 받아오기 진행중
-    LOCATION_API_KEY = 'AIzaSyB7Sx40393IyWF0OYSJ7OMUqY2dHCdxzsw'
     url = f'https://www.googleapis.com/geolocation/v1/geolocate?key={LOCATION_API_KEY}'
 
     result = json.dumps(requests.post(url).json())
@@ -58,7 +63,6 @@ def weather_recommend(request):
     lat = location["location"]["lat"]
     lng = location["location"]["lng"]
 
-    WEATHER_API_KEY = 'b1a32c0fd2033a695051df3761f95526'
     url = f'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lng}&appid={WEATHER_API_KEY}'
     # request the API data and convert the JSON to Python data types
     city_weather = requests.get(url).json()
@@ -70,7 +74,7 @@ def weather_recommend(request):
         'description': city_weather['weather'][0]['description'],
         'icon': city_weather['weather'][0]['icon']
     }
-
+    
     # 일단 딕셔너리로 날씨에 장르들 하나씩을 선택 하도록 함(더 좋은 방법 있으면 그걸로 구현)
     lst = {'clear sky': 28, 'few clouds': 12, 'overcast cloud': 16, 'drizzle': 35, 'rain': 80, 'shower rain': 99, 'thunderstorm': 18,
            'snow': 10751, 'mist': 14, 'broken clouds': 27, 'scattered clouds': 10749}
@@ -86,47 +90,39 @@ def weather_recommend(request):
     return Response(serializers.data, status.HTTP_200_OK)
 
 # 장르별 영화 받아오기
-
-
 @api_view(['GET'])
 def genre_recommend(request):
     if request.method == 'GET':
         orderby = request.GET['orderby']
-       # 정렬 분기점
-        if orderby == 'title' or orderby == '-title':
+        # 정렬 분기점
+        if orderby == 'title':
             serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
-        elif orderby == 'release_date' or orderby == '-release_date':
+        elif orderby == 'release_date':
             serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
-        elif orderby == 'popularity' or orderby == '-popularity':
+        elif orderby == 'popularity':
             serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
-        elif orderby == 'vote_average' or orderby == '-vote_average':
+        elif orderby == 'vote_average':
             serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
         elif orderby == 'random':
             genre_name = request.GET['genre']
             genre_number = Genre.objects.get(name=genre_name)
-            movies = Movie.objects.filter(
-                genres=genre_number).order_by("?")[:10]
+            movies = Movie.objects.filter(genres=genre_number).order_by("?")[:10]
             serializers = MovieListSerializer(movies, many=True)
             return Response(serializers.data, status.HTTP_200_OK)
 
 # 장르별 정렬한 데이터 돌려줌
-
-
 def genre_orderby(request, orderby):
     genre_name = request.GET['genre']
     genre_number = Genre.objects.get(name=genre_name)
     # 오름차순인 경우
-
-    if orderby[0] != '-':
-        print(type(orderby))
+    if '-' not in orderby:
         movies = Movie.objects.filter(genres=genre_number).order_by(orderby)
     # 내림차순인 경우
-    elif orderby[0] == '-':
-
+    else:
         movies = Movie.objects.filter(genres=genre_number).order_by(orderby)
     serializers = MovieListSerializer(movies, many=True)
     return serializers
@@ -134,15 +130,14 @@ def genre_orderby(request, orderby):
 
 @api_view(['GET'])
 def movie_search(request):
-
-    # 네이버 영화정보 요청
+    
+    ##네이버 영화정보 요청
     search_string = request.GET['search_string']
-    client_id = "IqjBx_CPQ1tCtiy9M1Yy"
-    client_secret = "_k5sl9Zyeb"
+
     url = f'https://openapi.naver.com/v1/search/movie.json?query={search_string}'
     header = {
-        "X-Naver-Client-Id": client_id,
-        "X-Naver-Client-Secret": client_secret,
+        "X-Naver-Client-Id" : CLIENT_ID,
+        "X-Naver-Client-Secret" : CLIENT_SECRET,
     }
     res = requests.get(url, headers=header).json()
     english_title = []
@@ -159,25 +154,22 @@ def movie_search(request):
         except Movie.DoesNotExist:
             continue
 
-    # 해당 한글을 영어로 번역후 검색
-    translate_naver_id = "W7neAKLvLxpSenaSKg_r"
-    translate_naver_secret = "TMxEhZ9Qmh"
+    # 해당 한글을 영어로 번역후 검색    
 
     encText = urllib.parse.quote(search_string)
     data = "source=ko&target=en&text=" + encText
     url = "https://openapi.naver.com/v1/papago/n2mt"
     request = urllib.request.Request(url)
-    request.add_header("X-Naver-Client-Id", translate_naver_id)
-    request.add_header("X-Naver-Client-Secret", translate_naver_secret)
+    request.add_header("X-Naver-Client-Id", TRANSLATE_NAVER_ID)
+    request.add_header("X-Naver-Client-Secret",TRANSLATE_NAVER_SECRET)
     response = urllib.request.urlopen(request, data=data.encode("utf-8"))
     rescode = response.getcode()
-
-    if(rescode == 200):
+    
+    if(rescode==200):
         response_body = response.read()
-        search_result = json.loads(response_body)[
-            'message']['result']['translatedText']
+        search_result = json.loads(response_body)['message']['result']['translatedText']
         if search_result[-1] == '.':
-            search_result = search_result[:len(search_result) - 1]
+            search_result = search_result[:len(search_result) -1]
         word = search_result.split()
         if len(word) > 1:
             if word[0] == 'The':
@@ -187,21 +179,24 @@ def movie_search(request):
     else:
         print("Error Code:" + rescode)
 
-    # 만약 네이버 api로도 검색 못하고 한글로도 검색 못했을 때 영어검색
 
+
+    # 만약 네이버 api로도 검색 못하고 한글로도 검색 못했을 때 영어검색
+    
     origin_movies = Movie.objects.filter(title__contains=search_string)
 
     search = len(search_movies)
     translate = len(translate_movie)
     origin = len(origin_movies)
-
+    
     num = max(search, translate, origin)
     if num == search:
         movies = search_movies
     elif num == translate:
         movies = translate_movie
-    else:
+    else: 
         movies = origin_movies
+
 
     serializers = MovieSerializer(movies, many=True)
     return Response(serializers.data, status.HTTP_200_OK)
@@ -209,7 +204,7 @@ def movie_search(request):
 
 @api_view(['GET', 'POST'])
 def movie_watched_list(request):
-
+    
     if request.method == 'POST':
         user = get_user_model().objects.get(id=request.user.id)
         movie = Movie.objects.get(id=request.data['id'])
@@ -222,13 +217,12 @@ def movie_watched_list(request):
 
     else:
         movies = Movie.objects.filter(user_watched=request.user.id)
-        serializer = MovieSerializer(movies, many=True)
+        serializer = MovieSerializer(movies, many=True) 
         return Response(serializer.data, status.HTTP_200_OK)
-
 
 @api_view(['GET', 'POST'])
 def movie_wish_list(request):
-
+    
     if request.method == 'POST':
         user = get_user_model().objects.get(id=request.user.id)
         movie = Movie.objects.get(id=request.data['id'])
@@ -241,5 +235,5 @@ def movie_wish_list(request):
 
     else:
         movies = Movie.objects.filter(user_wish=request.user.id)
-        serializer = MovieSerializer(movies, many=True)
+        serializer = MovieSerializer(movies, many=True) 
         return Response(serializer.data, status.HTTP_200_OK)
