@@ -67,7 +67,7 @@ video {
 
 
 
-.serach img {
+.search img {
   width: 1.5rem;
   height: 1.5rem;
   margin-left: 0.5rem;
@@ -91,4 +91,53 @@ video {
 
 .hidden {
   display: none;
+}
+
+@media screen and (max-width: 375px) {
+  .navbar {
+    width: 100%;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start
+  }
+
+  .logo {
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .nav {
+    padding: 0;
+  }
+
+  .nav-item {
+    margin-right: 5px;
+  }
+
+  .nav-item:first-child {
+    display: none;
+  }
+
+  .my-list {
+    display: none;
+  }
+
+  .watched-list {
+    display: none;
+  }
+
+  .overlay {
+    padding: 0;
+  }
+
+  .menu {
+    margin: 0;
+  }
+
+  .profile {
+    display: none;
+  }
 }

@@ -16,7 +16,9 @@
         <tbody v-if="reviews.length > 0">
           <tr v-for="review in reviews" :key="review.id">
             <td>{{ review.id }}</td>
-            <td @click="detail(review)">{{ review.title }}</td>
+            <td class="review-title" @click="detail(review)">
+              {{ review.title }}
+            </td>
             <td class="comment-writer">{{ review.user.username }}</td>
             <td>{{ review.created_at.substr(0, 10) }}</td>
           </tr>

@@ -47,7 +47,8 @@ export default new Vuex.Store({
     trailer:'',
     watched:[],
     basedOnMyList:[],
-    watchedMovies:[]
+    watchedMovies:[],
+    score:0,
 
 
     
@@ -191,6 +192,9 @@ export default new Vuex.Store({
     // 봤던 영화 기반 추천 데이터
     GET_WATCHED_MOVIES(state,data){
       state.watchedMovies=data
+    },
+    GET_SCORE(state,data){
+      state.score=data
     }
   },
   actions: {
@@ -251,6 +255,7 @@ export default new Vuex.Store({
         headers: item.token,
       })
         .then(() => {
+          console.log(typeof item.info.score)
           commit('CREATE_REVIEW')
           dispatch("getReviews", header)
         })
@@ -313,7 +318,23 @@ export default new Vuex.Store({
       commit('GET_MOVIEINFO', data)
       // console.log(data)
       dispatch('getVideo',data)
+      dispatch('getScore',data)
 
+    },
+    getScore({commit},data){
+      axios({
+        method: "GET",
+        url: `${SERVER_URL}movies/get_score/`,
+        params: {
+          movie:data
+        }
+      })
+        .then((res) => {
+          commit('GET_SCORE',res.data['score'])
+        })
+        .catch((err) => {  
+          console.log(err)
+        });
     },
     // 유저 프로필 장르 기반으로 영화 받아오기
     getUserMovies({commit}, token){
@@ -385,7 +406,7 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    
+    // 메인 페이지 큰 영화 영상
     mainMovie({commit}) {
       axios({
         method: "GET",
@@ -400,6 +421,7 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+    // 영화 모달 창에 나오는 트레일러
     getVideo({commit},movie) {
       const token = localStorage.getItem("JWT");
       const header = {
@@ -500,6 +522,9 @@ export default new Vuex.Store({
     },
     watchedRCMD(state){
       return state.watchedMovies
+    },
+    score(state){
+      return state.score
     }
   
 

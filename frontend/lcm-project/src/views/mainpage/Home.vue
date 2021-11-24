@@ -90,4 +90,22 @@ export default {
   border-radius: 10px;
   border: none;
 }
+
+@media screen and (max-width: 375px) {
+  .Main-Movie {
+    width: 100%;
+    height: 250px;
+  }
+  .movie-title {
+    top: 10rem;
+  }
+  .movie-title h3 {
+    font-size: 15px;
+  }
+  .more-info {
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+  }
+}
 </style>

@@ -144,19 +144,19 @@ export default {
     },
   },
   mounted() {
-    const naver_id_login = new window.naver_login(
+    const naver_login = new window.naver_id_login(
       "CjWEtcN_SVhkWFE6lD8B",
       "http://localhost:8080/accounts/login"
     );
 
-    if (naver_id_login.getAccessToken()) {
+    if (naver_login.getAccessToken()) {
       // 네이버 사용자 프로필 조회
-      console.log(naver_id_login.getAccessToken());
+      console.log(naver_login.getAccessToken());
       axios({
         method: "post",
         url: `${SERVER_URL}accounts/naver/`,
         data: {
-          token: naver_id_login.getAccessToken(),
+          token: naver_login.getAccessToken(),
         },
       })
         .then((res) => {
@@ -170,12 +170,12 @@ export default {
           console.log(err);
         });
     } else {
-      const state = naver_id_login.getUniqState();
+      const state = naver_login.getUniqState();
       // naver_id_login.setButton("green", 1);
       // 버튼 설정
-      naver_id_login.setState(state);
+      naver_login.setState(state);
       //naver_id_login.setPopup(); // popup 설정을 위한 코드
-      naver_id_login.init_naver_id_login();
+      naver_login.init_naver_id_login();
     }
   },
 };

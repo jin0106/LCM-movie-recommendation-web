@@ -44,4 +44,17 @@ export default {
   opacity: 1;
   border-radius: 10px;
 }
+
+@media screen and (max-width: 375px) {
+  .Modal,
+  .overlay {
+    width: 100%;
+  }
+
+  .modal-card {
+    width: 80%;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+}
 </style>

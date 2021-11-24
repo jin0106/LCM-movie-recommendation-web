@@ -60,6 +60,11 @@ tr {
 
 .title {
   width: 70%;
+
+}
+
+.review-title {
+  cursor: pointer;
 }
 
 .data {

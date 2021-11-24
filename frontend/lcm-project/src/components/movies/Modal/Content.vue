@@ -27,6 +27,10 @@
           Rating : <span class="info-num">{{ currentMovie.vote_average }}</span>
         </p>
         <p>
+          User Rating :
+          <span class="info-num">{{ score }}</span>
+        </p>
+        <p>
           View : <span class="info-num">{{ currentMovie.popularity }}</span>
         </p>
         <p>
@@ -43,13 +47,14 @@
           </div>
         </div>
       </div>
-      <img :src="currentMovie.poster_path" alt="poster" />
+      <img :src="currentMovie.poster_path" class="poster" alt="poster" />
     </div>
     <div class="overviews">
       <h4 class="overview">Overview</h4>
       <p>{{ currentMovie.overview }}</p>
     </div>
   </div>
+  <!-- http://8c3d-125-134-86-234.ngrok.io/ -->
 </template>
 
 <script>
@@ -67,7 +72,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentMovie", "trailer"]),
+    ...mapGetters(["currentMovie", "trailer", "score"]),
   },
   methods: {
     addList() {

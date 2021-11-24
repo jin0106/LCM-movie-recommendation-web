@@ -24,12 +24,10 @@
   padding: 2rem;
 }
 
-.movie-title {
-  margin-bottom: 15px;
-}
+
 
 .title {
-  margin: 5% 0;
+  margin-top: 5%;
 }
 
 .title label {
@@ -87,4 +85,46 @@
   font-size: 14px;
   right: 10%;
   font-weight: 600;
+}
+
+.ratings {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.ratings span {
+  margin-right: 10px;
+}
+
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  justify-content: space-around;
+  padding: 0 0.2em;
+  text-align: center;
+  width: 5em;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  -webkit-text-fill-color: transparent;
+  /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2.3px;
+  -webkit-text-stroke-color: #2b2a29;
+  cursor: pointer;
+}
+
+.star-rating :checked~label {
+  -webkit-text-fill-color: gold;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+  -webkit-text-fill-color: #fff58c;
 }

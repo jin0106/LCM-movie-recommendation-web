@@ -54,10 +54,11 @@
   border: 0.5px solid #4B4A54;
   width: 30px;
   height: 35px;
-  background-color: transparent;
+  background-color: #ffffff;
   font-weight: 500;
-  border-radius: 40%;
-  color: #ffffff;
+  border-radius: 5px;
+  color: black;
+  margin-left: 3px;
   text-align: center;
   font-weight: 700;
 
@@ -108,8 +109,9 @@
   font-weight: normal;
 }
 
-.overview {
-  margin: 15px 0;
+.overviews {
+  margin-top: 15px;
+  margin-bottom: 3 0px;
 
 }
 
@@ -146,4 +148,46 @@
   color: black;
   text-align: center;
   margin-right: 5px;
+}
+
+@media screen and (max-width:375px) {
+  .Content {
+    width: 100%;
+  }
+
+  .movie-info {
+    width: 100%
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .ge {
+    font-size: 12px;
+  }
+
+  .genre {
+    font-size: 12px;
+  }
+
+  .info p {
+    font-size: 12px;
+  }
+
+  .info-num {
+    font-size: 10px;
+  }
+
+  .btn button {
+    margin: 0;
+    width: 20px;
+    height: 14px;
+  }
+
+  .movie-info imgposter {
+    width: 100px;
+    height: 140px;
+    margin: 0px;
+  }
 }

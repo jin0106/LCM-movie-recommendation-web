@@ -15,10 +15,12 @@
           <router-link class="nav-item" :to="{ name: 'Community' }"
             >Community</router-link
           >
-          <router-link class="nav-item" :to="{ name: 'MovieMyList' }"
+          <router-link class="nav-item my-list" :to="{ name: 'MovieMyList' }"
             >My List</router-link
           >
-          <router-link class="nav-item" :to="{ name: 'MovieWatchedList' }"
+          <router-link
+            class="nav-item watched-list"
+            :to="{ name: 'MovieWatchedList' }"
             >WatchedList</router-link
           >
         </div>
@@ -31,7 +33,7 @@
           >
         </div>
         <div class="menu" v-else>
-          <router-link class="serach" to="#"
+          <router-link class="search" to="#"
             ><input
               class="search-bar hidden"
               type="text"
@@ -49,7 +51,7 @@
           <router-link class="menu-item" to="#" @click.native="Logout"
             >Logout</router-link
           >
-          <router-link class="menu-item" :to="{ name: 'Profile' }"
+          <router-link class="menu-item profile" :to="{ name: 'Profile' }"
             >Profile</router-link
           >
         </div>
