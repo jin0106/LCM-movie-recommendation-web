@@ -2,24 +2,23 @@
   <div class="community">
     <header>
       <h3>Community</h3>
-      <h5>영화 제목 : {{ movietitle }}</h5>
     </header>
-    <div v-if="reviews.length > 0">
+    <div class="table" v-if="reviews.length > 0">
       <table>
         <thead>
           <tr>
             <th class="num">No.</th>
-            <th class="title">제목</th>
-            <th class="writer">작성자</th>
-            <th class="date">날짜</th>
+            <th class="title">Title</th>
+            <th class="writer">User</th>
+            <th class="date">Date</th>
           </tr>
         </thead>
         <tbody v-if="reviews.length > 0">
           <tr v-for="review in reviews" :key="review.id">
             <td>{{ review.id }}</td>
             <td @click="detail(review)">{{ review.title }}</td>
-            <td>{{ review.user.username }}</td>
-            <td>{{ review.created_at }}</td>
+            <td class="comment-writer">{{ review.user.username }}</td>
+            <td>{{ review.created_at.substr(0, 10) }}</td>
           </tr>
         </tbody>
         <div v-else>
@@ -27,7 +26,7 @@
         </div>
       </table>
 
-      <button class="write" @click="movieCreate">글 작성</button>
+      <button class="write-btn" @click="movieCreate">글 작성</button>
     </div>
     <div v-else>
       작성된 글이 없습니다
@@ -70,25 +69,4 @@ export default {
 </script>
 
 <style scoped src='./reviewlist.css'>
-.community {
-  width: 100%;
-  margin-top: 5rem;
-  padding: 0 3rem;
-  display: flex;
-  flex-direction: column;
-}
-.write {
-  margin-top: 1rem;
-  border: none;
-  border-radius: 8%;
-}
-
-.write-btn {
-  margin-top: 1rem;
-  border: none;
-  border-radius: 8%;
-  width: 4rem;
-  position: relative;
-  right: 0;
-}
 </style>

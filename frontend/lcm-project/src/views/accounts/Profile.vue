@@ -6,18 +6,28 @@
 
       <div class="input-div">
         <span class="label">NickName : </span>
-        <input class="input" v-model="credentials.nickname" type="text" />
+        <input
+          class="input"
+          v-model="credentials.nickname"
+          type="text"
+          maxlength="30"
+        />
       </div>
 
       <hr />
       <div class="select-genre">
-        <p>Select genres you love</p>
+        <p>Selected genres you love</p>
+        <div class="genres">
+          <span v-for="(num, idx) in credentials.genre" :key="idx"
+            >{{ genres[num] }}
+          </span>
+        </div>
         <select
+          @change="limitOption"
           multiple
           class="genre"
           v-model="credentials.genre"
           required
-          v-if="credentials.genre.length < 3"
         >
           <option value="12">Adventure</option>
           <option value="14">Fantasy</option>
@@ -66,9 +76,38 @@ export default {
         nickname: "",
         genre: [],
       },
+      genres: {
+        12: "Adventure",
+        14: "Fantasy",
+        16: "Animation",
+        18: "Drama",
+        27: "Horror",
+        28: "Action",
+        35: "Comedy",
+        36: "Horro",
+        37: "Western",
+        53: "Thriller",
+        80: "Crime",
+        99: "Documentary",
+        878: "Science Fiction",
+        9648: "Mystery",
+        10402: "Music",
+        10749: "Romance",
+        10751: "Family",
+        10752: "War",
+        10770: "TV Movie",
+      },
     };
   },
   methods: {
+    limitOption() {
+      const select = document.querySelector(".genre");
+      if (this.credentials.genre.length > 3) {
+        alert("You can choose only 3");
+
+        select.value = 0;
+      }
+    },
     setHeader: function () {
       const token = localStorage.getItem("JWT");
       const header = {
@@ -104,8 +143,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          alert("수정이 성공적으로 완료되었습니다.");
-          this.$router.push({ name: "Home" });
+          alert("You info was updated");
         })
         .catch((err) => {
           console.log(err);

@@ -120,6 +120,6 @@ select {
   color: white;
 }
 .sort span {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 </style>

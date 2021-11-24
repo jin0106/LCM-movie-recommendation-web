@@ -68,9 +68,10 @@ video {
 
 
 .serach img {
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin-left: 0.5rem;
+  background-color: black;
   transition: all 1s;
 }
 
@@ -80,6 +81,8 @@ video {
   text-align: center;
   padding: 3px;
   background-color: black;
+  color: white;
+  font-size: 12px;
 }
 
 .search-bar:focus::-webkit-input-placeholder {
@@ -88,9 +91,4 @@ video {
 
 .hidden {
   display: none;
-}
-
-
-.back-ground {
-  background-color: #ffffff;
 }

@@ -30,8 +30,13 @@
         />
       </div>
       <div class="select-genre">
-        <p>Select genres you loved</p>
-        <p></p>
+        <p>Selected genres you loved</p>
+        <div class="genres">
+          <span v-for="(num, idx) in credentials.genre" :key="idx"
+            >{{ credentials.genres[num] }}
+          </span>
+        </div>
+
         <select
           multiple
           class="genre"
@@ -88,6 +93,27 @@ export default {
         nickname: "",
         genre: [],
         profileimg: "",
+        genres: {
+          12: "Adventure",
+          14: "Fantasy",
+          16: "Animation",
+          18: "Drama",
+          27: "Horror",
+          28: "Action",
+          35: "Comedy",
+          36: "Horro",
+          37: "Western",
+          53: "Thriller",
+          80: "Crime",
+          99: "Documentary",
+          878: "Science Fiction",
+          9648: "Mystery",
+          10402: "Music",
+          10749: "Romance",
+          10751: "Family",
+          10752: "War",
+          10770: "TV Movie",
+        },
       },
     };
   },

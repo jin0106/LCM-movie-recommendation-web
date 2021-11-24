@@ -1,7 +1,7 @@
 <template>
   <div id="Genre2">
     <div class="contents">
-      <p class="title">How about {{ getgenre }} movies?</p>
+      <p class="title">{{ getgenre }} Movies</p>
       <div v-if="genreMovies" class="div-img">
         <ModalView v-if="isModal" @close-modal="isModal = false">
           <Content movie="this.movie" />

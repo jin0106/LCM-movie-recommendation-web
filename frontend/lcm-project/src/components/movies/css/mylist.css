@@ -1,0 +1,78 @@
+* {
+  color: black;
+  margin: 0;
+  color: white;
+}
+
+
+
+#MovieMyList {
+  width: 100%;
+  margin-top: 5rem;
+  padding: 0 3rem;
+}
+
+.my-list {
+  margin-bottom: 5vh;
+}
+
+.title {
+  font-size: 1.25rem;
+  text-align: left;
+  margin: 0;
+  color: white;
+  font-weight: 500;
+}
+
+.poster {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.div-img {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding-left: 0;
+  overflow-y: visible;
+  overflow-x: scroll;
+}
+
+.div-img::-webkit-scrollbar {
+  display: none;
+}
+
+.poster:hover {
+  transform: scale(1.12);
+  transition: .4s;
+}
+
+.poster:first-child:hover {
+  transform: scale(1.12) translate(10px, -10px);
+}
+
+.div-img:first-child>.poster {
+  padding: 0;
+}
+
+.contents {
+  /* padding: 0 1rem; */
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+.posters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  /* flex-wrap: nowrap; */
+}
+
+.title {
+  text-align: center;
+}

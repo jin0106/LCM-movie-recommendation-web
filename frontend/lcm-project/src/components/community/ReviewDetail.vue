@@ -1,28 +1,47 @@
 <template>
   <div id="ReviewDetail">
-    <p>{{ review }}</p>
     <div v-if="data">
       <h4 class="title">{{ data.title }}</h4>
       <div class="tab">
         <div class="tab-info">
           <span>{{ data.user["username"] }}</span>
-          <span class="date">{{ data.created_at }}</span>
         </div>
-        <div>
+        <div class="review-info">
+          <span class="date">{{ data.created_at.substr(0, 10) }}</span>
           <p>댓글 수 : {{ comments.length }}</p>
         </div>
       </div>
       <div class="content">
-        <p>시청 영화 :{{ data.movie["title"] }}</p>
-        <img :src="data.movie.poster_path" alt="" />
+        <div class="movie">
+          <img :src="data.movie.poster_path" alt="" />
+          <div class="movie-info">
+            <p>
+              Title : <span>{{ data.movie["title"] }}</span>
+            </p>
+            <p>
+              Genre :
+              <span v-for="(genre, idx) in data.movie.genres" :key="idx">
+                {{ genre["name"] }}</span
+              >
+            </p>
+            <p>
+              Overview : <span>{{ data.movie["overview"] }}</span>
+            </p>
+          </div>
+        </div>
 
-        <p>내용 :{{ data.content }}</p>
+        <p class="data-content">{{ data.content }}</p>
       </div>
-      <div class="btn">
-        <button @click="Back">Back</button>
-        <div v-if="data.user.username == currentUser">
-          <button @click="DeleteReview">Delete</button>
-          <button data="data" @click="UpdateReview">Update</button>
+      <div class="update">
+        <span
+          >Last updated at : <span>{{ data.updated_at.substr(0, 10) }}</span>
+        </span>
+        <div class="btn">
+          <button @click="Back">Back</button>
+          <div v-if="data.user.username == currentUser">
+            <button @click="DeleteReview">Delete</button>
+            <button data="data" @click="UpdateReview">Update</button>
+          </div>
         </div>
       </div>
 
@@ -36,16 +55,19 @@
             <p class="comment-writer">{{ comment.user.username }}</p>
             <div class="comment-content">
               <span>{{ comment.content }}</span>
-              <button
-                v-if="comment.user.username == currentUser"
-                @click="deleteComment(comment)"
-              >
-                Delete
-              </button>
+              <div class="comment-info">
+                <p class="time">{{ comment.created_at.substr(0, 10) }}</p>
+                <button
+                  v-if="comment.user.username == currentUser"
+                  @click="deleteComment(comment)"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <span v-else class="no-comment">댓글이 아직 없습니다.</span>
+        <span v-else class="no-comment">No Comment</span>
 
         <div class="comment-create">
           <div class="comment-box">

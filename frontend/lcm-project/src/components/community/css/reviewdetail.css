@@ -8,7 +8,7 @@
 
 #ReviewDetail {
   width: 70%;
-  border: 1px solid rgb(233, 235, 233, 0.8);
+  border: 0.5px solid #4B4A54;
   border-radius: 2%;
   margin: 6% 0 0 2rem;
   padding: 0 1rem;
@@ -38,19 +38,57 @@
   font-size: 19px;
 }
 
+.review-info {
+  display: flex;
+  align-items: center;
+}
+
 .date {
-  font-size: 12px;
-  color: #ffffff;
+  font-size: 10px;
+  color: rgb(142, 143, 142);
+  margin-right: 15px;
+}
+
+.movie {
+  display: flex;
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+
+.movie-info p {
+  color: #4B4A54;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.movie-info span {
+  font-size: 14px;
+  color: rgb(142, 143, 142, 0.5);
+  font-weight: 300;
+
 }
 
 .content {
   padding: 2rem;
-  margin-top: 2rem;
   color: #ffffff;
+}
+
+.data-content {
+  margin-top: 10px;
 }
 
 .content img {
   width: 30%
+}
+
+.update {
+  display: flex;
+  flex-direction: column;
 }
 
 .btn {
@@ -60,8 +98,9 @@
 
 .btn button {
   margin-right: 0.5rem;
-  font-weight: 800;
-  border-radius: 8%;
+  font-weight: 500;
+  border: 0.5px solid #4B4A54;
+  border-radius: 3px;
 }
 
 .btn button:last-child {
@@ -91,6 +130,7 @@
 .comment-content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 5px 0;
   width: 100%;
   padding: 10px;
@@ -115,7 +155,7 @@
 .comment-create {
   position: relative;
   padding: 10px;
-  border: 1px solid rgb(142, 143, 142);
+  border: 0.5px solid #4B4A54;
   margin-bottom: 10px;
   border-radius: 5px;
 }
@@ -131,6 +171,10 @@
   border: none;
   font-size: 14px;
   resize: none;
+}
+
+.comment-writer {
+  font-weight: 800;
 }
 
 .commnet-box {
@@ -151,4 +195,15 @@
   font-size: 14px;
   right: 10%;
   font-weight: 600;
+}
+
+.comment-info {
+  display: flex;
+  align-items: center;
+}
+
+.time {
+  font-size: 10px;
+  color: rgb(142, 143, 142);
+  margin-right: 10px;
 }

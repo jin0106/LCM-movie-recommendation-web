@@ -50,10 +50,12 @@ export default {
   padding: 0 3rem;
   height: 100vh;
   justify-content: center;
+  z-index: -3;
 }
 img {
   width: 220px;
   /* width: 100%; */
   max-height: 300px;
+  background-color: rgb(147, 147, 147, 0.5);
 }
 </style>

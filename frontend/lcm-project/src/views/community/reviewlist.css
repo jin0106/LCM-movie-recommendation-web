@@ -5,11 +5,30 @@
   background-color: black;
 }
 
-#ReviewList {
-  margin-top: 2rem;
+.community {
   width: 100%;
-  border: 0
+  margin-top: 5rem;
+  padding: 0 3rem;
+  display: flex;
+  flex-direction: column;
 }
+
+.table {
+  margin-top: 3rem;
+}
+
+
+
+.write-btn {
+  margin-top: 1rem;
+  border: 0.5px solid #4B4A54;
+  border-radius: 8%;
+  /* width: 4rem; */
+  position: relative;
+  right: 0;
+}
+
+
 
 table {
   width: 100%;
@@ -28,7 +47,7 @@ thead {
 }
 
 tr {
-  border-bottom: 1px solid rgb(211, 211, 211);
+  border-bottom: 0.5px solid #4B4A54;
 }
 
 .num {

@@ -5,7 +5,7 @@
         <div>
           <router-link class="logo" :to="{ name: 'Home' }">LCM</router-link>
         </div>
-        <div v-if="currentUser" class="nav">
+        <div v-if="this.isLogin" class="nav">
           <router-link class="nav-item" :to="{ name: 'Home' }"
             >Home</router-link
           >
@@ -19,7 +19,7 @@
             >My List</router-link
           >
         </div>
-        <div class="menu" v-if="!isLogin">
+        <div class="menu" v-if="!this.isLogin">
           <router-link class="menu-item" :to="{ name: 'Signup' }"
             >Signup</router-link
           >
@@ -39,7 +39,7 @@
             <img
               @click="show"
               class="magnifying"
-              src="./search.png"
+              src="./glass.png"
               alt="search"
             />
           </router-link>
@@ -65,10 +65,10 @@ export default {
   name: "navbar",
   data: function () {
     return {
-      isLogin: false,
       isSearch: false,
       content: "",
       userName: this.$store.state.getUserName,
+      isLogin: localStorage.getItem("JWT"),
     };
   },
   methods: {

@@ -1,10 +1,12 @@
 <template>
   <div id="MovieMyList">
     <div class="contents">
+      <h3 class="my-list">My List</h3>
       <div v-if="myList" class="div-img">
         <ModalView v-if="isModal" @close-modal="isModal = false">
           <Content />
         </ModalView>
+
         <img
           @click="createMovieReview(movie)"
           v-for="(movie, idx) in myList"
@@ -58,5 +60,5 @@ export default {
 };
 </script>
 
-<style scoped src='./css/movielist.css'>
+<style scoped src='./css/mylist.css'>
 </style>

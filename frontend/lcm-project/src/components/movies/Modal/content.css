@@ -37,13 +37,14 @@
 }
 
 .add-list {
-  border: none;
+  border: 1px solid #ffffff;
   width: 30px;
   height: 35px;
   background-color: transparent;
   font-weight: 500;
-  border-radius: 5px;
-
+  border-radius: 40%;
+  color: #ffffff;
+  text-align: center;
 
 }
 
