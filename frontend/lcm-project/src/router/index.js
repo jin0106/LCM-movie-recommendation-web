@@ -6,6 +6,7 @@ import Profile from '@/views/accounts/Profile'
 import Movies from '@/views/movies/Movies'
 import MovieSearchResult from '@/components/movies/MovieSearchResult'
 import MovieMyList from '@/components/movies/MovieMyList'
+import MovieWatchedList from '@/components/movies/MovieWatchedList'
 import Home from '@/views/mainpage/Home'
 import Community from '@/views/community/Community'
 import ReviewDetail from '@/components/community/ReviewDetail'
@@ -72,6 +73,13 @@ const routes = [
     name: 'MovieMyList',
     component : MovieMyList
   },
+  {
+    path:'/movies/watched/',
+    name: 'MovieWatchedList',
+    component : MovieWatchedList
+  },
+  
+
   
 
 

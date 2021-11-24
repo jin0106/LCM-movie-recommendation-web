@@ -5,6 +5,8 @@
         <movie-random />
         <MovieWeather />
         <user-recommend />
+        <movie-based-mylist />
+        <movie-based-watched />
         <genre-1 />
         <genre-2 />
         <genre-3 />
@@ -22,6 +24,8 @@ import Genre2 from "../../components/movies/Main-row/Genre2.vue";
 import Genre4 from "../../components/movies/Main-row/Genre4.vue";
 import Genre3 from "../../components/movies/Main-row/Genre3.vue";
 import MovieRandom from "../../components/movies/MovieRandom.vue";
+import MovieBasedMylist from "../../components/movies/MovieBasedMylist.vue";
+import MovieBasedWatched from "../../components/movies/MovieBasedWatched.vue";
 
 // import MoviesRecommend from "@/components/movies/MoviesRecommend.vue";
 
@@ -35,6 +39,8 @@ export default {
     Genre2,
     Genre4,
     Genre3,
+    MovieBasedMylist,
+    MovieBasedWatched,
   },
   isModal: false,
 };

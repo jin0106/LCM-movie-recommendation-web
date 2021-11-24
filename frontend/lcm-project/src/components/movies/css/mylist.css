@@ -4,7 +4,11 @@
   color: white;
 }
 
-
+#MovieWatchedList {
+  width: 100%;
+  margin-top: 5rem;
+  padding: 0 3rem;
+}
 
 #MovieMyList {
   width: 100%;

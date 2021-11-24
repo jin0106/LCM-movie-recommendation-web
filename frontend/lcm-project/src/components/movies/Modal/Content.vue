@@ -37,11 +37,10 @@
           <router-link class="nav-item" :to="{ name: 'ReviewForm' }">
             <button class="review-btn">Write Review</button></router-link
           >
-
-          <button @click="addList" class="add-list">+</button>
-
-          <!-- {{ currentMovie }} -->
-          <!-- <button @click="addList" class="remove-list none">-</button> -->
+          <button @click="watchedList" class="remove-list">Watched</button>
+          <div class="my-list">
+            <button @click="addList" class="add-list">+</button>
+          </div>
         </div>
       </div>
       <img :src="currentMovie.poster_path" alt="poster" />
@@ -81,29 +80,29 @@ export default {
         .then((res) => {
           console.log(res);
           this.$store.dispatch("getMyList", this.$store.state.token);
+          alert("You added this movie into the My List");
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    // getVideo() {
-    //   axios({
-    //     method: "get",
-    //     url: `${SERVER_URL}movies/wish_list/`,
-    //     headers: this.$store.state.token,
-    //     data: this.movie,
-    //   })
-    //     .then((res) => {
-    //       console.log(res);
-    //       this.video = res.data;
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
-    // created() {
-    //   this.getVideo();
-    // },
+    watchedList() {
+      axios({
+        method: "post",
+        url: `${SERVER_URL}movies/watched_movie/`,
+        headers: this.$store.state.token,
+        data: this.movie,
+      })
+        .then((res) => {
+          console.log(res);
+          alert("You added this movie into the WatchedList");
+
+          this.$store.dispatch("watchedList", this.$store.state.token);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>

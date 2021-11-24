@@ -18,6 +18,9 @@
           <router-link class="nav-item" :to="{ name: 'MovieMyList' }"
             >My List</router-link
           >
+          <router-link class="nav-item" :to="{ name: 'MovieWatchedList' }"
+            >WatchedList</router-link
+          >
         </div>
         <div class="menu" v-if="!this.isLogin">
           <router-link class="menu-item" :to="{ name: 'Signup' }"

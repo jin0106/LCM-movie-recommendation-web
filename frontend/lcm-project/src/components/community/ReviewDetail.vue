@@ -8,7 +8,7 @@
         </div>
         <div class="review-info">
           <span class="date">{{ data.created_at.substr(0, 10) }}</span>
-          <p>댓글 수 : {{ comments.length }}</p>
+          <p>Comments : {{ comments.length }}</p>
         </div>
       </div>
       <div class="content">
@@ -48,7 +48,7 @@
 
       <div>
         <div class="comment-tab">
-          <span>댓글</span>
+          <span>Comments</span>
           <p>{{ comments.length }}</p>
         </div>
         <div class="comments" v-if="comments.length">
@@ -72,7 +72,7 @@
 
         <div class="comment-create">
           <div class="comment-box">
-            <p>{{ data.user.username }}</p>
+            <p>{{ currentUser }}</p>
             <textarea
               class="comment-write"
               @keyup.enter="createComment"

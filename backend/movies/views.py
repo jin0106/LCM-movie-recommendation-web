@@ -101,16 +101,16 @@ def genre_recommend(request):
     if request.method == 'GET':
         orderby = request.GET['orderby']
         # 정렬 분기점
-        if orderby == 'title':
+        if orderby == 'title' or orderby == '-title':
             serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
-        elif orderby == 'release_date':
+        elif orderby == 'release_date' or orderby == '-release_date':
             serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
-        elif orderby == 'popularity':
+        elif orderby == 'popularity' or orderby == '-popularity':
             serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
-        elif orderby == 'vote_average':
+        elif orderby == 'vote_average' or orderby == '-vote_average':
             serializers = genre_orderby(request, orderby)
             return Response(serializers.data, status.HTTP_200_OK)
         elif orderby == 'random':
@@ -127,12 +127,7 @@ def genre_recommend(request):
 def genre_orderby(request, orderby):
     genre_name = request.GET['genre']
     genre_number = Genre.objects.get(name=genre_name)
-    # 오름차순인 경우
-    if '-' not in orderby:
-        movies = Movie.objects.filter(genres=genre_number).order_by(orderby)
-    # 내림차순인 경우
-    else:
-        movies = Movie.objects.filter(genres=genre_number).order_by(orderby)
+    movies = Movie.objects.filter(genres=genre_number).order_by(orderby)
     serializers = MovieListSerializer(movies, many=True)
     return serializers
 

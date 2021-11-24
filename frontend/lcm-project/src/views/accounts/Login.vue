@@ -128,12 +128,15 @@ export default {
               password: PASSWORD,
             };
             this.login();
+            // this.$router.push({ name: "Home" });
           })
           .catch((res) => {
             console.log(res);
           });
-        this.$router.push({ name: "Home" });
       }
+      // this.$router.push({ name: "Profile" });
+
+      // this.$router.go();
     },
     //구글 로그인 콜백함수 (실패)
     GoogleLoginFailure(error) {

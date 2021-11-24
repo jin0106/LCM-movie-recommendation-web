@@ -103,7 +103,7 @@ export default {
     limitOption() {
       const select = document.querySelector(".genre");
       if (this.credentials.genre.length > 3) {
-        alert("You can choose only 3");
+        alert("We recommend you to choose maximum 3 genres");
 
         select.value = 0;
       }

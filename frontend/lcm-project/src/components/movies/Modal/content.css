@@ -18,6 +18,8 @@
 }
 
 .title {
+  top: 0;
+  /* position: fixed; */
   margin-bottom: 20px;
 }
 
@@ -42,8 +44,14 @@
   margin-right: 10px;
 }
 
+
+.my-list {
+  display: flex;
+  align-items: center;
+}
+
 .add-list {
-  border: 1px solid #ffffff;
+  border: 0.5px solid #4B4A54;
   width: 30px;
   height: 35px;
   background-color: transparent;
@@ -51,6 +59,7 @@
   border-radius: 40%;
   color: #ffffff;
   text-align: center;
+  font-weight: 700;
 
 }
 
@@ -125,4 +134,16 @@
 .overviews p {
   color: gray;
 
+}
+
+.remove-list {
+  width: 120px;
+  height: 35px;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 5px;
+  font-weight: 700;
+  color: black;
+  text-align: center;
+  margin-right: 5px;
 }

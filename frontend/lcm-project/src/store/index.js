@@ -45,6 +45,9 @@ export default new Vuex.Store({
     myList:[],
     mainMovie:[],
     trailer:'',
+    watched:[],
+    basedOnMyList:[],
+    watchedMovies:[]
 
 
     
@@ -83,6 +86,9 @@ export default new Vuex.Store({
     },
     GET_USER_MOVIES(state,data){
       state.userMovies = data
+    },
+    GET_MY_LIST_MOVIES(state,data){
+      state.basedOnMyList = data
     },
     GET_GENREMOVIES(state,data){
       switch(data['genre']) {
@@ -178,6 +184,13 @@ export default new Vuex.Store({
     },
     GET_VIDEO(state,data){
       state.trailer = data
+    },
+    WATCHED_LIST(state,data){
+      state.watched=data
+    },
+    // 봤던 영화 기반 추천 데이터
+    GET_WATCHED_MOVIES(state,data){
+      state.watchedMovies=data
     }
   },
   actions: {
@@ -359,6 +372,20 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+    watchedList({commit},token) {
+      axios({
+        method: "get",
+        url: `${SERVER_URL}movies/watched_movie/`,
+        headers: token,
+      })
+        .then((res) => {
+          commit('WATCHED_LIST',res.data)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    
     mainMovie({commit}) {
       axios({
         method: "GET",
@@ -394,6 +421,34 @@ export default new Vuex.Store({
           console.log(movie.title)
           console.log(err);
         });
+    },
+    // mylist 기반으로 영화 추천 받기
+    basedOnMyList({commit}, token){
+      axios({
+        method:'get',
+        url:`${SERVER_URL}movies/wish_list_recommend/`,
+        headers:token,
+      })
+      .then((res =>{
+        commit('GET_MY_LIST_MOVIES', res.data)
+      }))
+      .catch((err =>{
+        console.log(err)
+      }))
+    },
+    // 봤던영화 기반으로 추천
+    basedOnWatched({commit}, token){
+      axios({
+        method:'get',
+        url:`${SERVER_URL}movies/watched_recommend/`,
+        headers:token,
+      })
+      .then((res =>{
+        commit('GET_WATCHED_MOVIES', res.data)
+      }))
+      .catch((err =>{
+        console.log(err)
+      }))
     },
    
   },
@@ -436,6 +491,15 @@ export default new Vuex.Store({
     },
     trailer(state){
       return state.trailer
+    },
+    watchedList(state){
+      return state.watched
+    },
+    myListRCMD(state){
+      return state.basedOnMyList
+    },
+    watchedRCMD(state){
+      return state.watchedMovies
     }
   
 
