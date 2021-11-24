@@ -373,3 +373,5 @@ def watched_list_recommend(request):
         movies = Movie.objects.all().order_by('-vote_average')[:20]
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data, status.HTTP_200_OK)
+
+#pp
