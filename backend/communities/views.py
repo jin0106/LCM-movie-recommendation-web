@@ -24,7 +24,6 @@ def review_list_create(request):
         movie = Movie.objects.get(title=request.data['movie']['title'])
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, movie=movie)
-            #review = Review.objects.get()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -68,6 +67,7 @@ def review_update_delete(request, review_pk):
 def comment_list_create(request, review_pk):
     if request.method == 'GET':
         comments = Comment.objects.filter(review_id=review_pk)
+        # comment = comments.DateTimeField(input_formats=['%Y/%m/%d'])
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
