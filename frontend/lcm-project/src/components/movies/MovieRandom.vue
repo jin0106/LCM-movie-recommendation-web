@@ -62,6 +62,6 @@ export default {
 };
 </script>
 
-<style scoped src='./css/movielist.css'>
+<style scoped src='./css/movierandom.css'>
 /* 전체 글자 색깔 마진 없애주기 */
 </style>

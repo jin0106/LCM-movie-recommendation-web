@@ -43,6 +43,8 @@ export default new Vuex.Store({
     searchMovies:[],
     value:'',
     myList:[],
+    mainMovie:[],
+    trailer:'',
 
 
     
@@ -170,6 +172,12 @@ export default new Vuex.Store({
     },
     MY_LIST(state,data){
       state.myList=data
+    },
+    MAIN_MOVIE(state,data){
+      state.mainMovie= data
+    },
+    GET_VIDEO(state,data){
+      state.trailer = data
     }
   },
   actions: {
@@ -241,6 +249,7 @@ export default new Vuex.Store({
       commit('GET_USERNAME',data)
     },
     getMovieList: function({commit}, data){
+      
       axios({
         method: "GET",
         url : `${SERVER_URL}movies/`,
@@ -287,8 +296,11 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    getMovieInfo({commit}, data){
+    getMovieInfo({commit,dispatch}, data){
       commit('GET_MOVIEINFO', data)
+      // console.log(data)
+      dispatch('getVideo',data)
+
     },
     // 유저 프로필 장르 기반으로 영화 받아오기
     getUserMovies({commit}, token){
@@ -341,13 +353,49 @@ export default new Vuex.Store({
         headers: token,
       })
         .then((res) => {
-          console.log(res);
           commit('MY_LIST',res.data)
         })
         .catch((err) => {
           console.log(err);
         });
     },
+    mainMovie({commit}) {
+      axios({
+        method: "GET",
+        url: `${SERVER_URL}movies/main_movies/`,
+      })
+        .then((res) => {
+          commit('MAIN_MOVIE',res.data)
+          // this.MainMovie = _.sample(res.data);
+          // this.MainMovie = res.data[4];
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getVideo({commit},movie) {
+      const token = localStorage.getItem("JWT");
+      const header = {
+        Authorization: `Bearer ${token}`,
+      };
+      axios({
+        method: "post",
+        url: `${SERVER_URL}movies/trailer/`,
+        headers: header,
+        data :{ 
+          q:movie.title}
+      })
+        .then((res) => {
+          console.log(movie);
+          console.log(res)
+          commit('GET_VIDEO', res.data)
+        })
+        .catch((err) => {
+          console.log(movie.title)
+          console.log(err);
+        });
+    },
+   
   },
   getters: {
     reviews: function(state){
@@ -382,7 +430,14 @@ export default new Vuex.Store({
     },
     myList(state){
       return state.myList
+    },
+    mainMovie(state){
+      return _.sample(state.mainMovie)
+    },
+    trailer(state){
+      return state.trailer
     }
+  
 
     }
   })

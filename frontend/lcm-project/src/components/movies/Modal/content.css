@@ -6,9 +6,15 @@
 }
 
 .Content {
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.movie-info img {
+  width: 12rem;
+  margin-right: 20px;
 }
 
 .title {
@@ -50,6 +56,7 @@
 
 .movie-info {
   display: flex;
+  justify-content: space-between;
 }
 
 .info {
@@ -93,7 +100,8 @@
 }
 
 .overview {
-  margin: 25px 0;
+  margin: 15px 0;
+
 }
 
 .none {
@@ -102,4 +110,19 @@
 
 .toggled {
   display: hidden;
+}
+
+.trailer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.overviews {
+  margin-bottom: 2rem;
+}
+
+.overviews p {
+  color: gray;
+
 }

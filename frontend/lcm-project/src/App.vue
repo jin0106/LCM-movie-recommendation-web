@@ -4,7 +4,6 @@
   </div>
 </template>
 <script>
-// import MovieGuest from "./components/movies/MovieGuest.vue";
 import Navbar from "./components/navbar/navbar.vue";
 
 export default {
@@ -32,6 +31,9 @@ export default {
       localStorage.removeItem("JWT");
       this.isLogin = false;
     },
+  },
+  mounted() {
+    this.$store.dispatch("mainMovie");
   },
 };
 </script>

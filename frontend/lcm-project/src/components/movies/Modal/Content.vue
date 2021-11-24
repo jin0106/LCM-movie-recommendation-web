@@ -1,9 +1,17 @@
 <template>
   <div class="Content">
+    <div class="trailer">
+      <iframe
+        :src="trailer.src"
+        frameborder="0"
+        width="500px"
+        height="300px"
+      ></iframe>
+    </div>
+
     <div class="movie-info">
-      <img :src="currentMovie.poster_path" alt="poster" />
       <div class="info">
-        <h2 class="title">{{ currentMovie.title }}</h2>
+        <h3 class="title">{{ currentMovie.title }}</h3>
         <div class="genres">
           <span class="ge">Genres :</span>
           <span
@@ -36,8 +44,9 @@
           <!-- <button @click="addList" class="remove-list none">-</button> -->
         </div>
       </div>
+      <img :src="currentMovie.poster_path" alt="poster" />
     </div>
-    <div>
+    <div class="overviews">
       <h4 class="overview">Overview</h4>
       <p>{{ currentMovie.overview }}</p>
     </div>
@@ -55,10 +64,11 @@ export default {
       movie: this.$store.state.movieInfo,
       movies: [],
       isToggled: false,
+      video: "",
     };
   },
   computed: {
-    ...mapGetters(["currentMovie"]),
+    ...mapGetters(["currentMovie", "trailer"]),
   },
   methods: {
     addList() {
@@ -76,6 +86,24 @@ export default {
           console.log(err);
         });
     },
+    // getVideo() {
+    //   axios({
+    //     method: "get",
+    //     url: `${SERVER_URL}movies/wish_list/`,
+    //     headers: this.$store.state.token,
+    //     data: this.movie,
+    //   })
+    //     .then((res) => {
+    //       console.log(res);
+    //       this.video = res.data;
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
+    // created() {
+    //   this.getVideo();
+    // },
   },
 };
 </script>

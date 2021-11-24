@@ -36,12 +36,12 @@ export default {
     Genre4,
     Genre3,
   },
+  isModal: false,
 };
 </script>
 
 <style>
 #Main {
   padding: 0 3rem;
-  margin-top: 5rem;
 }
 </style>

@@ -33,8 +33,9 @@
         <p class="data-content">{{ data.content }}</p>
       </div>
       <div class="update">
-        <span
-          >Last updated at : <span>{{ data.updated_at.substr(0, 10) }}</span>
+        <span class="last-update"
+          >Last updated at :
+          <span class="dated">{{ data.updated_at.substr(0, 10) }}</span>
         </span>
         <div class="btn">
           <button @click="Back">Back</button>
