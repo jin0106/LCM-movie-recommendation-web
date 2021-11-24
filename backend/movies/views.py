@@ -255,11 +255,18 @@ def trailer(request):
 # 홈페이지의 윗 쪽 영상들 랜덤 5개 리턴
 @api_view(['GET'])
 def main_movies(request):
-    data = {0: {'movie': 'Fast & Furious 10', 'src': 'https://www.youtube.com/embed/ZxMTar5F4Ak'},
-    1: {'movie': 'Avatar 2', 'src': 'https://www.youtube.com/embed/AxLH0lXEGAY'},
-    2: {'movie': 'The Flash', 'src': 'https://www.youtube.com/embed/drQWopZDEEY'},
-    3: {'movie': 'Spider-Man: Across the Spider-Verse', 'src': 'https://www.youtube.com/embed/TLiI1wumchs'}, 
-    4: {'movie':'John Wick: Chapter 4 - Hagakure', 'src': 'https://www.youtube.com/embed/56pvThSsoSE'}}
+    movies = list(Movie.objects.filter().order_by('-release_date')[:5])
+    movie0 = MovieSerializer(movies[0])
+    movie1 = MovieSerializer(movies[1])
+    movie2 = MovieSerializer(movies[2])
+    movie3 = MovieSerializer(movies[3])
+    movie4 = MovieSerializer(movies[4])
+    
+    data = {0: {'movie': movie0.data, 'src': 'https://www.youtube.com/embed/ZxMTar5F4Ak'},
+    1: {'movie': movie1.data, 'src': 'https://www.youtube.com/embed/AxLH0lXEGAY'},
+    2: {'movie': movie2.data, 'src': 'https://www.youtube.com/embed/drQWopZDEEY'},
+    3: {'movie': movie3.data, 'src': 'https://www.youtube.com/embed/TLiI1wumchs'}, 
+    4: {'movie': movie4.data, 'src': 'https://www.youtube.com/embed/56pvThSsoSE'}}
     return Response(data, status.HTTP_200_OK)
 
 def youtube(title):
