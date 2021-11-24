@@ -11,4 +11,7 @@ urlpatterns = [
     path('movie_search/', views.movie_search),
     path('watched_movie/', views.movie_watched_list),
     path('wish_list/', views.movie_wish_list),
+    path('trailer/', views.trailer),
+    path('main_movies/', views.main_movies),
+    path('wish_list_recommend/', views.wish_list_recommend)
 ]

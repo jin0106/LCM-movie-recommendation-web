@@ -19,6 +19,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+   
     class MovieSerializer(serializers.ModelSerializer):
         class Meta:
             model = Movie

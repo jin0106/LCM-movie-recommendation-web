@@ -2,7 +2,6 @@ from django.db import models
 from movies.models import Movie
 from django.conf import settings
 
-
 class Review(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()

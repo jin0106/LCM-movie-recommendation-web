@@ -1,7 +1,10 @@
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.contrib.auth import get_user_model
 from rest_framework import serializers, status
+from rest_framework import response
 from rest_framework.decorators import api_view, permission_classes
+
+from communities.models import Review
 from .models import Movie, Genre
 from .serializers import GenreListSerializer, MovieSerializer, MovieListSerializer
 from rest_framework.response import Response
@@ -17,6 +20,7 @@ from config.settings import (
     TRANSLATE_NAVER_SECRET,
     LOCATION_API_KEY,
     WEATHER_API_KEY,
+    YOUTUBE_API_KEY,
 )
 # 전체 영화 목록 조회
 
@@ -45,7 +49,7 @@ def user_recommend(request):
         genres.append(user_genre)
     input_serializer = []
     for id in genres:
-        movie = Movie.objects.filter(genres=id)
+        movie = Movie.objects.filter(genres=id).order_by("?")
         input_serializer.extend(movie)
     serializer = MovieListSerializer(input_serializer, many=True)
     return Response(serializer.data, status.HTTP_200_OK)
@@ -236,4 +240,65 @@ def movie_wish_list(request):
     else:
         movies = Movie.objects.filter(user_wish=request.user.id)
         serializer = MovieSerializer(movies, many=True) 
+        return Response(serializer.data, status.HTTP_200_OK)
+
+
+# 해당 영화의 영상 주소 리턴
+@api_view(['POST'])
+def trailer(request):
+    # 영화 객체 들어오면 영화 객체도 같이 넣어서 보내주기 
+    title = request.data['q']
+    data = youtube(title)
+    return Response(data, status.HTTP_200_OK)
+
+
+# 홈페이지의 윗 쪽 영상들 랜덤 5개 리턴
+@api_view(['GET'])
+def main_movies(request):
+    data = {0: {'movie': 'Fast & Furious 10', 'src': 'https://www.youtube.com/embed/ZxMTar5F4Ak'},
+    1: {'movie': 'Avatar 2', 'src': 'https://www.youtube.com/embed/AxLH0lXEGAY'},
+    2: {'movie': 'The Flash', 'src': 'https://www.youtube.com/embed/drQWopZDEEY'},
+    3: {'movie': 'Spider-Man: Across the Spider-Verse', 'src': 'https://www.youtube.com/embed/TLiI1wumchs'}, 
+    4: {'movie':'John Wick: Chapter 4 - Hagakure', 'src': 'https://www.youtube.com/embed/56pvThSsoSE'}}
+    return Response(data, status.HTTP_200_OK)
+
+def youtube(title):
+    params = {
+        'key' : YOUTUBE_API_KEY,
+        'part' : 'snippet',
+        'q': title + ' official trailer',
+        'type': 'video'
+    }
+    URL = "https://www.googleapis.com/youtube/v3/search"
+    response = requests.get(URL, params=params)
+    src = 'https://www.youtube.com/embed/' + json.loads(response.text)['items'][0]['id']['videoId']
+    data = {
+        'src' : src
+    }
+    return data
+
+
+@api_view(['GET'])
+def wish_list_recommend(request):
+    id = request.user.id
+    user = get_user_model().objects.get(id=id)
+    wish_list = list(user.wish_list.all())
+    test = {}
+    input_serializer = []
+    # 만약 나중에 보기 한 영화가 없으면 랜덤으로 추천 
+    if len(wish_list) < 1:
+        return Response(status.HTTP_200_OK)
+    else: 
+        for movie in wish_list:
+            genres = Movie.genre.get(id=movie.id)
+            for genre in genres:
+                if genre.id in test:
+                    test[genre.id] += 1
+                else:
+                    test[genre] = 1
+        genre = max(test)
+        movie = Movie.objects.filter(genres=id).order_by("?")
+        input_serializer.extend(movie)
+        serializer = MovieListSerializer(input_serializer, many=True)
+
         return Response(serializer.data, status.HTTP_200_OK)

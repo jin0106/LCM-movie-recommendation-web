@@ -24,6 +24,7 @@ def review_list_create(request):
         movie = Movie.objects.get(title=request.data['movie']['title'])
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, movie=movie)
+            #review = Review.objects.get()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
