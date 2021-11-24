@@ -1,7 +1,7 @@
 from django.db import models
 from movies.models import Movie
 from django.conf import settings
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 class Review(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
@@ -23,6 +23,10 @@ class Review(models.Model):
 
 class Comment(models.Model):
     content = models.CharField(max_length=100)
+    score = models.IntegerField(default=3,validators=[
+            MaxValueValidator(5),
+            MinValueValidator(1)
+        ], blank=True)
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
