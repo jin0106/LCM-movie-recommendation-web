@@ -6,6 +6,7 @@ from movies.serializers import MovieSerializer
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework.decorators import api_view
+import pprint
 
 # GET일 때 전체 리뷰 불러오기, POST일때 리뷰 생성
 
@@ -20,7 +21,7 @@ def review_list_create(request):
 
     if request.method == 'POST':
         serializer = ReviewSerializer(data=request.data)
-        print(request.data)
+        pprint.pprint(request.data)
         movie = Movie.objects.get(title=request.data['movie']['title'])
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, movie=movie)

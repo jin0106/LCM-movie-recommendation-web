@@ -24,7 +24,6 @@ import datetime
 @permission_classes([AllowAny])
 def signup(request):
     # 회원 가입 
-    print('!!!!!!!!!!!!!!!!!')
 
     if request.method == 'POST':
         if request.data.get('password') != request.data.get('passwordconfirm'):

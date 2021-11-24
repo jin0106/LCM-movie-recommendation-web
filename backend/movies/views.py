@@ -13,6 +13,7 @@ import requests
 import json
 import pprint
 import urllib.request
+from django.db.models import Avg
 from config.settings import (
     CLIENT_ID,
     CLIENT_SECRET,
@@ -28,17 +29,25 @@ from config.settings import (
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def movie_list(request):
-    movies = get_list_or_404(Movie)
+    movies = Movie.objects.all()
     serializers = MovieListSerializer(movies, many=True)
     return Response(serializers.data)
 
 
 # 특정 영화 목록 조회(pk값이 아닌 영화 이름으로 바꿀까 고민중)
 @api_view(['GET'])
-def movie_detail(request, movie_pk):
-    movie = get_list_or_404(Movie, pk=movie_pk)
-    serializers = MovieSerializer(movie)
-    return Response(serializers.data)
+def get_score(request):
+    movie =json.loads(request.GET['movie'])
+    movie_pk = movie['id']
+  
+    movie = Movie.objects.get(pk=movie_pk)
+    score = Review.objects.filter(movie=movie.id).values('score').aggregate(Avg('score'))
+    if score['score__avg'] == None:
+        score['score__avg'] = 0
+    data = {
+        'score' : round(score['score__avg'], 2)
+    }
+    return Response(data, status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -261,11 +270,11 @@ def main_movies(request):
     movie3 = MovieSerializer(movies[3])
     movie4 = MovieSerializer(movies[9])
 
-    data = {0: {'movie': movie0.data, 'src': 'https://www.youtube.com/embed/ZYzbalQ6Lg8?autoplay=1&mute=0&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0&start=6'},
-            1: {'movie': movie1.data, 'src': 'https://www.youtube.com/embed/AxLH0lXEGAY?autoplay=1&mute=0&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
-            2: {'movie': movie2.data, 'src': 'https://www.youtube.com/embed/drQWopZDEEY?autoplay=1&mute=0&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
-            3: {'movie': movie3.data, 'src': 'https://www.youtube.com/embed/TLiI1wumchs?autoplay=1&mute=0&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
-            4: {'movie': movie4.data, 'src': 'https://www.youtube.com/embed/9ix7TUGVYIo?autoplay=1&mute=0&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '}}
+    data = {0: {'movie': movie0.data, 'src': 'https://www.youtube.com/embed/ZYzbalQ6Lg8?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0&start=6'},
+            1: {'movie': movie1.data, 'src': 'https://www.youtube.com/embed/AxLH0lXEGAY?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
+            2: {'movie': movie2.data, 'src': 'https://www.youtube.com/embed/drQWopZDEEY?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
+            3: {'movie': movie3.data, 'src': 'https://www.youtube.com/embed/TLiI1wumchs?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
+            4: {'movie': movie4.data, 'src': 'https://www.youtube.com/embed/9ix7TUGVYIo?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '}}
     return Response(data, status.HTTP_200_OK)
 
 
