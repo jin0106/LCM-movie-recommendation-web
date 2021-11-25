@@ -18,11 +18,12 @@ export default {
 .Modal,
 .overlay {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 1;
+  margin-top: 2rem;
 }
 .overlay {
   opacity: 0.5;
@@ -49,12 +50,15 @@ export default {
   .Modal,
   .overlay {
     width: 100%;
+    margin: 0;
   }
 
   .modal-card {
-    width: 80%;
-    height: 100vh;
+    width: 85%;
+    height: 90%;
     overflow-y: scroll;
+    border: 0.5px solid #4b4a54;
+    padding: 0 1rem;
   }
 }
 </style>

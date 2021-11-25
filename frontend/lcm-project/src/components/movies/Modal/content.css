@@ -12,13 +12,17 @@
   justify-content: center;
 }
 
+.Content::-webkit-scrollbar {
+  display: none;
+}
+
 .movie-info img {
   width: 12rem;
   margin-right: 20px;
 }
 
 .title {
-  top: 0;
+  /* padding: 1rem; */
   /* position: fixed; */
   margin-bottom: 20px;
 }
@@ -52,7 +56,7 @@
 
 .add-list {
   border: 0.5px solid #4B4A54;
-  width: 30px;
+  width: 50px;
   height: 35px;
   background-color: #ffffff;
   font-weight: 500;
@@ -73,7 +77,6 @@
   display: flex;
   flex-direction: column;
   justify-content: ;
-  margin-left: 15px;
 }
 
 .info p {
@@ -111,8 +114,10 @@
 
 .overviews {
   margin-top: 15px;
-  margin-bottom: 3 0px;
+}
 
+.overview {
+  margin-bottom: 15px;
 }
 
 .none {
@@ -153,14 +158,33 @@
 @media screen and (max-width:375px) {
   .Content {
     width: 100%;
+    height: 100%;
+  }
+
+
+  .Content::-webkit-scrollbar {
+    display: none;
+  }
+
+  .trailer {
+    display: none;
   }
 
   .movie-info {
-    width: 100%
+    width: 100%;
+    align-items: center;
+  }
+
+  .test {
+    display: flex;
+  }
+
+  .info {
+    width: 100%;
   }
 
   .title {
-    font-size: 15px;
+    font-size: 18px;
   }
 
   .ge {
@@ -169,6 +193,10 @@
 
   .genre {
     font-size: 12px;
+  }
+
+  .info {
+    margin: 0;
   }
 
   .info p {
@@ -185,9 +213,47 @@
     height: 14px;
   }
 
-  .movie-info imgposter {
+  .poster {
     width: 100px;
     height: 140px;
     margin: 0px;
+  }
+
+  .btn {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    padding-right: 2px;
+  }
+
+  .btn button {
+    width: 52px;
+    height: 30px;
+    text-align: center;
+    margin-right: 1px;
+  }
+
+  .review-btn {
+    font-size: 8px;
+
+  }
+
+  .remove-list {
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .btn a {
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .overview {
+    font-size: 14px;
+  }
+
+  .overviews p {
+    font-size: 12px;
   }
 }

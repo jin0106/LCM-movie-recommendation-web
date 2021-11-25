@@ -2,7 +2,7 @@
   <div id="MovieBasedWatched">
     <div class="contents">
       <p class="title">Based on your WatchedList</p>
-      <div v-if="watchedRCMD" class="div-img">
+      <div v-if="watchedRCMD.length" class="div-img">
         <ModalView v-if="isModal" @close-modal="isModal = false">
           <Content movie="this.movie" />
         </ModalView>

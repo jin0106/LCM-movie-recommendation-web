@@ -137,3 +137,49 @@
 .star-rating label:hover~label {
   -webkit-text-fill-color: #fff58c;
 }
+
+@media screen and (max-width:375px) {
+  #ReviewUpdate {
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .title label {
+    font-size: 14px;
+  }
+
+  .title input {
+    border: 1px solid rgb(233, 235, 233, 0.8);
+
+  }
+
+  .update {
+    padding: 0;
+    margin-bottom: 10px;
+  }
+
+  .movie-title {
+    font-size: 17px;
+    margin: 0;
+  }
+
+  .reviewupdate {
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .title input {
+    width: 100%;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content textarea {
+    width: 100%;
+    border: 1px solid rgb(233, 235, 233, 0.8);
+
+  }
+}

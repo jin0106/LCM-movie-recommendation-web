@@ -70,3 +70,17 @@ tr {
 .data {
   width: 15%;
 }
+
+@media screen and (max-width:375px) {
+  .community {
+    padding: 0;
+  }
+
+  .title {
+    width: 50%;
+  }
+
+  .data {
+    width: 100%;
+  }
+}

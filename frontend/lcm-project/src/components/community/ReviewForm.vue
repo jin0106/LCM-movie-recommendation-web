@@ -11,7 +11,6 @@
           <label for="title">Title : </label>
           <input v-model="info.title" type="text" />
         </div>
-        <br />
         <div class="ratings">
           <span>Ratings:</span>
           <div class="star-rating">

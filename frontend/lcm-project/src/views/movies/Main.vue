@@ -1,7 +1,7 @@
 <template>
   <div id="Main">
     <header>
-      <div>
+      <div class="soon">
         <movie-random />
         <MovieWeather />
         <user-recommend />
@@ -49,5 +49,14 @@ export default {
 <style>
 #Main {
   padding: 0 3rem;
+}
+
+@media screen and (max-width: 375px) {
+  #Main::-webkit-scrollbar {
+    display: none;
+  }
+  .soon::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>

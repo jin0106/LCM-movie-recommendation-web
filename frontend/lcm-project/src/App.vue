@@ -34,6 +34,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("mainMovie");
+    this.$router.push({ name: "Login" });
   },
 };
 </script>

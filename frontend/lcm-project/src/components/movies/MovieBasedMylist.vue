@@ -1,7 +1,8 @@
 <template>
-  <div id="MovieBasedWatched">
+  <div id="MovieBasedMyList">
     <div class="contents">
       <p class="title">Based on your List</p>
+      <!-- <p>{{ myListRCMD }}</p> -->
       <div v-if="myListRCMD" class="div-img">
         <ModalView v-if="isModal" @close-modal="isModal = false">
           <Content movie="this.movie" />
@@ -30,7 +31,7 @@ import { mapGetters } from "vuex";
 import Content from "@/components/movies/Modal/Content";
 import ModalView from "@/components/movies/Modal/ModalView";
 export default {
-  name: "UserRecommend",
+  name: "MovieBasedMyList",
   data: function () {
     return {
       genres: [],

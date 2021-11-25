@@ -2,27 +2,27 @@
   <div class="navbar">
     <div class="overlay">
       <div class="header">
-        <div>
+        <div class="logo-item">
           <router-link class="logo" :to="{ name: 'Home' }">LCM</router-link>
-        </div>
-        <div v-if="this.isLogin" class="nav">
-          <router-link class="nav-item" :to="{ name: 'Home' }"
-            >Home</router-link
-          >
-          <router-link class="nav-item" :to="{ name: 'Movies' }"
-            >Movies</router-link
-          >
-          <router-link class="nav-item" :to="{ name: 'Community' }"
-            >Community</router-link
-          >
-          <router-link class="nav-item my-list" :to="{ name: 'MovieMyList' }"
-            >My List</router-link
-          >
-          <router-link
-            class="nav-item watched-list"
-            :to="{ name: 'MovieWatchedList' }"
-            >WatchedList</router-link
-          >
+          <div v-if="this.isLogin" class="nav">
+            <router-link class="nav-item" :to="{ name: 'Home' }"
+              >Home</router-link
+            >
+            <router-link class="nav-item" :to="{ name: 'Movies' }"
+              >Movies</router-link
+            >
+            <router-link class="nav-item" :to="{ name: 'Community' }"
+              >Community</router-link
+            >
+            <router-link class="nav-item my-list" :to="{ name: 'MovieMyList' }"
+              >My List</router-link
+            >
+            <router-link
+              class="nav-item watched-list"
+              :to="{ name: 'MovieWatchedList' }"
+              >WatchedList</router-link
+            >
+          </div>
         </div>
         <div class="menu" v-if="!this.isLogin">
           <router-link class="menu-item" :to="{ name: 'Signup' }"
@@ -40,6 +40,8 @@
               placeholder="type movie title"
               v-model="content"
               @keyup.enter="search"
+              onfocus
+              onblur="hidden"
             />
             <img
               @click="show"

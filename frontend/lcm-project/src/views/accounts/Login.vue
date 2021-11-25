@@ -72,6 +72,11 @@ export default {
       errMsg: "",
     };
   },
+  created() {
+    if (localStorage.getItem("JWT")) {
+      this.$router.push({ name: "Home" });
+    }
+  },
   methods: {
     login: function () {
       axios({

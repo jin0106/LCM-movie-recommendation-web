@@ -128,3 +128,39 @@
 .star-rating label:hover~label {
   -webkit-text-fill-color: #fff58c;
 }
+
+
+@media screen and (max-width:375px) {
+  #CreateReview {
+    width: 100%;
+  }
+
+  .create {
+    padding: 0;
+    padding-top: 3rem;
+    margin-bottom: 10px;
+
+  }
+
+  .review-create {
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .movie-title {
+    font-size: 17px;
+  }
+
+  .title input {
+    width: 100%;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content textarea {
+    width: 100%;
+  }
+}

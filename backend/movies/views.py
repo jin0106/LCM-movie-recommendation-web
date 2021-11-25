@@ -37,15 +37,16 @@ def movie_list(request):
 # 특정 영화 목록 조회(pk값이 아닌 영화 이름으로 바꿀까 고민중)
 @api_view(['GET'])
 def get_score(request):
-    movie =json.loads(request.GET['movie'])
+    movie = json.loads(request.GET['movie'])
     movie_pk = movie['id']
-  
+
     movie = Movie.objects.get(pk=movie_pk)
-    score = Review.objects.filter(movie=movie.id).values('score').aggregate(Avg('score'))
+    score = Review.objects.filter(movie=movie.id).values(
+        'score').aggregate(Avg('score'))
     if score['score__avg'] == None:
         score['score__avg'] = 0
     data = {
-        'score' : round(score['score__avg'], 2)
+        'score': round(score['score__avg'], 2)
     }
     return Response(data, status.HTTP_200_OK)
 
@@ -270,11 +271,11 @@ def main_movies(request):
     movie3 = MovieSerializer(movies[3])
     movie4 = MovieSerializer(movies[9])
 
-    data = {0: {'movie': movie0.data, 'src': 'https://www.youtube.com/embed/ZYzbalQ6Lg8?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0&start=6'},
-            1: {'movie': movie1.data, 'src': 'https://www.youtube.com/embed/AxLH0lXEGAY?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
-            2: {'movie': movie2.data, 'src': 'https://www.youtube.com/embed/drQWopZDEEY?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
-            3: {'movie': movie3.data, 'src': 'https://www.youtube.com/embed/TLiI1wumchs?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
-            4: {'movie': movie4.data, 'src': 'https://www.youtube.com/embed/9ix7TUGVYIo?autoplay=1&mute=1&enablejsapi=1&controls=0&disablekb=1&modestbranding=1&rel=0&showinfo=0 '}}
+    data = {0: {'movie': movie0.data, 'src': 'https://www.youtube.com/embed/ZYzbalQ6Lg8?autoplay=1&mute=1&enablejsapi=1&controls=1&disablekb=1&modestbranding=1&rel=0&showinfo=0&start=6'},
+            1: {'movie': movie1.data, 'src': 'https://www.youtube.com/embed/AxLH0lXEGAY?autoplay=1&mute=1&enablejsapi=1&controls=1&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
+            2: {'movie': movie2.data, 'src': 'https://www.youtube.com/embed/drQWopZDEEY?autoplay=1&mute=1&enablejsapi=1&controls=1&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
+            3: {'movie': movie3.data, 'src': 'https://www.youtube.com/embed/TLiI1wumchs?autoplay=1&mute=1&enablejsapi=1&controls=1&disablekb=1&modestbranding=1&rel=0&showinfo=0 '},
+            4: {'movie': movie4.data, 'src': 'https://www.youtube.com/embed/9ix7TUGVYIo?autoplay=1&mute=1&enablejsapi=1&controls=1&disablekb=1&modestbranding=1&rel=0&showinfo=0 '}}
     return Response(data, status.HTTP_200_OK)
 
 
@@ -340,7 +341,7 @@ def wish_list_recommend(request):
         return Response(serializer.data, status.HTTP_200_OK)
     # 둘다 없다면 그냥 평점 기준으로 추천
     else:
-        movies = Movie.objects.all().order_by('-vote_average')[:20]
+        movies = Movie.objects.all().order_by('vote_average')[:20]
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data, status.HTTP_200_OK)
 

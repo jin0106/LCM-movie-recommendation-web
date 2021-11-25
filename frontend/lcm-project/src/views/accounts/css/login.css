@@ -133,3 +133,26 @@
 #my-signin2 {
   display: none;
 }
+
+@media screen and (max-width:375px) {
+  #Login {
+    width: 100%;
+  }
+
+  .login {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .login-info input {
+    width: 100%;
+  }
+
+  .login button {
+    width: 100%;
+  }
+
+  .signup {
+    width: 100%;
+  }
+}

@@ -23,9 +23,6 @@
 
       <Main />
     </div>
-    <div v-else>
-      <movie-guest />
-    </div>
   </div>
 </template>
 
@@ -59,6 +56,13 @@ export default {
   },
   computed: {
     ...mapGetters(["mainMovie"]),
+  },
+  created() {
+    if (localStorage.getItem("JWT")) {
+      null;
+    } else {
+      this.$router.push({ name: "Login" });
+    }
   },
 };
 </script>
@@ -95,6 +99,7 @@ export default {
   .Main-Movie {
     width: 100%;
     height: 250px;
+    margin-top: 2rem;
   }
   .movie-title {
     top: 10rem;
@@ -106,6 +111,9 @@ export default {
     width: 80px;
     height: 30px;
     font-size: 12px;
+  }
+  #Home::-webkit-scrollbar {
+    display: none;
   }
 }
 </style>

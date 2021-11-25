@@ -8,10 +8,10 @@
         height="300px"
       ></iframe>
     </div>
+    <h3 class="title">{{ currentMovie.title }}</h3>
 
     <div class="movie-info">
       <div class="info">
-        <h3 class="title">{{ currentMovie.title }}</h3>
         <div class="genres">
           <span class="ge">Genres :</span>
           <span

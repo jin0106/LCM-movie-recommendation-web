@@ -2,7 +2,7 @@
   <div id="Signup">
     <div class="signup">
       <h2 class="title">Sign Up</h2>
-      <div>
+      <div class="info">
         <input
           v-model="credentials.username"
           type="text"
@@ -30,19 +30,22 @@
         />
       </div>
       <div class="select-genre">
-        <p>Selected genres you loved</p>
+        <p>Selected Genres</p>
         <div class="genres">
-          <span v-for="(num, idx) in credentials.genre" :key="idx"
+          <span
+            class="genre-span"
+            v-for="(num, idx) in credentials.genre"
+            :key="idx"
             >{{ credentials.genres[num] }}
           </span>
         </div>
 
         <select
+          @change="limitOptions"
           multiple
           class="genre"
           v-model="credentials.genre"
           required
-          v-if="credentials.genre.length < 3"
         >
           <option value="12">Adventure</option>
           <option value="14">Fantasy</option>
@@ -132,6 +135,14 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    limitOptions() {
+      const select = document.querySelector(".genre");
+      if (this.credentials.genre.length > 3) {
+        alert("We recommend you to choose maximum 3 genres");
+
+        select.value = 0;
+      }
     },
   },
 };

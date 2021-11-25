@@ -218,3 +218,35 @@
   color: rgb(142, 143, 142);
 
 }
+
+@media screen and (max-width:375px) {
+  #ReviewDetail {
+    width: 100%;
+    margin: 0;
+    margin-top: 3rem;
+  }
+
+  .tab-info span {
+    font-size: 14px;
+  }
+
+  .review-info {
+    font-size: 12px;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .movie-info p {
+    font-size: 14px;
+  }
+
+  .update {
+    font-size: 10px;
+  }
+
+  .btn button {
+    font-size: 14px;
+  }
+}

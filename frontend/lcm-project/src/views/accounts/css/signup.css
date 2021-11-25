@@ -37,12 +37,23 @@
 }
 
 .select-genre {
-  width: 400px;
+
+  text-align: center;
 }
 
 .select-genre p {
   margin: 20px 0 10px;
   color: gray;
+}
+
+.genres {
+  display: flex;
+  justify-content: center;
+
+}
+
+.genre-span {
+  color: #ffffff;
 }
 
 .genre {
@@ -99,5 +110,38 @@
 
 .genres span {
   margin-right: 5px;
-  color: rgb(211, 211, 211, 0.5);
+}
+
+
+@media screen and (max-width:375px) {
+  #Signup {
+    width: 100%;
+  }
+
+  .signup {
+    width: 100%;
+  }
+
+  .info {
+    width: 100%;
+  }
+
+  .info input {
+    width: 100%;
+  }
+
+  .login {
+    width: 100%;
+  }
+
+  .select-genre {
+    width: 100%;
+    text-align: center;
+  }
+
+  .genres {
+    display: flex;
+    justify-content: center;
+  }
+
 }
