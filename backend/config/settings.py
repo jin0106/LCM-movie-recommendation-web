@@ -10,20 +10,21 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+from decouple import config
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-5d8&8cpc@9x&zgw85we(#$0d0=hm5(&_=6e8gt8!!gz_*d!6zt'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = config('SECRET_KEY')
+# cast=bool 이 없으면 False 를 문자열로 인식하게됨.
+DEBUG = config('DEBUG', default=False, cast=bool)
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 ALLOWED_HOSTS = ['*']
 
@@ -31,8 +32,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    
-    #3rd partyapp
+
+    # 3rd partyapp
     'accounts',
     'communities',
     'movies',
@@ -49,7 +50,7 @@ INSTALLED_APPS = [
 
 
 
-    #provider
+    # provider
     'allauth.socialaccount.providers.google',
 
     'django.contrib.admin',
@@ -163,33 +164,29 @@ REST_FRAMEWORK = {
 }
 
 
-AUTHENTICATION_BACKENDS = ( 
-    # Needed to login by username in Django admin, regardless of 'allauth' 
-    'django.contrib.auth.backends.ModelBackend', 
-    'allauth.account.auth_backends.AuthenticationBackend', 
-) 
-SITE_ID = 1 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of 'allauth'
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 
-
-from datetime import timedelta
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=300),
 }
 
-SECRET_KEY='xktmxkem'
-ALGORITHM = 'HS256'
-PASSWORD = 'xktmxkem'
+PASSWORD = config('PASSWORD')
+ALGORITHM = config('ALGORITHM')
 # 네이버
-CLIENT_ID = "IqjBx_CPQ1tCtiy9M1Yy"
-CLIENT_SECRET = "_k5sl9Zyeb"
-TRANSLATE_NAVER_ID = "W7neAKLvLxpSenaSKg_r"
-TRANSLATE_NAVER_SECRET = "TMxEhZ9Qmh"
+CLIENT_ID = config("CLIENT_ID")
+CLIENT_SECRET = config("CLIENT_SECRET")
+TRANSLATE_NAVER_ID = config("TRANSLATE_NAVER_ID")
+TRANSLATE_NAVER_SECRET = config("TRANSLATE_NAVER_SECRET")
 # 위치
-LOCATION_API_KEY = 'AIzaSyB7Sx40393IyWF0OYSJ7OMUqY2dHCdxzsw'
-WEATHER_API_KEY = 'b1a32c0fd2033a695051df3761f95526'
+LOCATION_API_KEY = config("LOCATION_API_KEY")
+WEATHER_API_KEY = config("WEATHER_API_KEY")
 
 # 유튜브
-YOUTUBE_API_KEY = 'AIzaSyB7Sx40393IyWF0OYSJ7OMUqY2dHCdxzsw'
-
+YOUTUBE_API_KEY = config("YOUTUBE_API_KEY")
