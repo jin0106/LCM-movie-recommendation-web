@@ -29,7 +29,7 @@
 * Vue 클라이언트 구현
 * Front-end
 
-![image-20211127001303273](readme.assets/image-20211127001303273.png)
+![image-20211127001303273](readme.assets/image-20211127001303273-7944460.png)=
 
 ## ✨ 2. 목표 서비스 및 실제 구현 정도
 
