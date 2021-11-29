@@ -6,7 +6,7 @@
 
 ## **🧰 사용기술**
 
-- HTML, CSS, Python, Django, Vue.jsm 
+- HTML, CSS, Python, Django, Vue.js
 
 
 
@@ -222,7 +222,7 @@ Frontend
 
 ![Screen Shot 2021-11-27 at 12.43.33 AM](README.assets/Screen Shot 2021-11-27 at 12.43.33 AM.png)
 
-![Screen Shot 2021-11-27 at 12.43.42 AM](README.assets/Screen Shot 2021-11-27 at 12.43.42 AM-7941670.png)
+![Screen Shot 2021-11-27 at 12.43.42 AM-7941670](README.assets/Screen Shot 2021-11-27 at 12.43.42 AM-7941670.png)
 
 
 
