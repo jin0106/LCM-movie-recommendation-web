@@ -85,7 +85,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.$store.dispatch("getMyList", this.$store.state.token);
-          alert("You added this movie into the My List");
+          alert("You updated this movie into the My List");
         })
         .catch((err) => {
           console.log(err);
@@ -100,7 +100,7 @@ export default {
       })
         .then((res) => {
           console.log(res);
-          alert("You added this movie into the WatchedList");
+          alert("You updated this movie into the WatchedList");
 
           this.$store.dispatch("watchedList", this.$store.state.token);
         })
