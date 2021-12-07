@@ -232,11 +232,13 @@ Frontend
   * 만약 한글로 검색해야 하는 경우 우선 네이버 영화 api에 검색어를 바탕으로 요청하여 subtitle을 받아오고 해당 subtitle은 영문으로 되어있어 다시 검색하도록 하였다.
   * 또한 한글 키워드 바탕으로도 검색을 성공하기 위해 네이버 번역 api를 사용하여 해당 키워드를 영어로 번역하고 이를 통해 DB에서 검색하는 방식으로 구현하였다.
 
+
 ![main](README.assets/main.png)
 
 
 
 ![main2](README.assets/main2.png)
+=======
 
 #### 4. Movies 페이지
 
