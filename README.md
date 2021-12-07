@@ -16,6 +16,18 @@
 
 
 
+## 배포 링크
+
+* Front(Netlify로 배포)
+
+  * https://festive-bartik-2a259a.netlify.app/
+
+* Backend(Heroku)
+
+  * https://git.heroku.com/chocochipcookie.git
+
+  
+
 ### 1. 팀원 정보 및 업무 분담 내역
 
 ##### 팀장 : 강태훈
@@ -26,10 +38,10 @@
 
 ##### 팀원 : 우동진
 
-* Vue 클라이언트 구현
+* Vue 클라이언트 구현 및 배포
 * Front-end
 
-![image-20211127001303273](readme.assets/image-20211127001303273-7944460.png)=
+![image-20211127001303273](README.assets/image-20211127001303273-7944460.png)=
 
 ## ✨ 2. 목표 서비스 및 실제 구현 정도
 
@@ -77,7 +89,7 @@
 
 #### 2-3 데이터베이스 모델링(ERD)
 
-![image-20211125222744626](readme.assets/image-20211125222744626-7945182-7945185.png)
+![image-20211125222744626](README.assets/image-20211125222744626-7945182-7945185.png)
 
 
 
@@ -182,7 +194,7 @@ Frontend
 
   * 네이버의 경우에는 개발자 단계일 때는 타 아이디의 접근이 안되는 단점이 있어 이는 추후 배포후에 수정할 예정이다.
 
-![image-20211127003831473](readme.assets/image-20211127003831473-7945202.png)
+![image-20211127003831473](README.assets/image-20211127003831473-7945202.png)
 
 
 
@@ -192,7 +204,7 @@ Frontend
 
 * 장르를 받아오도록 해 추후 영화 추천에 쓰이도록 했다.
 
-![image-20211127003931551](readme.assets/image-20211127003931551.png)
+![image-20211127003931551](README.assets/image-20211127003931551.png)
 
 
 
@@ -220,9 +232,9 @@ Frontend
   * 만약 한글로 검색해야 하는 경우 우선 네이버 영화 api에 검색어를 바탕으로 요청하여 subtitle을 받아오고 해당 subtitle은 영문으로 되어있어 다시 검색하도록 하였다.
   * 또한 한글 키워드 바탕으로도 검색을 성공하기 위해 네이버 번역 api를 사용하여 해당 키워드를 영어로 번역하고 이를 통해 DB에서 검색하는 방식으로 구현하였다.
 
-![Screen Shot 2021-11-27 at 12.43.33 AM](readme.assets/Screen Shot 2021-11-27 at 12.43.33 AM.png)
+![Screen Shot 2021-11-27 at 12.43.33 AM](README.assets/Screen Shot 2021-11-27 at 12.43.33 AM.png)
 
-![Screen Shot 2021-11-27 at 12.43.42 AM-7941670](readme.assets/Screen Shot 2021-11-27 at 12.43.42 AM-7941670.png)
+![Screen Shot 2021-11-27 at 12.43.42 AM-7941670](README.assets/Screen Shot 2021-11-27 at 12.43.42 AM-7941670.png)
 
 
 
@@ -231,9 +243,9 @@ Frontend
 * 영화들을 장르 기준으로 정렬
   * 우측 상단의 Sort 옆에서 개봉일자 순, 이름순, 인기도 순 등의 오름차순, 내림차순 순으로 영화들 정렬 가능
 
-![image-20211127005023278](readme.assets/image-20211127005023278.png)
+![image-20211127005023278](README.assets/image-20211127005023278.png)
 
-![image-20211127005103918](readme.assets/image-20211127005103918.png)
+![image-20211127005103918](README.assets/image-20211127005103918.png)
 
 
 
@@ -245,7 +257,7 @@ Frontend
   * Write Review를 누르면 해당 영화에 대한 리뷰를 쓸수있는 페이지로 바로 이동
   * Watched와 +를 누르면 각각 봤던 영화 목록 리스트, 볼 영화 목록 리스트에 해당 영화를 추가
 
-![image-20211127005322962](readme.assets/image-20211127005322962.png)
+![image-20211127005322962](README.assets/image-20211127005322962.png)
 
 
 
@@ -257,9 +269,9 @@ Frontend
 * 작성자만 해당 글을 수정 및 삭제 할 수 있도록 코드 구현
 * 해당 글, 댓글의 작성시간 및 최종 수정 시간 표시
 
-![image-20211127005621615](readme.assets/image-20211127005621615.png)
+![image-20211127005621615](README.assets/image-20211127005621615.png)
 
-![image-20211127005722706](readme.assets/image-20211127005722706.png)
+![image-20211127005722706](README.assets/image-20211127005722706.png)
 
 
 
@@ -268,7 +280,7 @@ Frontend
 * 사용자의 편의를 위한 리스트 페이지. Modal창에서 버튼을 누름으로서 실시간으로 추가 및 제거가 가능
 * 리스트에 있는 영화들을 기반으로 메인 페이지에서 새로운 영화들 추천
 
-![image-20211127005846291](readme.assets/image-20211127005846291.png)
+![image-20211127005846291](README.assets/image-20211127005846291.png)
 
 
 
@@ -276,13 +288,13 @@ Frontend
 
 ##### 1. 태블릿 사이즈
 
-![image-20211127011814331](readme.assets/image-20211127011814331.png)
+![image-20211127011814331](README.assets/image-20211127011814331.png)
 
 
 
 ##### 2. 휴대폰 사이즈
 
-![image-20211127011856474](readme.assets/image-20211127011856474.png)
+![image-20211127011856474](README.assets/image-20211127011856474.png)
 
 ### 5. 프로젝트를 통해 배운 점
 
